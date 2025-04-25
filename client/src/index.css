@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+html {
+  font-size: 62.5%; /* Makes 1rem = 10px */
+}
+
+* {
+  color: var(--color-black);
+  font-size: 1.6rem;
+}
+
+body {
+  color: var(--color-black);
+}
+
+.text-coral {
+  color: var(--color-coral) !important;
+}
+
+@theme {
+  --font-*: initial;
+  --font-sans: "Inter", sans-serif;
+  --font-primary: "Inter", sans-serif;
+  --font-secondary:  "Playfair Display", serif;
+  --color-coral: #FF642F;
+  --color-peach: #FFD7C9;
+  --color-sky: #E3F1FF;
+  --color-black: #212427;
+  --color-gray: #7F7F7F;
+  --color-light-gray: #E8E8E8;
+  --color-white: #F9F9F9;
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Custom Shadows */
+  --shadow-soft: 0px 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0px 8px 32px rgba(0, 0, 0, 0.08);
+  --transition-default: all 0.3s ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  margin-bottom: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  font-size: 4.2rem; /* 48px */
+  margin-bottom: 4rem;
+}
+
+h2 {
+  font-size: 3.0rem; /* 32px */
+  margin-bottom: 3rem;
+}
+
+h3 {
+  font-size: 2.2rem; /* 22px */
+}
+
+h4 {
+  font-size: 2rem; /* 20px */
+}
+
+h5, h6 {
+  font-size: 1.6rem; /* 16px */
+}
+
+
