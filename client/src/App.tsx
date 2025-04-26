@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import CategoryPage from './pages/CategoryPage'
 import { Navbar } from './components/navbar/Navbar'
 import './App.css'
 import RecipesPage from './pages/RecipesPage'
 import HomePage from './pages/HomePage'
+import ProductsPage from './pages/ProductsPage'
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path=':id' element={<CategoryPage />} />
         <Route path='/recipes' element={<RecipesPage />} />
+        <Route path='/products' element={<ProductsPage />} />
       </Routes>
     </>
   )
