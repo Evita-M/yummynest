@@ -15,11 +15,13 @@ const cartAdapter = createEntityAdapter<CartItem>()
 type CartState = EntityState<CartItem, string> & {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   errors: string[];
+  items: CartItem[];
 }
 
 const initialState: CartState = cartAdapter.getInitialState({
   status: 'idle',
   errors: [],
+  items: [],
 })
 
 export const cartSlice = createSlice({
@@ -42,6 +44,28 @@ export const cartSlice = createSlice({
     },
     updateQuantity: (state, action) => {
       cartAdapter.updateOne(state, action.payload)
+    },
+    incrementQuantity: (state, action) => {
+      const existingItem = state.entities[action.payload];
+      if (existingItem) {
+        cartAdapter.updateOne(state, {
+          id: action.payload,
+          changes: { quantity: existingItem.quantity + 1 }
+        });
+      }
+    },
+    decrementQuantity: (state, action) => {
+      const existingItem = state.entities[action.payload];
+      if (existingItem) {
+        if (existingItem.quantity === 1) {
+          cartAdapter.removeOne(state, action.payload);
+        } else {
+          cartAdapter.updateOne(state, {
+            id: action.payload,
+            changes: { quantity: existingItem.quantity - 1 }
+          });
+        }
+      }
     }
   },
 })
@@ -62,5 +86,5 @@ export const selectCartTotalPrice = (state: RootState) => {
   }, 0);
 };
 
-export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions
+export const { addToCart, removeFromCart, updateQuantity, incrementQuantity, decrementQuantity } = cartSlice.actions
 export default cartSlice.reducer
