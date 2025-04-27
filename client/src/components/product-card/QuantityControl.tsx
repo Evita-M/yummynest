@@ -26,7 +26,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({
     >
       <div
         className={clsx(
-          'h-[3.2rem] bg-coral overflow-hidden rounded-[0.8rem]',
+          'h-[3.2rem] bg-coral overflow-hidden rounded-[5rem]',
           'transition-all duration-300 ease-in-out',
           'w-full flex items-center'
         )}

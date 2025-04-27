@@ -37,7 +37,7 @@ const totalItems = useAppSelector(selectCartTotalItems)
 					</li>
 				))}
 			</ul>
-			<CartCounter totalItems={totalItems} onClick={() => {}} />
+			<CartCounter totalItems={totalItems} href="/cart" />
 		</div>
 	</div>
   </PageContainer>

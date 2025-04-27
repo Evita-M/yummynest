@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from "react"
+import { FC, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/store"
 import { fetchProducts } from "./productsSlice"
 import { ProductCard } from "../../components/product-card/ProductCard"
@@ -24,9 +24,13 @@ export const Products: FC<ProductsProps> = ({ title }) => {
     dispatch(fetchProducts())
   }, [dispatch])
 
-  const isInCart = useCallback((id: string) => {
-    return cartItems.some((item: any) => item.id === id)
-  }, [cartItems])
+  const getCartItemInfo = (id: string) => {
+    const item = cartItems.find((item) => item.id === id);
+    return {
+      inCart: !!item,
+      quantity: item?.quantity || 0
+    };
+  }
 
   const handleIncrement = (id: string) => {
     dispatch(incrementQuantity(id))
@@ -37,21 +41,24 @@ export const Products: FC<ProductsProps> = ({ title }) => {
   }
   return (
     <section>
-      <h2>{title}</h2>
+      <h1>{title}</h1>
       <div className='flex flex-wrap gap-[3.2rem]'>
-        {products.map(({id, name, price, offerPrice}: Product) => (
-          <ProductCard
-            key={id}
-            name={name}
-            price={price}
-            offerPrice={offerPrice}
-            onClick={() => dispatch(addToCart({ id, name, price, offerPrice }))}
-            onIncrement={() => handleIncrement(id)}
-            onDecrement={() => handleDecrement(id)}
-            inCart={isInCart(id)}
-            inCartQuantity={cartItems.find((item: any) => item.id === id)?.quantity || 0}
-          />
-        ))}
+        {products.map(({id, name, price, offerPrice}: Product) => {
+          const { inCart, quantity } = getCartItemInfo(id);
+          return (
+            <ProductCard
+              key={id}
+              name={name}
+              price={price}
+              offerPrice={offerPrice}
+              onClick={() => dispatch(addToCart({ id, name, price, offerPrice }))}
+              onIncrement={() => handleIncrement(id)}
+              onDecrement={() => handleDecrement(id)}
+              inCart={inCart}
+              inCartQuantity={quantity}
+            />
+          );
+        })}
       </div>
     </section>
   )

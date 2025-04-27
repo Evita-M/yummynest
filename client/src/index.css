@@ -21,9 +21,9 @@ html {
   --color-peach: #FFD7C9;
   --color-sky: #E3F1FF;
   --color-black: #212427;
-  --color-gray: #7F7F7F;
-  --color-light-gray: #FDF3F1;
-  --color-white: #F9F9F9;
+  --color-light-gray: #F5F5F5;
+  --color-white: #FAFAFA;
+  --color-light-green: #E4F9F5;
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
   /* Custom Shadows */
@@ -40,25 +40,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 4.2rem; /* 48px */
-  margin-bottom: 4rem;
+  font-size: 3.4rem;
+  margin-bottom: 0.8em;
 }
 
 h2 {
-  font-size: 3.0rem; /* 32px */
-  margin-bottom: 3rem;
+  font-size: 2.8rem;
+  margin-bottom: 0.6em;
 }
 
 h3 {
-  font-size: 2.2rem; /* 22px */
+  font-size: 2rem;
+  margin-bottom: 0.6em;
 }
 
 h4 {
-  font-size: 2rem; /* 20px */
+  font-size: 1.8rem;
+  margin-bottom: 0.4em;
 }
 
 h5, h6 {
-  font-size: 1.6rem; /* 16px */
+  font-size: 1.6rem;
+  margin-bottom: 0.2em;
 }
 
 
