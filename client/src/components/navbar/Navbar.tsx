@@ -26,7 +26,7 @@ const totalItems = useAppSelector(selectCartTotalItems)
 
   return (
     <PageContainer>
-      <div className="flex items-center justify-between w-full gap-4 py-12">
+      <div className="flex items-center justify-between w-full gap-4">
         <Link to="/" className="font-secondary font-bold text-[18px]">Yummy<span className="text-coral">Nest</span>
 	  </Link>
 		<div className="flex items-center gap-12">

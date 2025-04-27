@@ -5,12 +5,7 @@ html {
 }
 
 * {
-  color: var(--color-black);
   font-size: 1.6rem;
-}
-
-body {
-  color: var(--color-black);
 }
 
 .text-coral {
@@ -19,9 +14,9 @@ body {
 
 @theme {
   --font-*: initial;
-  --font-sans: "Inter", sans-serif;
-  --font-primary: "Inter", sans-serif;
-  --font-secondary:  "Playfair Display", serif;
+  --font-sans: "Roboto", sans-serif;
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary:  "Lora", serif;
   --color-coral: #FF642F;
   --color-peach: #FFD7C9;
   --color-sky: #E3F1FF;
@@ -35,8 +30,6 @@ body {
   --shadow-soft: 0px 4px 8px rgba(0, 0, 0, 0.04);
   --shadow-hover: 0px 8px 32px rgba(0, 0, 0, 0.08);
   --transition-default: all 0.3s ease-in-out;
-
-  --text-white: #FFFFFF;
 }
 
 h1, h2, h3, h4, h5, h6 {

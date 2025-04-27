@@ -14,13 +14,13 @@ const categoriesAdapter = createEntityAdapter<Category>()
 type CategoriesState = EntityState<Category, string> & {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   errors: string[];
-  data: Category[];
+  categories: Category[];
 }
 
 const initialState: CategoriesState = categoriesAdapter.getInitialState({
   status: 'idle',
   errors: [],
-  data: []
+  categories: []
 })
 
 export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (_, thunkAPI) => {

@@ -11,11 +11,11 @@ interface CategoryCardProps {
 
 export const CategoryCard: FC<CategoryCardProps> = ({ name, id, imgUrl, onClick }) => {
   return (
-  <a className="cursor-pointer flex flex-col items-center justify-center">
-    <span className="p-4 flex flex-col items-center justify-center bg-sky rounded-[50%] w-[160px] h-[160px] shadow-soft hover:shadow-hover transition-default" onClick={onClick}>
+  <a className="cursor-pointer flex flex-col items-center justify-center gap-[1.2rem]">
+    <span className="p-4 flex flex-col items-center justify-center bg-sky rounded-[50%] w-[140px] h-[140px] shadow-soft hover:shadow-hover transition-default" onClick={onClick}>
       <img src={imgUrl} alt={name} width={IMAGE_SIZE} height={IMAGE_SIZE}  />
     </span>
-    <h3 className="font-secondary mt-[2.4rem]">{name}</h3>
+    <h3 className="!m-0 !text-[1.8rem]">{name}</h3>
   </a>
   )
 }
