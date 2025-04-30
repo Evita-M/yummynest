@@ -34,6 +34,16 @@ export const fetchProducts = createAsyncThunk<Product[], void, { rejectValue: st
   }
 })
 
+export const fetchProductById = createAsyncThunk<Product, string, { rejectValue: string }>('products/fetchProductById', async (id, thunkAPI) => {
+  try {
+    const response = await fetch(`http://localhost:5555/api/products/${id}`)
+    const data = await response.json()
+    return data
+  } catch {
+    return thunkAPI.rejectWithValue('Failed to fetch product')
+  }
+})
+
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -53,7 +63,18 @@ export const productsSlice = createSlice({
         state.status = 'failed'
         state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
       })
+      .addCase(fetchProductById.pending, (state) => {
+        state.status = 'loading'
+        state.errors = []
+      })
+      .addCase(fetchProductById.fulfilled, (state) => {
+        state.status = 'succeeded'
+        state.errors = []
+      })
+      .addCase(fetchProductById.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
+      })
   }
 });
-
 export default productsSlice.reducer;

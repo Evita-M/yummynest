@@ -34,6 +34,15 @@ app.get('/api/products', sleepMiddleware(), async(req, res) => {
   }
 });
 
+// Get product by id
+app.get('/api/products/:id', sleepMiddleware(), async(req, res) => {
+  try {
+    const product = dummyProducts.find(product => product.id === req.params.id);
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch product' });
+  }
+});
 
 // Health check route
 app.get('/api/test', (req, res) => {
