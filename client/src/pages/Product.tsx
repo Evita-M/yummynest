@@ -1,9 +1,11 @@
 import React, { FC, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { fetchProductById } from '@/features/products/thunks';
 import { ProductDetail } from '@/modules/product-detail/ProductDetail';
 import vegetableImg from "@/assets/images/vegetable.png"
+import { BreadCrumbs } from '@/components/breadcrumbs/BreadCrumbs';
+import { Loader } from '@/components/loader/Lodaer';
 
 interface Product {
   id: string;
@@ -23,7 +25,6 @@ const ProductPage: FC = () => {
   const [product, setProduct] = React.useState<Product | null>(null)
   const { status } = useAppSelector(state => state.products)
 
-
   useEffect(() => {
     const fetchProduct = async () => {
       const product = await dispatch(fetchProductById(id!)).unwrap()
@@ -35,52 +36,27 @@ const ProductPage: FC = () => {
   }, [dispatch, id]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>
+    return (
+        <Loader/>
+    );
   }
 
   if (status === 'failed' || !product) {
-    return <div>Error</div>
+    return (
+        <h1>Error loading product</h1>
+    )
   }
 
-
-//  const handleIncrement = (id: string) => {
-//     dispatch(incrementQuantity(id))
-//   }
-
-//   const handleDecrement = (id: string) => {
-//     dispatch(decrementQuantity(id))
-//   }
-
-//   const getCartItemInfo = (id: string) => {
-//     const item = cartItems.find((item) => item.id === id);
-//     return {
-//       inCart: !!item,
-//       quantity: item?.quantity || 0
-//     };
-//   }
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Breadcrumb */}
-      <nav className="flex items-center text-sm mb-8">
-        <Link to="/" className="text-gray-500 hover:text-gray-700 transition-colors">Home</Link>
-        <span className="mx-2 text-gray-400">/</span>
-        <Link to="/products" className="text-gray-500 hover:text-gray-700 transition-colors">Products</Link>
-        <span className="mx-2 text-gray-400">/</span>
-        <Link
-          to={`/products/${product?.category.toLowerCase()}`}
-          className="text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          {product?.category}
-        </Link>
-        <span className="mx-2 text-gray-400">/</span>
-        <span className="text-gray-700">{product?.name}</span>
-      </nav>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2">
-          </div>
-          <div className="flex-1 flex items-center justify-center aspect-square bg-offwhite rounded-[2rem] overflow-hidden">
+    <div className="container mx-auto">
+      <BreadCrumbs items={[
+        {label: 'Products', href: '/products'},
+        {label: product.category, href: `/products/${product.category.toLowerCase()}`},
+        {label: product.name}
+      ]} className="mb-[3.2rem]" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[4rem]">
+        <div className="flex gap-[2rem]">
+          <div className="flex-1 flex items-center justify-center aspect-square bg-white rounded-[2rem] overflow-hidden">
             <img
               src={vegetableImg}
               alt={product.name}
@@ -88,7 +64,13 @@ const ProductPage: FC = () => {
             />
           </div>
         </div>
-        <ProductDetail name={product.name} price={product.price} offerPrice={product.offerPrice} description={product.description} inStock={product.inStock}/>
+        <ProductDetail
+          name={product.name}
+          price={product.price}
+          offerPrice={product.offerPrice}
+          description={product.description}
+          inStock={product.inStock}
+        />
       </div>
     </div>
   );

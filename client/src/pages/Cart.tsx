@@ -68,7 +68,6 @@ const CartPage: FC = () => {
             ))}
           </div>
         </div>
-
         <div className="lg:col-span-1">
           <Summary
             subtotal={subtotal}

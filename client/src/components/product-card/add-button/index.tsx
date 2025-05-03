@@ -10,6 +10,7 @@ interface AddButtonProps {
   className?: string
   inCart: boolean
   inCartQuantity: number
+  isDisabled: boolean
   label?: string
 }
 
@@ -20,7 +21,8 @@ export const AddButton: FC<AddButtonProps> = ({
   inCart,
   inCartQuantity,
   className,
-  label
+  label,
+  isDisabled
 }) => {
 
   return (
@@ -33,7 +35,7 @@ export const AddButton: FC<AddButtonProps> = ({
           className={className}
         />
       ) : (
-        <AddToCartButton onClick={onClick} label={label} />
+        <AddToCartButton onClick={onClick} label={label} isDisabled={isDisabled} />
       )}
     </div>
   )

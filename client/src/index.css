@@ -8,10 +8,6 @@ html {
   font-size: 1.6rem;
 }
 
-.text-coral {
-  color: var(--color-coral) !important;
-}
-
 @theme {
   --font-*: initial;
   --font-sans: "Roboto", sans-serif;
@@ -32,6 +28,22 @@ html {
   --shadow-soft: 0px 4px 8px rgba(0, 0, 0, 0.04);
   --shadow-hover: 0px 8px 32px rgba(0, 0, 0, 0.08);
   --transition-default: all 0.3s ease-in-out;
+}
+
+.text-blue {
+  color: var(--color-blue);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  background-color: #fbf9f6;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {

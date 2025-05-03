@@ -17,7 +17,7 @@ export const CartHeader: FC<CartHeaderProps> = ({ link, title, info }) => {
       <div className="flex items-end gap-[2.4rem]">
         <h1 className="!mb-0">{title}</h1>
         {info && (
-          <p className="text-green-700 font-medium !text-[1.8rem] pb-[0.6rem]">
+          <p className="text-blue font-medium !text-[1.8rem] pb-[0.6rem]">
             {info}
           </p>
         )}

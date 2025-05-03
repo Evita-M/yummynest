@@ -6,7 +6,6 @@ import RecipesPage from './pages/Recipes'
 import CartPage from './pages/Cart'
 import ProductPage from './pages/Product'
 import ProductsPage from './pages/Products'
-import { PageContainer } from './layout/PageContainer'
 
 const navLinks = [
   {
@@ -26,15 +25,13 @@ const navLinks = [
 function App() {
   return (
     <>
-      <PageContainer>
-        <Navbar links={navLinks} />
-       </PageContainer>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/recipes' element={<RecipesPage />} />
-          <Route path='/products' element={<ProductsPage />} />
-          <Route path='/products/:id' element={<ProductPage />} />
-          <Route path='/cart' element={<CartPage />} />
+	<Navbar links={navLinks} />
+		<Routes>
+			<Route path='/' element={<HomePage />} />
+			<Route path='/recipes' element={<RecipesPage />} />
+			<Route path='/products' element={<ProductsPage />} />
+			<Route path='/products/:id' element={<ProductPage />} />
+			<Route path='/cart' element={<CartPage />} />
       </Routes>
     </>
   )

@@ -6,14 +6,16 @@ import { Button } from '../../button/Button';
 interface AddToCartButtonProps {
   onClick: (e: React.MouseEvent) => void
   label?: string
+  isDisabled: boolean
 }
 
 export const AddToCartButton: FC<AddToCartButtonProps> = ({
   onClick,
-  label
+  label,
+  isDisabled
 }) => {
   return label ? (
-    <Button onClick={onClick} className="w-full">
+    <Button onClick={onClick} className="w-full" disabled={isDisabled}>
       {label}
     </Button>
   ) : (
@@ -23,10 +25,18 @@ export const AddToCartButton: FC<AddToCartButtonProps> = ({
         'bg-brown rounded-[0.8rem]',
         'flex items-center justify-center',
         'text-white',
-        'hover:bg-brown-dark',
+        !isDisabled && [
+          'hover:bg-brown-dark',
+          'active:bg-brown-darker'
+        ],
+        isDisabled && [
+          'opacity-70',
+          'cursor-not-allowed'
+        ]
       )}
       onClick={onClick}
       aria-label="Add to cart"
+      disabled={isDisabled}
     >
       <LuPlus size={24} />
     </button>

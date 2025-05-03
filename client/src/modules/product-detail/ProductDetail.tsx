@@ -18,12 +18,14 @@ export const ProductDetail: FC<ProductDetailProps> = ({
   description
 }) => {
   return (
-    <div>
-      <h1>{name}</h1>
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col gap-[2.4rem]">
+     <div>
+       <h1 className="!mb-[1.2rem]">{name}</h1>
+       <div className="flex items-center gap-2">
         <Rating rating={4} />
         <span className="text-gray-500">37 reviews</span>
       </div>
+     </div>
       <ProductPricing
         price={price.toFixed(2)}
         offerPrice={offerPrice.toFixed(2)}

@@ -3,12 +3,14 @@ import { useAppDispatch, useAppSelector } from "@/app/store"
 import { ProductCard } from "@/components/product-card/ProductCard"
 import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from "@/features/cart/cartSlice"
 import { fetchProducts } from "./thunks";
+import { Loader } from "@/components/loader/Lodaer";
 
 interface Product {
   id: string;
   name: string;
   price: number;
   offerPrice: number;
+  inStock: boolean;
 }
 
 interface ProductsProps {
@@ -19,7 +21,7 @@ export const Products: FC<ProductsProps> = ({ title }) => {
   const dispatch = useAppDispatch()
   const products = useAppSelector(state => state.products.products)
   const cartItems = useAppSelector(selectAllCartItems)
-
+  const { status } = useAppSelector(state => state.products)
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
@@ -40,11 +42,14 @@ export const Products: FC<ProductsProps> = ({ title }) => {
     dispatch(decrementQuantity(id))
   }
 
+
+
   return (
-    <section>
-      <h1>{title}</h1>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3.2rem]'>
-        {products.map(({id, name, price, offerPrice}: Product) => {
+    <section className="flex flex-col h-full gap-[4.2rem]">
+      <h1 className="!mb-[0]">{title}</h1>
+      {status === 'loading' ? <Loader /> : (
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3.2rem]'>
+        {products.map(({id, name, price, offerPrice, inStock}: Product) => {
           const { inCart, quantity } = getCartItemInfo(id);
           return (
             <ProductCard
@@ -58,10 +63,12 @@ export const Products: FC<ProductsProps> = ({ title }) => {
               inCart={inCart}
               inCartQuantity={quantity}
               href={`/products/${id}`}
+              inStock={inStock}
             />
           );
         })}
       </div>
+      )}
     </section>
   )
 }

@@ -18,7 +18,7 @@ export const Navbar: FC<NavbarProps> = ({links}) => {
 const totalItems = useAppSelector(selectCartTotalItems)
 
   return (
-      <div className="flex items-center justify-between w-full gap-4">
+      <div className="flex items-center justify-between w-full gap-[1.2rem] max-w-[1220px] px-[1.2rem] py-[2.4rem] mx-auto">
         <Link to="/" className="font-secondary font-bold text-[18px]">Yummy<span className="text-coral">Nest</span>
 	  </Link>
 		<div className="flex items-center gap-12">

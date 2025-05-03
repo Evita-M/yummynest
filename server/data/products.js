@@ -59,7 +59,7 @@ const products = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     id: "gd50g67h",
@@ -90,7 +90,7 @@ const products = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     id: "fr52g89h",
@@ -136,7 +136,7 @@ const products = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     id: "dy55g12h",
@@ -212,7 +212,7 @@ const products = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   }
 ];
 

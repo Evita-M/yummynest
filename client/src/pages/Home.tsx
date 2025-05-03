@@ -1,3 +1,5 @@
+import hero from '@/assets/images/hero.jpg'
+
 const HomePage = () => {
   return (
     <section className="w-full h-[540px] relative">
@@ -7,7 +9,7 @@ const HomePage = () => {
 				Find it. Cook it. Love it. Your recipe journey starts here.
 			</p>
 		</div>
-		<img src='@/assets/images/hero.jpg' alt="hero" className="w-full h-full object-cover" />
+		<img src={hero} alt="hero" className="w-full h-full object-cover" />
     </section>
   )
 }
