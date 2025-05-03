@@ -1,8 +1,9 @@
 import { FC, useEffect } from "react"
-import { CategoryCard } from "../../components/category-card/CategoryCard"
-import { useAppDispatch, useAppSelector } from "../../app/store"
-import { fetchCategories, selectAllCategories } from "./categoriesSlice"
+import { CategoryCard } from "@/modules/category-card/CategoryCard"
+import { useAppDispatch, useAppSelector } from "@/app/store"
+import { selectAllCategories } from "./categoriesSlice"
 import { useNavigate } from "react-router-dom"
+import { fetchCategories } from "./thunks"
 
 interface CategoriesProps {
   title: string

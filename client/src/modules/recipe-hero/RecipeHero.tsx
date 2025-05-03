@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Badge } from '../badge/Badge'
+import { Badge } from '@/components/badge/Badge'
 import { FaBowlFood } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 

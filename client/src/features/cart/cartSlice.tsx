@@ -1,6 +1,5 @@
 import {  createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit"
-import { RootState } from "../../app/store";
-
+import { RootState } from "@/app/store"
 interface CartItem {
   id: string;
   name: string;

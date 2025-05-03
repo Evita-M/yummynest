@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../app/store"
-import { fetchProducts } from "./productsSlice"
-import { ProductCard } from "../../components/product-card/ProductCard"
-import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from "../cart/cartSlice"
+import { useAppDispatch, useAppSelector } from "@/app/store"
+import { ProductCard } from "@/components/product-card/ProductCard"
+import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from "@/features/cart/cartSlice"
+import { fetchProducts } from "./thunks";
 
 interface Product {
   id: string;

@@ -1,8 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
-import { fetchProductById } from '../features/products/productsSlice';
-import { ProductDetail } from '../modules/product-detail/ProductDetail';
+import { fetchProductById } from '@/features/products/thunks';
+import { ProductDetail } from '@/modules/product-detail/ProductDetail';
+import vegetableImg from "@/assets/images/vegetable.png"
 
 interface Product {
   id: string;
@@ -79,12 +80,12 @@ const ProductPage: FC = () => {
         <div className="flex gap-4">
           <div className="flex flex-col gap-2">
           </div>
-          <div className="flex-1 relative aspect-square bg-blue-light rounded-[2rem] overflow-hidden">
-            {/* <img
-              src="#"
-              alt="Product Image"
-              className="w-full h-full object-cover transition-opacity duration-300"
-            /> */}
+          <div className="flex-1 flex items-center justify-center aspect-square bg-offwhite rounded-[2rem] overflow-hidden">
+            <img
+              src={vegetableImg}
+              alt={product.name}
+              className="w-[320px] h-auto object-cover"
+            />
           </div>
         </div>
         <ProductDetail name={product.name} price={product.price} offerPrice={product.offerPrice} description={product.description} inStock={product.inStock}/>

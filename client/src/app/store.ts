@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
-import { categoriesSlice } from '../features/categories/categoriesSlice'
-import { recipesApi } from '../features/recipes/recipes-api'
-import { productsSlice } from '../features/products/productsSlice'
-import { cartSlice } from '../features/cart/cartSlice'
+import { categoriesSlice } from '@/features/categories/categoriesSlice'
+import { recipesApi } from '@/features/recipes/recipesApi'
+import { productsSlice } from '@/features/products/productsSlice'
+import { cartSlice } from '@/features/cart/cartSlice'
 
 
 const store = configureStore({

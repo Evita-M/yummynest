@@ -1,14 +1,7 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit"
+import { createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit"
+import { fetchCategories } from "./thunks";
+import { Category } from "./model/category";
 
-interface Category {
-  id: string;
-  idCategory: string;
-  strCategory: string;
-  strCategoryDescription: string;
-  strCategoryThumb: string;
-}
-
-// Create the adapter
 const categoriesAdapter = createEntityAdapter<Category>()
 
 type CategoriesState = EntityState<Category, string> & {
@@ -23,34 +16,6 @@ const initialState: CategoriesState = categoriesAdapter.getInitialState({
   categories: []
 })
 
-export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (_, thunkAPI) => {
-  try {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-    const data = await response.json()
-    const categories = data.categories
-      .filter((category: any) => !['13', '14'].includes(category.idCategory))
-      .map((category: any) => ({
-        ...category,
-        id: category.idCategory
-      }))
-    return categories
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error instanceof Error ? error.message : 'An error occurred')
-  }
-})
-
-export const fetchCategory = createAsyncThunk('categories/fetchCategory', async (name: string, thunkAPI) => {
-  try {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?c=${name}`)
-    const data = await response.json()
-    if (!data.categories || data.categories.length === 0) {
-      throw new Error('Category not found')
-    }
-    return data.categories[0]
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error instanceof Error ? error.message : 'An error occurred')
-  }
-})
 
 export const categoriesSlice = createSlice({
   name:'categories',

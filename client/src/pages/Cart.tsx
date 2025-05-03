@@ -1,21 +1,22 @@
 import { FC } from "react"
-import { PageContainer } from "../components/page-container/PageContainer"
-import { CartItem } from "../components/cart/CartItem"
-import { EmptyCart } from "../components/cart/EmptyCart"
-import { CartHeader } from "../modules/cart-header/CartHeader"
-import { useAppDispatch, useAppSelector } from "../app/store"
+import { PageContainer } from "@/layout/PageContainer"
+import { CartItem } from "@/components/cart/CartItem"
+import { EmptyCart } from "@/components/cart/EmptyCart"
+import { CartHeader } from "@/modules/cart-header/CartHeader"
+import { useAppDispatch, useAppSelector } from "@/app/store"
 import {
   selectAllCartItems,
   selectCartTotalPrice,
   removeFromCart,
   incrementQuantity,
   decrementQuantity
-} from "../features/cart/cartSlice"
-import { Summary } from "../modules/summary/Summary"
-
+} from "@/features/cart/cartSlice"
+import { Summary } from "@/modules/summary/Summary"
+import { useNavigate } from "react-router-dom"
 
 const CartPage: FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const cartItems = useAppSelector(selectAllCartItems)
   const subtotal = useAppSelector(selectCartTotalPrice)
   const tax = subtotal * 0.02
@@ -62,6 +63,7 @@ const CartPage: FC = () => {
                 onRemove={handleRemove}
                 onIncrement={handleIncrement}
                 onDecrement={handleDecrement}
+                onClick={() => navigate(`/products/${item.id}`)}
               />
             ))}
           </div>

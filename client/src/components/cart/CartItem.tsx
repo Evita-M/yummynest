@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { LuX } from 'react-icons/lu'
 import { QuantityControl } from '../product-card/add-button/QuantityControl'
+import vegetableImg from '@/assets/images/vegetable.png'
 
 interface CartItemProps {
   id: string
@@ -10,6 +11,7 @@ interface CartItemProps {
   onRemove: (id: string) => void
   onIncrement: (id: string) => void
   onDecrement: (id: string) => void
+  onClick: VoidFunction
 }
 
 export const CartItem: FC<CartItemProps> = ({
@@ -19,12 +21,13 @@ export const CartItem: FC<CartItemProps> = ({
   quantity,
   onRemove,
   onIncrement,
-  onDecrement
+  onDecrement,
+  onClick
 }) => {
   return (
-    <div className="flex items-center justify-between p-[1.6rem] rounded-xl bg-white">
-      <div className="flex items-center gap-4">
-        <div className="w-[80px] h-[80px] bg-light-gray rounded-lg"></div>
+    <div className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem]" onClick={onClick}>
+      <div className="flex items-center gap-[3.6rem]">
+        <div className="w-[80px] h-[80px] bg-offwhite rounded-[1.2rem]"><img src={vegetableImg} alt={name} width={80} height={80} /></div>
         <div>
           <h3 className="!text-[1.8rem]">{name}</h3>
           <div className="mt-2">

@@ -1,6 +1,6 @@
+import { Products } from "@/features/products/Products"
+import { PageContainer } from "@/layout/PageContainer"
 import { FC } from "react"
-import { PageContainer } from "../components/page-container/PageContainer"
-import { Products } from "../features/products/Products"
 
 const ProductsPage: FC = () => {
   return (

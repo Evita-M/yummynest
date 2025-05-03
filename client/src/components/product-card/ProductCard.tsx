@@ -2,7 +2,7 @@ import { FC } from "react"
 import { AddButton } from "./add-button"
 import { Price } from "../price/Price"
 import { Link } from "react-router-dom"
-
+import vegetableImg from "@/assets/images/vegetable.png"
 
 interface ProductCardProps {
   name: string,
@@ -20,9 +20,9 @@ export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onC
   return (
     <div className="flex flex-col w-full relative group">
       <Link to={href} className="flex flex-col">
-        <span className="p-[2.6rem] flex flex-col items-center justify-center bg-light-gray rounded-[1.2rem] w-full h-[240px] overflow-hidden" >
+        <span className="p-[2.6rem] flex flex-col items-center justify-center bg-offwhite rounded-[1.2rem] w-full h-[240px] overflow-hidden" >
           <img
-            src={`./src/assets/vegetable.png`}
+            src={vegetableImg}
             width={200}
             height="auto"
             alt={name}

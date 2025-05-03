@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { AddButton } from "../../components/product-card/add-button"
+import { AddButton } from "@/components/product-card/add-button"
 
 interface ProductPricingProps {
   price: string
@@ -13,8 +13,8 @@ export const ProductPricing: FC<ProductPricingProps> = ({ price, offerPrice }) =
         Orginal Price: <span className="text-gray-500 line-through">€ {price}</span>
       </p>
       <div className="flex items-center justify-between w-full">
-        <p className="!text-5xl font-secondary font-medium">€ {offerPrice}</p>
-        <AddButton onClick={() => {}} inCart={false} inCartQuantity={0} label="Add to Cart"/>
+        <p className="!text-5xl font-secondary font-medium whitespace-nowrap">€ {offerPrice}</p>
+        <AddButton onClick={() => {}} inCart={false} inCartQuantity={0} label="Add to Cart" onIncrement={() => {}} onDecrement={() => {}} className="w-[120px]"/>
       </div>
     </div>
   )

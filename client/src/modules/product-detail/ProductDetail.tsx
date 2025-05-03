@@ -25,8 +25,8 @@ export const ProductDetail: FC<ProductDetailProps> = ({
         <span className="text-gray-500">37 reviews</span>
       </div>
       <ProductPricing
-        price={price.toString()}
-        offerPrice={offerPrice.toString()}
+        price={price.toFixed(2)}
+        offerPrice={offerPrice.toFixed(2)}
       />
       <List items={description} />
     </div>

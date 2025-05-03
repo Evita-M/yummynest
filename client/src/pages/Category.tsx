@@ -1,9 +1,9 @@
 import { FC } from "react"
-import { useAppSelector } from "../app/store"
-import { selectCategoryById } from "../features/categories/categoriesSlice"
+import { useAppSelector } from "@/app/store"
+import { selectCategoryById } from "@/features/categories/categoriesSlice"
 import { useParams } from "react-router-dom"
-import { PageContainer } from "../components/page-container/PageContainer"
-import { CategoryHero } from "../components/category-hero/CategoryHero"
+import { PageContainer } from "@/layout/PageContainer"
+import { CategoryHero } from "@/modules/category-hero/CategoryHero"
 
 const CategoryPage: FC = () => {
   const { id } = useParams()

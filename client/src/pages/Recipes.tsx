@@ -1,8 +1,8 @@
 import { FC } from "react"
-import { PageContainer } from "../components/page-container/PageContainer"
-import { Categories } from "../features/categories/Categories"
-import { RecipeHero } from "../components/recipe-hero/RecipeHero"
-import { useGetRandomRecipeQuery } from "../features/recipes/recipes-api"
+import { PageContainer } from "@/layout/PageContainer"
+import { Categories } from "@/features/categories/Categories"
+import { RecipeHero } from "@/modules/recipe-hero/RecipeHero"
+import { useGetRandomRecipeQuery } from "@/features/recipes/recipesApi"
 
 const RecipesPage: FC = () => {
 const {data} = useGetRandomRecipeQuery({})

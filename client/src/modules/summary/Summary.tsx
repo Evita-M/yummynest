@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Button } from '../../components/button/Button'
+import { Button } from '@/components/button/Button'
 import { LuPlus } from 'react-icons/lu'
 
 interface SummaryProps {

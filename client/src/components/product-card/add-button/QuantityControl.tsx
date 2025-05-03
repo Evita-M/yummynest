@@ -56,7 +56,10 @@ export const QuantityControl: FC<QuantityControlProps> = ({
         )}
       >
         <QuantityButton
-          onClick={onDecrement}
+          onClick={(e) => {
+            e.stopPropagation()
+            onDecrement()
+          }}
           icon={<LuMinus size={20} className="text-white" />}
           label="Decrease quantity"
         />
@@ -66,7 +69,10 @@ export const QuantityControl: FC<QuantityControlProps> = ({
           {quantity}
         </span>
         <QuantityButton
-          onClick={onIncrement}
+          onClick={(e) => {
+            e.stopPropagation()
+            onIncrement()
+          }}
           icon={<LuPlus size={24} className="text-white" />}
           label="Increase quantity"
           disabled={isIncrementDisabled}
