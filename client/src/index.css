@@ -17,11 +17,13 @@ html {
   --font-sans: "Roboto", sans-serif;
   --font-primary: "Roboto", sans-serif;
   --font-secondary:  "Lora", serif;
-  --color-coral: #FF642F;
-  --color-peach: #FFD7C9;
-  --color-sky: #E3F1FF;
+  --color-brown: #D1805B;
+  --color-brown-light: #f8f0e9;
+  --color-brown-dark: #be6035;
+  --color-blue: #5bacd1;
+  --color-blue-light: #E8F3F7;
   --color-black: #212427;
-  --color-light-gray: #F5F5F5;
+  --color-light-gray: #fcf6f0;
   --color-white: #FAFAFA;
   --color-light-green: #E4F9F5;
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
@@ -65,3 +67,6 @@ h5, h6 {
 }
 
 
+button, a {
+ cursor: pointer
+}

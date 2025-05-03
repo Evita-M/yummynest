@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { LuX } from 'react-icons/lu'
-import { QuantityControl } from '../product-card/QuantityControl'
+import { QuantityControl } from '../product-card/add-button/QuantityControl'
 
 interface CartItemProps {
   id: string

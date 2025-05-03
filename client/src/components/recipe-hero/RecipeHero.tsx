@@ -23,7 +23,7 @@ export const RecipeHero: FC<RecipeHeroProps> = ({
 }) => {
 	return (
 		<section className={className}>
-			<div className="flex flex-col md:flex-row  bg-peach rounded-[2rem] overflow-hidden items-center">
+			<div className="flex flex-col md:flex-row  bg-brown-light rounded-[2rem] overflow-hidden items-center">
 				<div className="w-full h-[300px] md:h-[40rem] md:flex-[50%] relative">
 					<img
 						src={imgUrl}
@@ -40,8 +40,8 @@ export const RecipeHero: FC<RecipeHeroProps> = ({
 						</p>
 						<h1 className="text-3xl lg:text-4xl font-bold !mb-[1.5rem] lg:!mb-[2.2rem]">{name}</h1>
 						<div className="flex gap-[1.2rem]">
-							{category && <Badge text={category} bgColor='bg-coral' icon={FaBowlFood}/>}
-							{area && <Badge text={area} icon={FaLocationDot} bgColor='bg-coral'/>}
+							{category && <Badge text={category} bgColor='bg-brown' icon={FaBowlFood}/>}
+							{area && <Badge text={area} icon={FaLocationDot} bgColor='bg-brown'/>}
 						</div>
 					</div>
 					<p className="mt-[1.2rem] lg:text-lg line-clamp-4">{instructions}</p>

@@ -11,10 +11,10 @@ interface RatingProps {
     const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar key={i} className="text-green-500" />);
+      stars.push(<FaStar key={i} className="text-yellow-500" />);
     }
     if (hasHalfStar) {
-      stars.push(<FaStarHalf key="half" className="text-green-500" />);
+      stars.push(<FaStarHalf key="half" className="text-yellow-500" />);
     }
     const remainingStars = 5 - Math.ceil(rating);
     for (let i = 0; i < remainingStars; i++) {

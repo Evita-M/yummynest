@@ -1,26 +1,29 @@
 import { FC } from 'react'
 import clsx from 'clsx'
 import { LuPlus } from "react-icons/lu";
+import { Button } from '../../button/Button';
 
 interface AddToCartButtonProps {
-  onClick: VoidFunction
-  className?: string
+  onClick: (e: React.MouseEvent) => void
+  label?: string
 }
 
 export const AddToCartButton: FC<AddToCartButtonProps> = ({
   onClick,
-  className
+  label
 }) => {
-  return (
+  return label ? (
+    <Button onClick={onClick} className="w-full">
+      {label}
+    </Button>
+  ) : (
     <button
       className={clsx(
-        'absolute bottom-[0.8rem] right-[0.8rem]',
         'w-[3.2rem] h-[3.2rem]',
-        'bg-coral rounded-full',
+        'bg-brown rounded-[0.8rem]',
         'flex items-center justify-center',
         'text-white',
-        'hover:bg-orange-600 transition-colors cursor-pointer',
-        className
+        'hover:bg-brown-dark',
       )}
       onClick={onClick}
       aria-label="Add to cart"

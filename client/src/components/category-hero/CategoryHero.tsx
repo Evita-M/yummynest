@@ -12,7 +12,7 @@ export const CategoryHero: FC<CategoryHeroProps> = ({
   imageUrl,
 }) => {
   return (
-    <section className="relative w-full overflow-hidden bg-peach rounded-2xl p-10">
+    <section className="relative w-full overflow-hidden bg-brown-light rounded-2xl p-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-8 md:py-12">
           <div className="w-full md:w-1/3">
               <img

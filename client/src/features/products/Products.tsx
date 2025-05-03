@@ -39,23 +39,25 @@ export const Products: FC<ProductsProps> = ({ title }) => {
   const handleDecrement = (id: string) => {
     dispatch(decrementQuantity(id))
   }
+
   return (
     <section>
       <h1>{title}</h1>
-      <div className='flex flex-wrap gap-[3.2rem]'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3.2rem]'>
         {products.map(({id, name, price, offerPrice}: Product) => {
           const { inCart, quantity } = getCartItemInfo(id);
           return (
             <ProductCard
               key={id}
               name={name}
-              price={price}
-              offerPrice={offerPrice}
+              price={price.toFixed(2)}
+              offerPrice={offerPrice.toFixed(2)}
               onClick={() => dispatch(addToCart({ id, name, price, offerPrice }))}
               onIncrement={() => handleIncrement(id)}
               onDecrement={() => handleDecrement(id)}
               inCart={inCart}
               inCartQuantity={quantity}
+              href={`/products/${id}`}
             />
           );
         })}
