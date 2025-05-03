@@ -30,8 +30,8 @@ export const AddToCartButton: FC<AddToCartButtonProps> = ({
           'active:bg-brown-darker'
         ],
         isDisabled && [
-          'opacity-70',
-          'cursor-not-allowed'
+          'opacity-50',
+          'cursor-default'
         ]
       )}
       onClick={onClick}

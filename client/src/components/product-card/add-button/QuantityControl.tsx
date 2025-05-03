@@ -51,7 +51,6 @@ export const QuantityControl: FC<QuantityControlProps> = ({
       <div
         className={clsx(
           'h-[3.2rem] overflow-hidden rounded-[0.8rem]',
-          'transition-default',
           'w-full flex items-center'
         )}
       >
