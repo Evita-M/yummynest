@@ -6,6 +6,7 @@ import RecipesPage from './pages/Recipes'
 import CartPage from './pages/Cart'
 import ProductPage from './pages/Product'
 import ProductsPage from './pages/Products'
+import CategoryPage from './pages/Category'
 
 const navLinks = [
   {
@@ -31,6 +32,7 @@ function App() {
 			<Route path='/recipes' element={<RecipesPage />} />
 			<Route path='/products' element={<ProductsPage />} />
 			<Route path='/products/:id' element={<ProductPage />} />
+			<Route path='/:category' element={<CategoryPage />} />
 			<Route path='/cart' element={<CartPage />} />
       </Routes>
     </>

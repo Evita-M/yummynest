@@ -44,6 +44,22 @@ app.get('/api/products/:id', sleepMiddleware(), async(req, res) => {
   }
 });
 
+// Get products by category
+app.get('/api/:category', sleepMiddleware(), async(req, res) => {
+  try {
+    const categoryParam = req.params.category.toLowerCase();
+    const products = dummyProducts.filter(product =>
+      product.category.toLowerCase() === categoryParam
+    );
+    console.log('Category param:', categoryParam);
+    console.log('Found products:', products);
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products of this category' });
+  }
+});
+
+
 // Health check route
 app.get('/api/test', (req, res) => {
   res.json({

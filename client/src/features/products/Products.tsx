@@ -1,8 +1,7 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import { ProductCard } from "@/components/product-card/ProductCard"
 import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from "@/features/cart/cartSlice"
-import { fetchProducts } from "./thunks";
 import { Loader } from "@/components/loader/Lodaer";
 
 interface Product {
@@ -14,17 +13,14 @@ interface Product {
 }
 
 interface ProductsProps {
-  title: string;
+  title?: string;
+  items: Product[];
 }
 
-export const Products: FC<ProductsProps> = ({ title }) => {
+export const Products: FC<ProductsProps> = ({ title, items }) => {
   const dispatch = useAppDispatch()
-  const products = useAppSelector(state => state.products.products)
   const cartItems = useAppSelector(selectAllCartItems)
   const { status } = useAppSelector(state => state.products)
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
 
 
   const getCartItemInfo = (id: string) => {
@@ -42,10 +38,10 @@ export const Products: FC<ProductsProps> = ({ title }) => {
 
   return (
     <section className="flex flex-col h-full gap-[4.2rem]">
-      <h1 className="!mb-[0]">{title}</h1>
+      {title && <h1 className="!mb-[0] capitalize">{title}</h1>}
       {status === 'loading' ? <Loader /> : (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3.2rem]'>
-        {products.map(({id, name, price, offerPrice, inStock}: Product) => {
+        {items.map(({id, name, price, offerPrice, inStock}: Product) => {
           const quantity  = getCartItemInfo(id);
           return (
             <ProductCard

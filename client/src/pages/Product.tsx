@@ -10,6 +10,7 @@ import { List } from '@/components/list/List';
 import { Rating } from '@/components/rating/Rating';
 import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from '@/features/cart/cartSlice';
 import { Badge } from '@/components/badge/Badge';
+import { PageContainer } from '@/layout/PageContainer';
 
 interface Product {
   id: string;
@@ -89,10 +90,10 @@ const ProductPage: FC = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <PageContainer maxWidth="1000px">
       <BreadCrumbs items={[
         {label: 'Products', href: '/products'},
-        {label: product.category, href: `/products/${product.category.toLowerCase()}`},
+        {label: product.category, href: `/${product.category.toLowerCase()}`},
         {label: product.name}
       ]} className="mb-[3.2rem]" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[4rem]">
@@ -126,7 +127,7 @@ const ProductPage: FC = () => {
           />
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

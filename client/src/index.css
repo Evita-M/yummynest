@@ -40,8 +40,8 @@ body {
 }
 
 #root {
-  min-height: 100vh;
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 

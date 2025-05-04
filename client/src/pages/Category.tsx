@@ -1,17 +1,24 @@
-import { FC } from "react"
-import { useAppSelector } from "@/app/store"
-import { selectCategoryById } from "@/features/categories/categoriesSlice"
+import { FC, useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "@/app/store"
 import { useParams } from "react-router-dom"
 import { PageContainer } from "@/layout/PageContainer"
-import { CategoryHero } from "@/modules/category-hero/CategoryHero"
+import { fetchProductsByCategory } from "@/features/products/thunks"
+import { Products } from "@/features/products/Products"
 
 const CategoryPage: FC = () => {
-  const { id } = useParams()
-  const category = useAppSelector(state => selectCategoryById(state.categories, id as string))
+  const { category } = useParams()
+  const dispatch = useAppDispatch()
+  const categoryProducts = useAppSelector(state => state.products.categoryProducts)
+
+  useEffect(() => {
+    if (category) {
+      dispatch(fetchProductsByCategory(category))
+    }
+  }, [dispatch, category])
 
   return (
     <PageContainer>
-      <CategoryHero title={category?.strCategory} description={category?.strCategoryDescription} imageUrl={category?.strCategoryThumb} />
+      <Products title={category} items={categoryProducts}/>
     </PageContainer>
   )
 }

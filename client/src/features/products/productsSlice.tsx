@@ -1,16 +1,18 @@
 import {  createSlice } from "@reduxjs/toolkit";
-import { fetchProductById, fetchProducts } from "./thunks";
+import { fetchProductById, fetchProducts, fetchProductsByCategory } from "./thunks";
 import { Product } from "./model/product";
 
 
 interface ProductsState {
-  products: Product[];
+  allProducts: Product[];
+  categoryProducts: Product[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   errors: string[];
 }
 
 const initialState: ProductsState = {
-  products: [],
+  allProducts: [],
+  categoryProducts: [],
   status: 'idle',
   errors: []
 }
@@ -29,7 +31,7 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.errors = []
-        state.products = action.payload
+        state.allProducts = action.payload
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed'
@@ -44,6 +46,19 @@ export const productsSlice = createSlice({
         state.errors = []
       })
       .addCase(fetchProductById.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
+      })
+      .addCase(fetchProductsByCategory.pending, (state) => {
+        state.status = 'loading'
+        state.errors = []
+      })
+      .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.errors = []
+        state.categoryProducts = action.payload
+      })
+      .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
       })

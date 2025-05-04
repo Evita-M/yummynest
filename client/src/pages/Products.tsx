@@ -1,11 +1,20 @@
-import { Products } from "@/features/products/Products"
+import { FC, useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "@/app/store"
 import { PageContainer } from "@/layout/PageContainer"
-import { FC } from "react"
+import { fetchProducts } from "@/features/products/thunks"
+import { Products } from "@/features/products/Products"
 
 const ProductsPage: FC = () => {
+  const dispatch = useAppDispatch()
+  const allProducts = useAppSelector(state => state.products.allProducts)
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
   return (
     <PageContainer>
-      <Products title="Products" />
+      <Products title="All Products" items={allProducts}/>
     </PageContainer>
   )
 }
