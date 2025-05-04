@@ -44,7 +44,10 @@ export const CartItem: FC<CartItemProps> = ({
       <div className="flex items-center gap-8">
         <p className="font-secondary font-medium !text-[1.8rem]">€ {(price * quantity).toFixed(2)}</p>
         <button
-          onClick={() => onRemove(id)}
+          onClick={(e) => {
+            e.stopPropagation()
+            onRemove(id)
+          }}
           className="text-gray-400 hover:text-gray-600"
           aria-label="Remove item"
         >

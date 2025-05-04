@@ -4,6 +4,7 @@ import { Price } from "../price/Price"
 import { Link } from "react-router-dom"
 import vegetableImg from "@/assets/images/vegetable.png"
 import clsx from "clsx"
+import { Badge } from "../badge/Badge"
 
 interface ProductCardProps {
   name: string,
@@ -20,7 +21,7 @@ interface ProductCardProps {
 export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onClick, onIncrement, onDecrement,inCartQuantity, href, inStock}) => {
   return (
     <div className="flex flex-col w-full relative group bg-white rounded-[1.2rem]">
-      {!inStock && <p className="absolute top-[1.2rem] right-[1.2rem] !text-[1.4rem] text-red-400 font-medium tracking-wide py-[0.4rem] px-[0.8rem] rounded-[0.4rem] bg-red-100">Sold out</p>}
+      {!inStock && <Badge text="Sold out" bgColor='bg-blue-light' color='text-blue' className="absolute top-[1.2rem] right-[1.2rem]"/>}
       <Link to={href} className="flex flex-col">
         <span className="p-[2.6rem] flex flex-col items-center justify-center rounded-[1.2rem] w-full h-[240px] overflow-hidden" >
           <img

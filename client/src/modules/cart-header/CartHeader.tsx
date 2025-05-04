@@ -1,6 +1,6 @@
 import { FC } from "react"
-import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6"
+import { Button } from "@/components/button/Button"
 
 interface CartHeaderProps {
   title: string
@@ -23,13 +23,13 @@ export const CartHeader: FC<CartHeaderProps> = ({ link, title, info }) => {
         )}
       </div>
       {link && (
-      <Link
+      <Button
+        variant="secondary"
         to={link.href}
-        className="flex items-center gap-[0.8rem] text-green-600 hover:text-green-700"
+        preFix={<FaArrowLeft />}
       >
-        <FaArrowLeft />
-          {link.label}
-        </Link>
+        {link.label}
+      </Button>
       )}
     </div>
   )

@@ -9,6 +9,7 @@ import { ProductPricing } from '@/modules/product-pricing/ProductPricing';
 import { List } from '@/components/list/List';
 import { Rating } from '@/components/rating/Rating';
 import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } from '@/features/cart/cartSlice';
+import { Badge } from '@/components/badge/Badge';
 
 interface Product {
   id: string;
@@ -96,7 +97,8 @@ const ProductPage: FC = () => {
       ]} className="mb-[3.2rem]" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[4rem]">
         <div className="flex gap-[2rem]">
-          <div className="flex-1 flex items-center justify-center aspect-square bg-white rounded-[2rem] overflow-hidden">
+          <div className="flex-1 flex items-center justify-center aspect-square bg-white rounded-[2rem] overflow-hidden relative">
+            {!product.inStock && <Badge text="Sold out" bgColor='bg-blue-light' color='text-blue' className="absolute top-[1.2rem] right-[1.2rem]"/>}
             <img
               src={vegetableImg}
               alt={product.name}
