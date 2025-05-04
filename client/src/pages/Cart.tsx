@@ -42,14 +42,24 @@ const CartPage: FC = () => {
   if (cartItems.length === 0) {
     return (
       <PageContainer>
-        <EmptyCart href="/products" title="Your Cart is Empty" subTitle="Add some items to your cart to get started!" label="Continue shopping" />
+        <EmptyCart
+          href="/products"
+          title="Your Cart is Empty"
+          subTitle="Add some items to your cart to get started!"
+          label="Continue shopping"
+        />
       </PageContainer>
     )
   }
 
   return (
     <PageContainer>
-      <CartHeader title="Continue shopping" info={`${cartItems.length > 1 ? `${cartItems.length} items` : `${cartItems.length} item`}`} link={{ href: "/products", label: "Continue shopping" }} />
+      <CartHeader
+        title="Shopping Cart"
+        info={`${cartItems.length > 1 ? `${cartItems.length} items` : `${cartItems.length} item`}`}
+        link={{ href: "/products", label: "Continue shopping" }}
+      />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[3.2rem]">
         <div className="lg:col-span-2">
           <div className="flex flex-col gap-[1.6rem] rounded-lg">

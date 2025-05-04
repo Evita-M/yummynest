@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { LuX } from 'react-icons/lu'
+import { LuTrash } from 'react-icons/lu'
 import { QuantityControl } from '../product-card/add-button/QuantityControl'
 import vegetableImg from '@/assets/images/vegetable.png'
 
@@ -25,33 +25,33 @@ export const CartItem: FC<CartItemProps> = ({
   onClick
 }) => {
   return (
-    <div className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem]" onClick={onClick}>
+    <div className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem] bg-white" onClick={onClick}>
       <div className="flex items-center gap-[3.6rem]">
-        <div className="w-[80px] h-[80px] bg-offwhite rounded-[1.2rem]"><img src={vegetableImg} alt={name} width={80} height={80} /></div>
+        <div className="w-[100px] h-[100px] flex items-center justify-center rounded-[1.2rem] border-2 border-brown-light">
+			<img src={vegetableImg} alt={name} width={80} height="auto"/>
+		</div>
         <div>
-          <h3 className="!text-[1.8rem]">{name}</h3>
-          <div className="mt-2">
-            <QuantityControl
+          <h3 className="!text-[2rem] !mb-0">{name}</h3>
+        </div>
+      </div>
+      <div className="flex items-center gap-[3.2rem]">
+           <QuantityControl
               quantity={quantity}
               onIncrement={() => onIncrement(id)}
               onDecrement={() => onDecrement(id)}
               className="!relative !bottom-0 !right-0 !w-[120px]"
               size="sm"
             />
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-8">
-        <p className="font-secondary font-medium !text-[1.8rem]">€ {(price * quantity).toFixed(2)}</p>
+        <p className="font-secondary font-medium !text-[1.8rem] w-[100px] text-right">€ {(price * quantity).toFixed(2)}</p>
         <button
           onClick={(e) => {
             e.stopPropagation()
             onRemove(id)
           }}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-red-400 hover:text-red-600"
           aria-label="Remove item"
         >
-          <LuX size={24} />
+          <LuTrash size={20} />
         </button>
       </div>
     </div>
