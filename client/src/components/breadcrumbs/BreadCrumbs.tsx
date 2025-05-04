@@ -23,7 +23,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = ({ items, className }) => {
               {index < items.length - 1 && <span className="mx-2 text-gray-400">/</span>}
             </>
           ) : (
-            <span className="text-gray-700">{item.label}</span>
+            <span className="text-gray-700 capitalize">{item.label}</span>
           )}
         </div>
       ))}

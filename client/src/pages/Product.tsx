@@ -90,13 +90,13 @@ const ProductPage: FC = () => {
   };
 
   return (
-    <PageContainer maxWidth="1000px">
+    <PageContainer>
       <BreadCrumbs items={[
         {label: 'Products', href: '/products'},
         {label: product.category, href: `/${product.category.toLowerCase()}`},
         {label: product.name}
       ]} className="mb-[3.2rem]" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[4rem]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[4rem] max-w-[1000px] mx-auto">
         <div className="flex gap-[2rem]">
           <div className="flex-1 flex items-center justify-center aspect-square bg-white rounded-[2rem] overflow-hidden relative">
             {!product.inStock && <Badge text="Sold out" bgColor='bg-blue-light' color='text-blue' className="absolute top-[1.2rem] right-[1.2rem]"/>}
