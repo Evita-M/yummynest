@@ -8,34 +8,35 @@ interface AddButtonProps {
   onIncrement: VoidFunction
   onDecrement: VoidFunction
   className?: string
-  inCart: boolean
   inCartQuantity: number
   isDisabled: boolean
   label?: string
+  size?: 'sm' | 'default'
 }
 
 export const AddButton: FC<AddButtonProps> = ({
   onClick,
   onIncrement,
   onDecrement,
-  inCart,
   inCartQuantity,
   className,
   label,
-  isDisabled
+  isDisabled,
+  size = 'default'
 }) => {
 
   return (
     <div className={clsx("flex justify-end w-full items-center gap-[0.8rem]", className)}>
-      {inCart ? (
+      {inCartQuantity > 0 ? (
         <QuantityControl
           quantity={inCartQuantity}
           onIncrement={onIncrement}
           onDecrement={onDecrement}
           className={className}
+          size={size}
         />
       ) : (
-        <AddToCartButton onClick={onClick} label={label} isDisabled={isDisabled} />
+        <AddToCartButton onClick={onClick} label={label} isDisabled={isDisabled} size={size} />
       )}
     </div>
   )

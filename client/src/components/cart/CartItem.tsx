@@ -36,6 +36,7 @@ export const CartItem: FC<CartItemProps> = ({
               onIncrement={() => onIncrement(id)}
               onDecrement={() => onDecrement(id)}
               className="!relative !bottom-0 !right-0 !w-[120px]"
+              size="sm"
             />
           </div>
         </div>

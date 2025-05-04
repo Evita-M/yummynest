@@ -26,12 +26,9 @@ export const Products: FC<ProductsProps> = ({ title }) => {
     dispatch(fetchProducts())
   }, [dispatch])
 
+
   const getCartItemInfo = (id: string) => {
-    const item = cartItems.find((item) => item.id === id);
-    return {
-      inCart: !!item,
-      quantity: item?.quantity || 0
-    };
+    return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
   const handleIncrement = (id: string) => {
@@ -43,14 +40,13 @@ export const Products: FC<ProductsProps> = ({ title }) => {
   }
 
 
-
   return (
     <section className="flex flex-col h-full gap-[4.2rem]">
       <h1 className="!mb-[0]">{title}</h1>
       {status === 'loading' ? <Loader /> : (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3.2rem]'>
         {products.map(({id, name, price, offerPrice, inStock}: Product) => {
-          const { inCart, quantity } = getCartItemInfo(id);
+          const quantity  = getCartItemInfo(id);
           return (
             <ProductCard
               key={id}
@@ -60,7 +56,6 @@ export const Products: FC<ProductsProps> = ({ title }) => {
               onClick={() => dispatch(addToCart({ id, name, price, offerPrice }))}
               onIncrement={() => handleIncrement(id)}
               onDecrement={() => handleDecrement(id)}
-              inCart={inCart}
               inCartQuantity={quantity}
               href={`/products/${id}`}
               inStock={inStock}

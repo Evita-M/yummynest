@@ -12,15 +12,15 @@ interface ProductCardProps {
   onClick: VoidFunction
   onIncrement: VoidFunction
   onDecrement: VoidFunction
-  inCart: boolean
   inCartQuantity: number
   href: string
   inStock: boolean
 }
 
-export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onClick, onIncrement, onDecrement, inCart, inCartQuantity, href, inStock}) => {
+export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onClick, onIncrement, onDecrement,inCartQuantity, href, inStock}) => {
   return (
     <div className="flex flex-col w-full relative group bg-white rounded-[1.2rem]">
+      {!inStock && <p className="absolute top-[1.2rem] right-[1.2rem] !text-[1.4rem] text-red-400 font-medium tracking-wide py-[0.4rem] px-[0.8rem] rounded-[0.4rem] bg-red-100">Sold out</p>}
       <Link to={href} className="flex flex-col">
         <span className="p-[2.6rem] flex flex-col items-center justify-center rounded-[1.2rem] w-full h-[240px] overflow-hidden" >
           <img
@@ -38,7 +38,6 @@ export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onC
          <div className="flex items-end gap-[0.8rem] mt-2">
            <Price price={offerPrice} />
            <p className="line-through !text-[1.4rem] text-gray-500 tracking-wide">€ {price}</p>
-           {!inStock && <p className="!text-[1.4rem] text-red-400 font-medium tracking-wide ml-auto py-[0.4rem] px-[0.8rem] rounded-[0.4rem] bg-red-100">Sold out</p>}
         </div>
       </div>
       </Link>
@@ -47,9 +46,9 @@ export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onC
           onClick={onClick}
           onIncrement={onIncrement}
           onDecrement={onDecrement}
-          inCart={inCart}
           inCartQuantity={inCartQuantity}
           isDisabled={!inStock}
+          size="sm"
         />
       </div>
     </div>

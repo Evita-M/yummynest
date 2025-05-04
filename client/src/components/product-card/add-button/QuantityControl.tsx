@@ -7,12 +7,14 @@ interface QuantityButtonProps {
   icon: ReactNode
   label: string
   disabled?: boolean
+  size?: 'sm' | 'default'
 }
 
-const QuantityButton: FC<QuantityButtonProps> = ({ onClick, icon, label, disabled = false }) => (
+const QuantityButton: FC<QuantityButtonProps> = ({ onClick, icon, label, disabled = false, size = 'default' }) => (
   <button
     className={clsx(
-      'w-[3.2rem] h-[3.2rem] flex items-center justify-center bg-brown',
+      'flex items-center justify-center bg-brown',
+      size === 'sm' ? 'w-[3.2rem] h-[3.2rem]' : 'w-[4.0rem] h-[4.0rem]',
       disabled ? 'opacity-50 cursor-default' : 'hover:bg-brown-dark'
     )}
     onClick={onClick}
@@ -29,6 +31,7 @@ interface QuantityControlProps {
   onDecrement: VoidFunction
   className?: string
   maxQuantity?: number
+  size?: 'sm' | 'default'
 }
 
 export const QuantityControl: FC<QuantityControlProps> = ({
@@ -36,23 +39,20 @@ export const QuantityControl: FC<QuantityControlProps> = ({
   onIncrement,
   onDecrement,
   className,
-  maxQuantity = 10
+  maxQuantity = 10,
+  size = 'default'
 }) => {
   const isIncrementDisabled = quantity >= maxQuantity
 
   return (
-    <div
-      className={clsx(
-        'w-full',
-        className
-      )}
-      aria-label="Quantity control"
-    >
       <div
         className={clsx(
-          'h-[3.2rem] overflow-hidden rounded-[0.8rem]',
-          'w-full flex items-center'
+          'overflow-hidden rounded-[0.8rem] bg-brown-light',
+          'w-full flex items-center',
+          size === 'sm' ? 'h-[3.2rem]' : 'h-[4.0rem]',
+          className
         )}
+        aria-label="Quantity control"
       >
         <QuantityButton
           onClick={(e) => {
@@ -61,9 +61,13 @@ export const QuantityControl: FC<QuantityControlProps> = ({
           }}
           icon={<LuMinus size={20} className="text-white" />}
           label="Decrease quantity"
+          size={size}
         />
         <span
-          className="flex-1 min-w-[3.2rem] h-[3.2rem] flex items-center bg-brown-light justify-center font-bold"
+          className={clsx(
+            'flex items-center justify-center font-bold flex-1',
+            size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
+          )}
         >
           {quantity}
         </span>
@@ -72,11 +76,11 @@ export const QuantityControl: FC<QuantityControlProps> = ({
             e.stopPropagation()
             onIncrement()
           }}
-          icon={<LuPlus size={24} className="text-white" />}
+          icon={<LuPlus size={20} className="text-white" />}
           label="Increase quantity"
           disabled={isIncrementDisabled}
+          size={size}
         />
       </div>
-    </div>
   )
 }

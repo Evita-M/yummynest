@@ -32,9 +32,9 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
     };
 
     const sizeStyles = {
-      default: 'px-[2.4rem] pt-[0.6rem] pb-[0.5rem]',
-      sm: 'px-[1.6rem] pt-[0.4rem] pb-[0.3rem]',
-      lg: 'px-[3.2rem] pt-[0.8rem] pb-[0.7rem]',
+      default: 'px-[2.4rem] h-[4.0rem] pt-[0.8rem] pb-[0.7rem]',
+      sm: 'px-[1.6rem] h-[3.2rem] pt-[0.6rem] pb-[0.5rem]',
+      lg: 'px-[3.2rem] h-[4.8rem] pt-[1.2rem] pb-[1.1rem]',
     };
 
     const buttonClassName = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
