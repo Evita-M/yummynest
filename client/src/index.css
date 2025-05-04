@@ -14,14 +14,13 @@ html {
   --font-primary: "Roboto", sans-serif;
   --font-secondary:  "Lora", serif;
   --color-brown: #f29449;
-  --color-brown-light: #FCE8D9;
+  --color-brown-light: #FAF6F1;
   --color-brown-dark: #f18631;
   --color-blue: #5bacd1;
   --color-blue-light: #E8F3F7;
   --color-black: #212427;
   --color-offwhite: #FFFBF4;
   --color-yellow: #FFD14F;
-  --color-light-green: #E4F9F5;
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
   /* Custom Shadows */
@@ -37,11 +36,11 @@ html {
 html,
 body {
   height: 100%;
+  background-color: #FAF6F1;
 }
 
 #root {
-  background-color: #F6EEE4;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

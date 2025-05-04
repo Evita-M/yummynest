@@ -25,30 +25,40 @@ export const CartItem: FC<CartItemProps> = ({
   onClick
 }) => {
   return (
-    <div className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem] bg-white" onClick={onClick}>
-      <div className="flex items-center gap-[3.6rem]">
+    <div
+      className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem] bg-white"
+      onClick={onClick}
+    >
+      <div className="flex items-center gap-[2.0rem]">
         <div className="w-[100px] h-[100px] flex items-center justify-center rounded-[1.2rem] border-2 border-brown-light">
-			<img src={vegetableImg} alt={name} width={80} height="auto"/>
-		</div>
+          <img
+            src={vegetableImg}
+            alt={name}
+            width={80}
+            height="auto"
+          />
+        </div>
         <div>
           <h3 className="!text-[2rem] !mb-0">{name}</h3>
         </div>
       </div>
       <div className="flex items-center gap-[3.2rem]">
-           <QuantityControl
-              quantity={quantity}
-              onIncrement={() => onIncrement(id)}
-              onDecrement={() => onDecrement(id)}
-              className="!relative !bottom-0 !right-0 !w-[120px]"
-              size="sm"
-            />
-        <p className="font-secondary font-medium !text-[1.8rem] w-[100px] text-right">€ {(price * quantity).toFixed(2)}</p>
+        <QuantityControl
+          quantity={quantity}
+          onIncrement={() => onIncrement(id)}
+          onDecrement={() => onDecrement(id)}
+          className="!relative !bottom-0 !right-0 !w-[120px]"
+          size="sm"
+        />
+        <p className="font-secondary font-medium !text-[1.8rem] w-[80px] text-right">
+          € {(price * quantity).toFixed(2)}
+        </p>
         <button
           onClick={(e) => {
             e.stopPropagation()
             onRemove(id)
           }}
-          className="text-red-400 hover:text-red-600"
+          className="text-gray-600 hover:text-gray-800"
           aria-label="Remove item"
         >
           <LuTrash size={20} />

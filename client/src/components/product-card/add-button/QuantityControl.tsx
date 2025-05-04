@@ -65,7 +65,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({
         />
         <span
           className={clsx(
-            'flex items-center justify-center font-bold flex-1',
+            'flex items-center justify-center font-bold flex-1 text-brown-dark',
             size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
           )}
         >
