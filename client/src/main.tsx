@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './app/store.ts'
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './app/store.ts'
 import { ModalProvider } from '@/context/ModalContext'
 import { Modal } from '@/components/Modal'
 
@@ -12,10 +13,12 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ModalProvider>
-          <App />
-          <Modal />
-        </ModalProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ModalProvider>
+            <App />
+            <Modal />
+          </ModalProvider>
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   </StrictMode>,
