@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { fetchProductById } from '@/features/products/thunks';
@@ -12,56 +12,49 @@ import { addToCart, incrementQuantity, decrementQuantity, selectAllCartItems } f
 import { Badge } from '@/components/badge/Badge';
 import { PageContainer } from '@/layout/PageContainer';
 
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  offerPrice: number;
-  description: string[];
-  createdAt: string;
-  updatedAt: string;
-  inStock: boolean;
-}
-
 const ProductPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch()
-  const [product, setProduct] = React.useState<Product | null>(null)
-  const { status } = useAppSelector(state => state.products)
+  const { product, productStatus } = useAppSelector(state => state.products)
   const cartItems = useAppSelector(selectAllCartItems);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const product = await dispatch(fetchProductById(id!)).unwrap()
-      if (product) {
-        setProduct(product);
-      }
-    };
-    fetchProduct();
+    dispatch(fetchProductById(id!));
   }, [dispatch, id]);
 
-  if (status === 'loading') {
+  if (productStatus === 'loading') {
     return (
-        <Loader/>
+        <PageContainer>
+            <Loader/>
+        </PageContainer>
     );
   }
 
-  if (status === 'failed' || !product) {
+  if (productStatus === 'failed') {
     return (
-        <h1>Error loading product</h1>
+        <PageContainer>
+            <h1>Error loading product</h1>
+        </PageContainer>
     )
   }
 
-  const getCartItemInfo = () => {
-    const item = cartItems.find((item) => item.id === product.id);
+  if (!product) {
+    return (
+        <PageContainer>
+            <h1>Product not found</h1>
+        </PageContainer>
+    )
+  }
+
+  const getCartItemInfo = (productId: string) => {
+    const item = cartItems.find((item) => item.id === productId);
     return {
       inCart: !!item,
       quantity: item?.quantity || 0
     };
   };
 
-  const { inCart, quantity } = getCartItemInfo();
+  const { inCart, quantity } = getCartItemInfo(product.id);
 
   const handleIncrement = () => {
     if (!inCart) {
@@ -88,6 +81,7 @@ const ProductPage: FC = () => {
       offerPrice: product.offerPrice
     }));
   };
+
 
   return (
     <PageContainer>

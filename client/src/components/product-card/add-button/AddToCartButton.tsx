@@ -23,13 +23,13 @@ export const AddToCartButton: FC<AddToCartButtonProps> = ({
   ) : (
     <button
       className={clsx(
-        'bg-brown rounded-[0.8rem]',
+        'bg-orange rounded-[0.8rem]',
         'flex items-center justify-center',
         'text-white',
         size === 'sm' ? 'w-[3.2rem] h-[3.2rem]' : 'w-[4.0rem] h-[4.0rem]',
         !isDisabled && [
-          'hover:bg-brown-dark',
-          'active:bg-brown-darker'
+          'hover:bg-orange-dark',
+          'active:bg-orange-darker'
         ],
         isDisabled && [
           'opacity-50',

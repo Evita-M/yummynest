@@ -28,7 +28,7 @@ const Button = ({ className = '', variant = 'primary', size = 'default', to, pre
 ;
 
   const variantStyles = {
-    primary: 'bg-[var(--color-brown)] border-[var(--color-brown)] text-[var(--color-white)] hover:bg-brown-dark',
+    primary: 'bg-[var(--color-orange)] border-[var(--color-orange)] text-[var(--color-white)] hover:bg-orange-dark',
     secondary: 'bg-[var(--color-blue)] border-[var(--color-blue)] text-[var(--color-white)] hover:bg-blue-dark',
     tertiary: 'bg-[var(--color-light-green)] border-[var(--color-light-green)] text-[var(--color-black)] hover:bg-light-green-dark',
   };

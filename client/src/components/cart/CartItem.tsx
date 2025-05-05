@@ -30,7 +30,7 @@ export const CartItem: FC<CartItemProps> = ({
       onClick={onClick}
     >
       <div className="flex items-center gap-[2.0rem]">
-        <div className="w-[100px] h-[100px] flex items-center justify-center rounded-[1.2rem] border-2 border-brown-light">
+        <div className="w-[100px] h-[100px] flex items-center justify-center rounded-[1.2rem] border-3 border-orange-light">
           <img
             src={vegetableImg}
             alt={name}

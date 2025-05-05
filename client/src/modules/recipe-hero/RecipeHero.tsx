@@ -23,28 +23,28 @@ export const RecipeHero: FC<RecipeHeroProps> = ({
 }) => {
 	return (
 		<section className={className}>
-			<div className="flex flex-col md:flex-row  bg-brown-light rounded-[2rem] overflow-hidden items-center">
-				<div className="w-full h-[300px] md:h-[40rem] md:flex-[50%] relative">
+			<div className="flex flex-col md:flex-row bg-white rounded-[2rem] overflow-hidden items-stretch">
+				<div className="relative w-full md:w-1/2 h-[16rem] md:h-[24rem]">
 					<img
 						src={imgUrl}
 						alt={name}
 						width={600}
 						height={600}
-						className="absolute inset-0 w-full h-full object-cover"
+						className="w-full h-full object-cover"
 					/>
 				</div>
-				<div className="p-[2.4rem] lg:p-12 w-full lg:flex-[50%] flex flex-col h-full gap-[1.2rem] lg:gap-8">
-					<div>
-						<p className="text-sm font-secondary tracking-wider pb-2">
+				<div className="p-4 md:p-6 lg:p-8 w-full md:w-1/2 flex flex-col gap-4">
+					<div className="space-y-2">
+						<p className="font-secondary tracking-wider text-gray-600">
 							Cook This Tonight
 						</p>
-						<h1 className="text-3xl lg:text-4xl font-bold !mb-[1.5rem] lg:!mb-[2.2rem]">{name}</h1>
-						<div className="flex gap-[1.2rem]">
-							{category && <Badge text={category} bgColor='bg-brown' icon={FaBowlFood}/>}
-							{area && <Badge text={area} icon={FaLocationDot} bgColor='bg-brown'/>}
+						<h1>{name}</h1>
+						<div className="flex flex-wrap gap-[1.2rem]">
+							{category && <Badge text={category} bgColor='bg-orange' icon={FaBowlFood}/>}
+							{area && <Badge text={area} icon={FaLocationDot} bgColor='bg-orange'/>}
 						</div>
 					</div>
-					<p className="mt-[1.2rem] lg:text-lg line-clamp-4">{instructions}</p>
+					<p className="text-base text-gray-700 line-clamp-3">{instructions}</p>
 				</div>
 			</div>
 		</section>

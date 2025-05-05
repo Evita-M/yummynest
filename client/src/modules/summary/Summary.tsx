@@ -53,9 +53,9 @@ export const Summary: FC<SummaryProps> = ({
         </div>
       </div>
       </div>
-      <div className="flex justify-between font-semibold text-lg py-[1.2rem]">
-        <span>Total Amount:</span>
-        <span>€ {total.toFixed(2)}</span>
+      <div className="font-secondary flex justify-between font-semibold py-[1.2rem]">
+        <p className="!text-[1.8rem]">Total Amount</p>
+        <p className="!text-[1.8rem]">€ {total.toFixed(2)}</p>
       </div>
       <Button
         onClick={onCheckout}

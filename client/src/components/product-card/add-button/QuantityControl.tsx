@@ -13,9 +13,9 @@ interface QuantityButtonProps {
 const QuantityButton: FC<QuantityButtonProps> = ({ onClick, icon, label, disabled = false, size = 'default' }) => (
   <button
     className={clsx(
-      'flex items-center justify-center bg-brown',
+      'flex items-center justify-center bg-orange',
       size === 'sm' ? 'w-[3.2rem] h-[3.2rem]' : 'w-[4.0rem] h-[4.0rem]',
-      disabled ? 'opacity-50 cursor-default' : 'hover:bg-brown-dark'
+      disabled ? 'opacity-50 cursor-default' : 'hover:bg-orange-dark'
     )}
     onClick={onClick}
     disabled={disabled}
@@ -47,7 +47,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({
   return (
       <div
         className={clsx(
-          'overflow-hidden rounded-[0.8rem] bg-brown-light',
+          'overflow-hidden rounded-[0.8rem] bg-orange-light',
           'w-full flex items-center',
           size === 'sm' ? 'h-[3.2rem]' : 'h-[4.0rem]',
           className
@@ -65,7 +65,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({
         />
         <span
           className={clsx(
-            'flex items-center justify-center font-bold flex-1 text-brown-dark',
+            'flex items-center justify-center font-bold flex-1 text-orange-dark',
             size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
           )}
         >

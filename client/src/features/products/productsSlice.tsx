@@ -7,6 +7,8 @@ interface ProductsState {
   allProducts: Product[];
   categoryProducts: Product[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  product: Product | null;
+  productStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
   errors: string[];
 }
 
@@ -14,6 +16,8 @@ const initialState: ProductsState = {
   allProducts: [],
   categoryProducts: [],
   status: 'idle',
+  product: null,
+  productStatus: 'idle',
   errors: []
 }
 
@@ -38,15 +42,16 @@ export const productsSlice = createSlice({
         state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
       })
       .addCase(fetchProductById.pending, (state) => {
-        state.status = 'loading'
+        state.productStatus = 'loading'
         state.errors = []
       })
-      .addCase(fetchProductById.fulfilled, (state) => {
-        state.status = 'succeeded'
+      .addCase(fetchProductById.fulfilled, (state, action) => {
+        state.productStatus = 'succeeded'
+        state.product = action.payload
         state.errors = []
       })
       .addCase(fetchProductById.rejected, (state, action) => {
-        state.status = 'failed'
+        state.productStatus = 'failed'
         state.errors = action.error.message ? [action.error.message] : ['An unknown error occurred']
       })
       .addCase(fetchProductsByCategory.pending, (state) => {
