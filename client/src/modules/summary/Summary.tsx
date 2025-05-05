@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Button } from '@/components/button/Button'
 import { LuPlus } from 'react-icons/lu'
+import { useModal } from '@/hooks/useModal'
 
 interface SummaryProps {
   subtotal: number
@@ -15,16 +16,19 @@ export const Summary: FC<SummaryProps> = ({
   total,
   onCheckout
 }) => {
-  return (
-    <div className="bg-light-green p-[1.8rem] rounded-xl">
-      <h2>Order Summary</h2>
+	const {openModal} = useModal();
 
+  return (
+    <div className="bg-light-green p-[1.8rem] rounded-[1.2rem] bg-blue-light">
+      <h2>Order Summary</h2>
       <div className="flex flex-col gap-[1.8rem]">
         <div>
           <h3 className="uppercase">Delivery Address</h3>
           <div className="flex justify-between items-center">
             <p className="text-gray-500">No address found</p>
-            <button className="flex items-center gap-[0.8rem] text-green-600 hover:text-green-700 cursor-pointer"><LuPlus /> Add address</button>
+            <Button onClick={()=>openModal(<div>Hello</div>)} variant="secondary" size="sm" preFix={<LuPlus />}>
+               Add address
+            </Button>
           </div>
         </div>
         <div>
@@ -55,8 +59,8 @@ export const Summary: FC<SummaryProps> = ({
       </div>
       <Button
         onClick={onCheckout}
-        variant="tertiary"
-        size="lg"
+        className="w-full"
+        variant="secondary"
       >
         Proceed to Checkout
       </Button>

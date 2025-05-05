@@ -6,6 +6,7 @@ html {
 
 * {
   font-size: 1.6rem;
+  line-height: 1.5; /* Base line height for body text */
 }
 
 @theme {
@@ -55,29 +56,34 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3.4rem;
   margin-bottom: 0.8em;
+  line-height: 1.1; /* Tighter line height for large headings */
 }
 
 h2 {
   font-size: 2.8rem;
   margin-bottom: 0.6em;
+  line-height: 1.3;
 }
 
 h3 {
   font-size: 2rem;
   margin-bottom: 0.6em;
+  line-height: 1.4;
 }
 
 h4 {
   font-size: 1.8rem;
   margin-bottom: 0.4em;
+  line-height: 1.4;
 }
 
 h5, h6 {
   font-size: 1.6rem;
   margin-bottom: 0.2em;
+  line-height: 1.5;
 }
 
-
 button, a {
- cursor: pointer
+  cursor: pointer;
+  line-height: 1.5;
 }

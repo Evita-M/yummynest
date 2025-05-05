@@ -23,7 +23,7 @@ const CategoryPage: FC = () => {
         {label: 'Products', href: '/products'},
         {label: category || ''}
       ]} className="mb-[3.2rem]" />
-      <Products title={category} items={categoryProducts}/>
+      <Products title={category || ''} count={categoryProducts.length} items={categoryProducts}/>
     </PageContainer>
   )
 }

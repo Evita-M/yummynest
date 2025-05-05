@@ -34,7 +34,7 @@ const Button = ({ className = '', variant = 'primary', size = 'default', to, pre
 
   const sizeStyles = {
     default: 'px-[2.4rem] h-[4.0rem] pt-[0.8rem] pb-[0.7rem]',
-    sm: 'px-[1.6rem] h-[3.2rem] pt-[0.6rem] pb-[0.5rem]',
+    sm: 'px-[1.6rem] h-[3.2rem] pt-[0.6rem] pb-[0.5rem] !text-[1.4rem]',
     lg: 'px-[3.2rem] h-[4.8rem] pt-[1.2rem] pb-[1.1rem]',
   };
 

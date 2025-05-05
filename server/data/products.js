@@ -1,632 +1,167 @@
 const products = [
   {
-    "id": "veb8a5b8",
-    "name": "Spinach 250g",
-    "category": "Vegetables",
-    "price": 1.45,
-    "offerPrice": 1.37,
-    "description": [
-      "Fresh leafy greens",
-      "Rich in iron",
-      "Ideal for salads and soups"
-    ],
-    "createdAt": "2025-03-25T07:19:05Z",
-    "updatedAt": "2025-03-25T07:18:58Z",
-    "inStock": false
-  },
-  {
-    "id": "ve7e3156",
+    "id": "ve7c8f66",
     "name": "Onion 1 kg",
     "category": "Vegetables",
-    "price": 0.88,
-    "offerPrice": 0.77,
+    "price": 0.93,
+    "offerPrice": 0.82,
     "description": [
       "Pungent and crisp",
       "Essential for cooking",
       "Long shelf life"
     ],
-    "createdAt": "2025-03-25T07:19:51Z",
-    "updatedAt": "2025-03-25T07:22:39Z",
+    "createdAt": "2025-03-25T07:19:29Z",
+    "updatedAt": "2025-03-25T07:22:06Z",
     "inStock": true
   },
   {
-    "id": "ve03c2d2",
+    "id": "ve068061",
     "name": "Garlic 200g",
     "category": "Vegetables",
-    "price": 0.7,
-    "offerPrice": 0.64,
+    "price": 0.81,
+    "offerPrice": 0.71,
     "description": [
       "Aromatic flavor",
       "Immune booster",
-      "Great for sauces and saut\u00e9s"
+      "Great for sauces and sautés"
     ],
-    "createdAt": "2025-03-25T07:21:39Z",
-    "updatedAt": "2025-03-25T07:19:47Z",
+    "createdAt": "2025-03-25T07:20:43Z",
+    "updatedAt": "2025-03-25T07:21:55Z",
     "inStock": false
   },
   {
-    "id": "fr4143ad",
-    "name": "Strawberry 500g",
-    "category": "Fruits",
-    "price": 3.09,
-    "offerPrice": 2.85,
-    "description": [
-      "Sweet and juicy",
-      "Perfect for desserts",
-      "Rich in antioxidants"
-    ],
-    "createdAt": "2025-03-25T07:20:17Z",
-    "updatedAt": "2025-03-25T07:22:40Z",
-    "inStock": true
-  },
-  {
-    "id": "fr8e9735",
-    "name": "Pineapple 1 pc",
-    "category": "Fruits",
-    "price": 2.12,
-    "offerPrice": 1.84,
-    "description": [
-      "Tropical and tangy",
-      "Great for juicing",
-      "High in Vitamin C"
-    ],
-    "createdAt": "2025-03-25T07:18:41Z",
-    "updatedAt": "2025-03-25T07:18:25Z",
-    "inStock": false
-  },
-  {
-    "id": "fr83385b",
-    "name": "Watermelon 1 pc",
-    "category": "Fruits",
-    "price": 4.39,
-    "offerPrice": 3.87,
-    "description": [
-      "Refreshing and hydrating",
-      "Perfect for summer",
-      "Low in calories"
-    ],
-    "createdAt": "2025-03-25T07:20:53Z",
-    "updatedAt": "2025-03-25T07:19:50Z",
-    "inStock": false
-  },
-  {
-    "id": "da841d26",
-    "name": "Butter 250g",
-    "category": "Dairy",
-    "price": 2.18,
-    "offerPrice": 2.06,
-    "description": [
-      "Creamy and smooth",
-      "Great for baking",
-      "Rich flavor"
-    ],
-    "createdAt": "2025-03-25T07:18:42Z",
-    "updatedAt": "2025-03-25T07:19:31Z",
-    "inStock": true
-  },
-  {
-    "id": "da6a0d92",
-    "name": "Paneer 200g",
-    "category": "Dairy",
-    "price": 2.91,
-    "offerPrice": 2.59,
-    "description": [
-      "Soft and fresh",
-      "High in protein",
-      "Ideal for Indian dishes"
-    ],
-    "createdAt": "2025-03-25T07:20:37Z",
-    "updatedAt": "2025-03-25T07:18:13Z",
-    "inStock": false
-  },
-  {
-    "id": "da421a50",
-    "name": "Cream Cheese 200g",
-    "category": "Dairy",
-    "price": 3.2,
-    "offerPrice": 2.97,
-    "description": [
-      "Smooth and tangy",
-      "Perfect for spreads and baking",
-      "Refrigerated"
-    ],
-    "createdAt": "2025-03-25T07:19:41Z",
-    "updatedAt": "2025-03-25T07:21:15Z",
-    "inStock": true
-  },
-  {
-    "id": "baa15ac3",
-    "name": "Baguette",
-    "category": "Bakery",
-    "price": 1.63,
-    "offerPrice": 1.41,
-    "description": [
-      "Crispy crust",
-      "Soft inside",
-      "Perfect for sandwiches"
-    ],
-    "createdAt": "2025-03-25T07:17:55Z",
-    "updatedAt": "2025-03-25T07:18:21Z",
-    "inStock": true
-  },
-  {
-    "id": "baaed07d",
-    "name": "Muffins 4 pack",
-    "category": "Bakery",
-    "price": 2.71,
-    "offerPrice": 2.5,
-    "description": [
-      "Moist and delicious",
-      "Great snack option",
-      "Available in assorted flavors"
-    ],
-    "createdAt": "2025-03-25T07:18:43Z",
-    "updatedAt": "2025-03-25T07:19:25Z",
-    "inStock": true
-  },
-  {
-    "id": "baf9a12c",
-    "name": "Brown Bread",
-    "category": "Bakery",
-    "price": 2.68,
-    "offerPrice": 2.41,
-    "description": [
-      "Whole wheat goodness",
-      "High in fiber",
-      "Ideal for healthy diets"
-    ],
-    "createdAt": "2025-03-25T07:22:08Z",
-    "updatedAt": "2025-03-25T07:22:24Z",
-    "inStock": false
-  },
-  {
-    "id": "be159a8e",
-    "name": "Orange Juice 1L",
-    "category": "Beverages",
-    "price": 3.03,
-    "offerPrice": 2.65,
-    "description": [
-      "100% natural",
-      "No added sugar",
-      "Rich in Vitamin C"
-    ],
-    "createdAt": "2025-03-25T07:17:47Z",
-    "updatedAt": "2025-03-25T07:19:59Z",
-    "inStock": false
-  },
-  {
-    "id": "be550ee8",
-    "name": "Green Tea 20 bags",
-    "category": "Beverages",
-    "price": 1.86,
-    "offerPrice": 1.7,
-    "description": [
-      "Antioxidant-rich",
-      "Calming and fresh",
-      "Caffeine-free option"
-    ],
-    "createdAt": "2025-03-25T07:18:20Z",
-    "updatedAt": "2025-03-25T07:22:07Z",
-    "inStock": false
-  },
-  {
-    "id": "be63295a",
-    "name": "Coffee 200g",
-    "category": "Beverages",
-    "price": 4.19,
-    "offerPrice": 3.68,
-    "description": [
-      "Strong aroma",
-      "Roasted beans",
-      "Ideal for mornings"
-    ],
-    "createdAt": "2025-03-25T07:21:00Z",
-    "updatedAt": "2025-03-25T07:18:39Z",
-    "inStock": false
-  },
-  {
-    "id": "sndcea29",
-    "name": "Potato Chips 150g",
-    "category": "Snacks",
-    "price": 1.37,
-    "offerPrice": 1.22,
-    "description": [
-      "Crispy and salty",
-      "Perfect for parties",
-      "Made from real potatoes"
-    ],
-    "createdAt": "2025-03-25T07:19:20Z",
-    "updatedAt": "2025-03-25T07:20:43Z",
-    "inStock": false
-  },
-  {
-    "id": "sndfe717",
-    "name": "Trail Mix 200g",
-    "category": "Snacks",
-    "price": 2.8,
-    "offerPrice": 2.41,
-    "description": [
-      "Nuts and dried fruits",
-      "Healthy snack",
-      "High energy content"
-    ],
-    "createdAt": "2025-03-25T07:22:05Z",
-    "updatedAt": "2025-03-25T07:17:55Z",
-    "inStock": true
-  },
-  {
-    "id": "sn29db01",
-    "name": "Chocolate Bar 100g",
-    "category": "Snacks",
-    "price": 1.74,
-    "offerPrice": 1.6,
-    "description": [
-      "Rich and creamy",
-      "Perfect for cravings",
-      "Available in dark & milk"
-    ],
-    "createdAt": "2025-03-25T07:18:00Z",
-    "updatedAt": "2025-03-25T07:21:21Z",
-    "inStock": false
-  },
-  {
-    "id": "vefb0d56",
-    "name": "Spinach 250g",
+    "id": "ve123456",
+    "name": "Carrots 500g",
     "category": "Vegetables",
-    "price": 1.46,
-    "offerPrice": 1.26,
-    "description": [
-      "Fresh leafy greens",
-      "Rich in iron",
-      "Ideal for salads and soups"
-    ],
-    "createdAt": "2025-03-25T07:17:47Z",
-    "updatedAt": "2025-03-25T07:22:45Z",
-    "inStock": true
-  },
-  {
-    "id": "vefd44f1",
-    "name": "Onion 1 kg",
-    "category": "Vegetables",
-    "price": 0.8,
-    "offerPrice": 0.72,
-    "description": [
-      "Pungent and crisp",
-      "Essential for cooking",
-      "Long shelf life"
-    ],
-    "createdAt": "2025-03-25T07:21:16Z",
-    "updatedAt": "2025-03-25T07:20:41Z",
-    "inStock": true
-  },
-  {
-    "id": "veeb7556",
-    "name": "Garlic 200g",
-    "category": "Vegetables",
-    "price": 0.97,
+    "price": 0.95,
     "offerPrice": 0.85,
     "description": [
-      "Aromatic flavor",
-      "Immune booster",
-      "Great for sauces and saut\u00e9s"
+      "Sweet and crunchy",
+      "Rich in Vitamin A",
+      "Perfect for salads and cooking"
     ],
-    "createdAt": "2025-03-25T07:17:49Z",
-    "updatedAt": "2025-03-25T07:17:50Z",
+    "createdAt": "2025-03-25T07:20:00Z",
+    "updatedAt": "2025-03-25T07:21:00Z",
     "inStock": true
   },
   {
-    "id": "fra7674b",
+    "id": "ve234567",
+    "name": "Broccoli 300g",
+    "category": "Vegetables",
+    "price": 1.25,
+    "offerPrice": 1.15,
+    "description": [
+      "Fresh and green",
+      "High in fiber",
+      "Great for stir-fries"
+    ],
+    "createdAt": "2025-03-25T07:21:00Z",
+    "updatedAt": "2025-03-25T07:22:00Z",
+    "inStock": true
+  },
+  {
+    "id": "ve345678",
+    "name": "Bell Peppers 3 pack",
+    "category": "Vegetables",
+    "price": 1.75,
+    "offerPrice": 1.55,
+    "description": [
+      "Colorful variety",
+      "Sweet and crisp",
+      "Perfect for salads"
+    ],
+    "createdAt": "2025-03-25T07:22:00Z",
+    "updatedAt": "2025-03-25T07:23:00Z",
+    "inStock": true
+  },
+  {
+    "id": "fref6185",
     "name": "Strawberry 500g",
     "category": "Fruits",
-    "price": 2.9,
+    "price": 3.16,
     "offerPrice": 2.73,
     "description": [
       "Sweet and juicy",
       "Perfect for desserts",
       "Rich in antioxidants"
     ],
-    "createdAt": "2025-03-25T07:22:40Z",
-    "updatedAt": "2025-03-25T07:17:54Z",
-    "inStock": false
+    "createdAt": "2025-03-25T07:22:00Z",
+    "updatedAt": "2025-03-25T07:19:09Z",
+    "inStock": true
   },
   {
-    "id": "frfbffaf",
+    "id": "fr57ac77",
     "name": "Pineapple 1 pc",
     "category": "Fruits",
-    "price": 2.5,
-    "offerPrice": 2.2,
+    "price": 2.05,
+    "offerPrice": 1.82,
     "description": [
       "Tropical and tangy",
       "Great for juicing",
       "High in Vitamin C"
     ],
-    "createdAt": "2025-03-25T07:19:26Z",
-    "updatedAt": "2025-03-25T07:22:21Z",
-    "inStock": false
+    "createdAt": "2025-03-25T07:19:22Z",
+    "updatedAt": "2025-03-25T07:19:01Z",
+    "inStock": true
   },
   {
-    "id": "frc08d0f",
+    "id": "frb81976",
     "name": "Watermelon 1 pc",
     "category": "Fruits",
-    "price": 4.19,
-    "offerPrice": 3.77,
+    "price": 3.32,
+    "offerPrice": 2.88,
     "description": [
       "Refreshing and hydrating",
       "Perfect for summer",
       "Low in calories"
     ],
-    "createdAt": "2025-03-25T07:19:39Z",
-    "updatedAt": "2025-03-25T07:22:32Z",
+    "createdAt": "2025-03-25T07:21:43Z",
+    "updatedAt": "2025-03-25T07:20:17Z",
     "inStock": false
   },
   {
-    "id": "da86a8b4",
-    "name": "Butter 250g",
-    "category": "Dairy",
-    "price": 2.38,
-    "offerPrice": 2.12,
-    "description": [
-      "Creamy and smooth",
-      "Great for baking",
-      "Rich flavor"
-    ],
-    "createdAt": "2025-03-25T07:18:56Z",
-    "updatedAt": "2025-03-25T07:21:44Z",
-    "inStock": true
-  },
-  {
-    "id": "da214159",
-    "name": "Paneer 200g",
-    "category": "Dairy",
-    "price": 3.06,
-    "offerPrice": 2.71,
-    "description": [
-      "Soft and fresh",
-      "High in protein",
-      "Ideal for Indian dishes"
-    ],
-    "createdAt": "2025-03-25T07:17:56Z",
-    "updatedAt": "2025-03-25T07:18:23Z",
-    "inStock": true
-  },
-  {
-    "id": "da304b56",
-    "name": "Cream Cheese 200g",
-    "category": "Dairy",
-    "price": 2.82,
-    "offerPrice": 2.5,
-    "description": [
-      "Smooth and tangy",
-      "Perfect for spreads and baking",
-      "Refrigerated"
-    ],
-    "createdAt": "2025-03-25T07:22:40Z",
-    "updatedAt": "2025-03-25T07:20:11Z",
-    "inStock": true
-  },
-  {
-    "id": "ba6a3f29",
-    "name": "Baguette",
-    "category": "Bakery",
-    "price": 2.27,
-    "offerPrice": 2.07,
-    "description": [
-      "Crispy crust",
-      "Soft inside",
-      "Perfect for sandwiches"
-    ],
-    "createdAt": "2025-03-25T07:18:10Z",
-    "updatedAt": "2025-03-25T07:19:39Z",
-    "inStock": true
-  },
-  {
-    "id": "bafe5c3d",
-    "name": "Muffins 4 pack",
-    "category": "Bakery",
-    "price": 3.37,
-    "offerPrice": 3.1,
-    "description": [
-      "Moist and delicious",
-      "Great snack option",
-      "Available in assorted flavors"
-    ],
-    "createdAt": "2025-03-25T07:20:18Z",
-    "updatedAt": "2025-03-25T07:19:52Z",
-    "inStock": true
-  },
-  {
-    "id": "baf6b05e",
-    "name": "Brown Bread",
-    "category": "Bakery",
-    "price": 2.66,
-    "offerPrice": 2.3,
-    "description": [
-      "Whole wheat goodness",
-      "High in fiber",
-      "Ideal for healthy diets"
-    ],
-    "createdAt": "2025-03-25T07:19:08Z",
-    "updatedAt": "2025-03-25T07:21:02Z",
-    "inStock": true
-  },
-  {
-    "id": "be4d017c",
-    "name": "Orange Juice 1L",
-    "category": "Beverages",
-    "price": 2.84,
-    "offerPrice": 2.44,
-    "description": [
-      "100% natural",
-      "No added sugar",
-      "Rich in Vitamin C"
-    ],
-    "createdAt": "2025-03-25T07:18:25Z",
-    "updatedAt": "2025-03-25T07:20:18Z",
-    "inStock": false
-  },
-  {
-    "id": "be36d838",
-    "name": "Green Tea 20 bags",
-    "category": "Beverages",
-    "price": 1.7,
-    "offerPrice": 1.5,
-    "description": [
-      "Antioxidant-rich",
-      "Calming and fresh",
-      "Caffeine-free option"
-    ],
-    "createdAt": "2025-03-25T07:21:30Z",
-    "updatedAt": "2025-03-25T07:19:51Z",
-    "inStock": true
-  },
-  {
-    "id": "be4f94b4",
-    "name": "Coffee 200g",
-    "category": "Beverages",
-    "price": 4.55,
-    "offerPrice": 3.97,
-    "description": [
-      "Strong aroma",
-      "Roasted beans",
-      "Ideal for mornings"
-    ],
-    "createdAt": "2025-03-25T07:22:20Z",
-    "updatedAt": "2025-03-25T07:18:00Z",
-    "inStock": false
-  },
-  {
-    "id": "snbabf94",
-    "name": "Potato Chips 150g",
-    "category": "Snacks",
-    "price": 1.32,
-    "offerPrice": 1.16,
-    "description": [
-      "Crispy and salty",
-      "Perfect for parties",
-      "Made from real potatoes"
-    ],
-    "createdAt": "2025-03-25T07:22:05Z",
-    "updatedAt": "2025-03-25T07:20:12Z",
-    "inStock": true
-  },
-  {
-    "id": "snb0733a",
-    "name": "Trail Mix 200g",
-    "category": "Snacks",
-    "price": 3.35,
-    "offerPrice": 3.09,
-    "description": [
-      "Nuts and dried fruits",
-      "Healthy snack",
-      "High energy content"
-    ],
-    "createdAt": "2025-03-25T07:19:55Z",
-    "updatedAt": "2025-03-25T07:18:08Z",
-    "inStock": false
-  },
-  {
-    "id": "sn4dc643",
-    "name": "Chocolate Bar 100g",
-    "category": "Snacks",
-    "price": 1.53,
-    "offerPrice": 1.41,
-    "description": [
-      "Rich and creamy",
-      "Perfect for cravings",
-      "Available in dark & milk"
-    ],
-    "createdAt": "2025-03-25T07:20:33Z",
-    "updatedAt": "2025-03-25T07:22:31Z",
-    "inStock": false
-  },
-  {
-    "id": "ve4aa659",
-    "name": "Spinach 250g",
-    "category": "Vegetables",
-    "price": 1.04,
-    "offerPrice": 0.97,
-    "description": [
-      "Fresh leafy greens",
-      "Rich in iron",
-      "Ideal for salads and soups"
-    ],
-    "createdAt": "2025-03-25T07:22:43Z",
-    "updatedAt": "2025-03-25T07:19:45Z",
-    "inStock": false
-  },
-  {
-    "id": "ve4e8fe0",
-    "name": "Onion 1 kg",
-    "category": "Vegetables",
-    "price": 0.94,
-    "offerPrice": 0.83,
-    "description": [
-      "Pungent and crisp",
-      "Essential for cooking",
-      "Long shelf life"
-    ],
-    "createdAt": "2025-03-25T07:19:35Z",
-    "updatedAt": "2025-03-25T07:22:18Z",
-    "inStock": false
-  },
-  {
-    "id": "ve110c09",
-    "name": "Garlic 200g",
-    "category": "Vegetables",
-    "price": 0.84,
-    "offerPrice": 0.74,
-    "description": [
-      "Aromatic flavor",
-      "Immune booster",
-      "Great for sauces and saut\u00e9s"
-    ],
-    "createdAt": "2025-03-25T07:19:30Z",
-    "updatedAt": "2025-03-25T07:20:13Z",
-    "inStock": false
-  },
-  {
-    "id": "fr9b2765",
-    "name": "Strawberry 500g",
+    "id": "fr456789",
+    "name": "Apples 1 kg",
     "category": "Fruits",
-    "price": 3.47,
-    "offerPrice": 2.97,
+    "price": 2.45,
+    "offerPrice": 2.15,
+    "description": [
+      "Crisp and sweet",
+      "Great for snacking",
+      "Available in red and green"
+    ],
+    "createdAt": "2025-03-25T07:23:00Z",
+    "updatedAt": "2025-03-25T07:24:00Z",
+    "inStock": true
+  },
+  {
+    "id": "fr567890",
+    "name": "Bananas 1 kg",
+    "category": "Fruits",
+    "price": 1.85,
+    "offerPrice": 1.65,
+    "description": [
+      "Sweet and nutritious",
+      "Perfect for smoothies",
+      "Great source of potassium"
+    ],
+    "createdAt": "2025-03-25T07:24:00Z",
+    "updatedAt": "2025-03-25T07:25:00Z",
+    "inStock": true
+  },
+  {
+    "id": "fr678901",
+    "name": "Grapes 500g",
+    "category": "Fruits",
+    "price": 2.95,
+    "offerPrice": 2.75,
     "description": [
       "Sweet and juicy",
-      "Perfect for desserts",
-      "Rich in antioxidants"
+      "Perfect for snacking",
+      "Available in red and green"
     ],
-    "createdAt": "2025-03-25T07:21:23Z",
-    "updatedAt": "2025-03-25T07:20:43Z",
-    "inStock": true
-  },
-  {
-    "id": "frb0c2d6",
-    "name": "Pineapple 1 pc",
-    "category": "Fruits",
-    "price": 2.69,
-    "offerPrice": 2.44,
-    "description": [
-      "Tropical and tangy",
-      "Great for juicing",
-      "High in Vitamin C"
-    ],
-    "createdAt": "2025-03-25T07:22:32Z",
-    "updatedAt": "2025-03-25T07:19:55Z",
-    "inStock": true
-  },
-  {
-    "id": "frf0ae9d",
-    "name": "Watermelon 1 pc",
-    "category": "Fruits",
-    "price": 3.65,
-    "offerPrice": 3.13,
-    "description": [
-      "Refreshing and hydrating",
-      "Perfect for summer",
-      "Low in calories"
-    ],
-    "createdAt": "2025-03-25T07:18:59Z",
-    "updatedAt": "2025-03-25T07:22:15Z",
+    "createdAt": "2025-03-25T07:25:00Z",
+    "updatedAt": "2025-03-25T07:26:00Z",
     "inStock": true
   },
   {
@@ -675,6 +210,51 @@ const products = [
     "inStock": true
   },
   {
+    "id": "da789012",
+    "name": "Greek Yogurt 500g",
+    "category": "Dairy",
+    "price": 3.25,
+    "offerPrice": 2.95,
+    "description": [
+      "Creamy and thick",
+      "High in protein",
+      "Perfect for breakfast"
+    ],
+    "createdAt": "2025-03-25T07:26:00Z",
+    "updatedAt": "2025-03-25T07:27:00Z",
+    "inStock": true
+  },
+  {
+    "id": "da890123",
+    "name": "Mozzarella 200g",
+    "category": "Dairy",
+    "price": 2.75,
+    "offerPrice": 2.45,
+    "description": [
+      "Fresh and soft",
+      "Perfect for pizza",
+      "Great for salads"
+    ],
+    "createdAt": "2025-03-25T07:27:00Z",
+    "updatedAt": "2025-03-25T07:28:00Z",
+    "inStock": true
+  },
+  {
+    "id": "da901234",
+    "name": "Sour Cream 200g",
+    "category": "Dairy",
+    "price": 1.95,
+    "offerPrice": 1.75,
+    "description": [
+      "Tangy and creamy",
+      "Perfect for dips",
+      "Great for baking"
+    ],
+    "createdAt": "2025-03-25T07:28:00Z",
+    "updatedAt": "2025-03-25T07:29:00Z",
+    "inStock": true
+  },
+  {
     "id": "baa84b49",
     "name": "Baguette",
     "category": "Bakery",
@@ -718,6 +298,51 @@ const products = [
     "createdAt": "2025-03-25T07:21:34Z",
     "updatedAt": "2025-03-25T07:19:05Z",
     "inStock": false
+  },
+  {
+    "id": "ba012345",
+    "name": "Croissant 4 pack",
+    "category": "Bakery",
+    "price": 3.45,
+    "offerPrice": 3.15,
+    "description": [
+      "Buttery and flaky",
+      "Perfect for breakfast",
+      "Freshly baked"
+    ],
+    "createdAt": "2025-03-25T07:29:00Z",
+    "updatedAt": "2025-03-25T07:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "ba123456",
+    "name": "Cinnamon Roll",
+    "category": "Bakery",
+    "price": 2.25,
+    "offerPrice": 1.95,
+    "description": [
+      "Sweet and spicy",
+      "Perfect with coffee",
+      "Freshly baked"
+    ],
+    "createdAt": "2025-03-25T07:30:00Z",
+    "updatedAt": "2025-03-25T07:31:00Z",
+    "inStock": true
+  },
+  {
+    "id": "ba234567",
+    "name": "Sourdough Bread",
+    "category": "Bakery",
+    "price": 3.95,
+    "offerPrice": 3.65,
+    "description": [
+      "Artisan quality",
+      "Tangy flavor",
+      "Perfect for sandwiches"
+    ],
+    "createdAt": "2025-03-25T07:31:00Z",
+    "updatedAt": "2025-03-25T07:32:00Z",
+    "inStock": true
   },
   {
     "id": "be2440f8",
@@ -765,6 +390,51 @@ const products = [
     "inStock": false
   },
   {
+    "id": "be345678",
+    "name": "Apple Juice 1L",
+    "category": "Beverages",
+    "price": 2.35,
+    "offerPrice": 2.15,
+    "description": [
+      "100% pure",
+      "No added sugar",
+      "Refreshing taste"
+    ],
+    "createdAt": "2025-03-25T07:32:00Z",
+    "updatedAt": "2025-03-25T07:33:00Z",
+    "inStock": true
+  },
+  {
+    "id": "be456789",
+    "name": "Sparkling Water 1L",
+    "category": "Beverages",
+    "price": 1.25,
+    "offerPrice": 1.15,
+    "description": [
+      "Refreshing bubbles",
+      "Zero calories",
+      "Perfect mixer"
+    ],
+    "createdAt": "2025-03-25T07:33:00Z",
+    "updatedAt": "2025-03-25T07:34:00Z",
+    "inStock": true
+  },
+  {
+    "id": "be567890",
+    "name": "Hot Chocolate Mix 300g",
+    "category": "Beverages",
+    "price": 3.45,
+    "offerPrice": 3.15,
+    "description": [
+      "Rich and creamy",
+      "Perfect for cold days",
+      "Easy to prepare"
+    ],
+    "createdAt": "2025-03-25T07:34:00Z",
+    "updatedAt": "2025-03-25T07:35:00Z",
+    "inStock": true
+  },
+  {
     "id": "sn0b66f2",
     "name": "Potato Chips 150g",
     "category": "Snacks",
@@ -810,94 +480,49 @@ const products = [
     "inStock": true
   },
   {
-    "id": "ve7f013b",
-    "name": "Spinach 250g",
-    "category": "Vegetables",
-    "price": 1.48,
-    "offerPrice": 1.32,
+    "id": "sn678901",
+    "name": "Popcorn 200g",
+    "category": "Snacks",
+    "price": 1.45,
+    "offerPrice": 1.25,
     "description": [
-      "Fresh leafy greens",
-      "Rich in iron",
-      "Ideal for salads and soups"
+      "Light and fluffy",
+      "Perfect for movie nights",
+      "Ready to pop"
     ],
-    "createdAt": "2025-03-25T07:21:17Z",
-    "updatedAt": "2025-03-25T07:21:53Z",
-    "inStock": false
-  },
-  {
-    "id": "ve7c8f66",
-    "name": "Onion 1 kg",
-    "category": "Vegetables",
-    "price": 0.93,
-    "offerPrice": 0.82,
-    "description": [
-      "Pungent and crisp",
-      "Essential for cooking",
-      "Long shelf life"
-    ],
-    "createdAt": "2025-03-25T07:19:29Z",
-    "updatedAt": "2025-03-25T07:22:06Z",
+    "createdAt": "2025-03-25T07:35:00Z",
+    "updatedAt": "2025-03-25T07:36:00Z",
     "inStock": true
   },
   {
-    "id": "ve068061",
-    "name": "Garlic 200g",
-    "category": "Vegetables",
-    "price": 0.81,
-    "offerPrice": 0.71,
+    "id": "sn789012",
+    "name": "Pretzels 200g",
+    "category": "Snacks",
+    "price": 1.85,
+    "offerPrice": 1.65,
     "description": [
-      "Aromatic flavor",
-      "Immune booster",
-      "Great for sauces and saut\u00e9s"
+      "Crunchy and salty",
+      "Perfect for snacking",
+      "Great with dips"
     ],
-    "createdAt": "2025-03-25T07:20:43Z",
-    "updatedAt": "2025-03-25T07:21:55Z",
-    "inStock": false
-  },
-  {
-    "id": "fref6185",
-    "name": "Strawberry 500g",
-    "category": "Fruits",
-    "price": 3.16,
-    "offerPrice": 2.73,
-    "description": [
-      "Sweet and juicy",
-      "Perfect for desserts",
-      "Rich in antioxidants"
-    ],
-    "createdAt": "2025-03-25T07:22:00Z",
-    "updatedAt": "2025-03-25T07:19:09Z",
+    "createdAt": "2025-03-25T07:36:00Z",
+    "updatedAt": "2025-03-25T07:37:00Z",
     "inStock": true
   },
   {
-    "id": "fr57ac77",
-    "name": "Pineapple 1 pc",
-    "category": "Fruits",
-    "price": 2.05,
-    "offerPrice": 1.82,
+    "id": "sn890123",
+    "name": "Granola Bars 6 pack",
+    "category": "Snacks",
+    "price": 2.95,
+    "offerPrice": 2.75,
     "description": [
-      "Tropical and tangy",
-      "Great for juicing",
-      "High in Vitamin C"
+      "Healthy and filling",
+      "Perfect for on-the-go",
+      "Made with oats and honey"
     ],
-    "createdAt": "2025-03-25T07:19:22Z",
-    "updatedAt": "2025-03-25T07:19:01Z",
+    "createdAt": "2025-03-25T07:37:00Z",
+    "updatedAt": "2025-03-25T07:38:00Z",
     "inStock": true
-  },
-  {
-    "id": "frb81976",
-    "name": "Watermelon 1 pc",
-    "category": "Fruits",
-    "price": 3.32,
-    "offerPrice": 2.88,
-    "description": [
-      "Refreshing and hydrating",
-      "Perfect for summer",
-      "Low in calories"
-    ],
-    "createdAt": "2025-03-25T07:21:43Z",
-    "updatedAt": "2025-03-25T07:20:17Z",
-    "inStock": false
   }
 ]
 

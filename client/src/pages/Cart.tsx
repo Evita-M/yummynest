@@ -2,7 +2,6 @@ import { FC } from "react"
 import { PageContainer } from "@/layout/PageContainer"
 import { CartItem } from "@/components/cart/CartItem"
 import { EmptyCart } from "@/components/cart/EmptyCart"
-import { CartHeader } from "@/modules/cart-header/CartHeader"
 import { useAppDispatch, useAppSelector } from "@/app/store"
 import {
   selectAllCartItems,
@@ -13,6 +12,9 @@ import {
 } from "@/features/cart/cartSlice"
 import { Summary } from "@/modules/summary/Summary"
 import { useNavigate } from "react-router-dom"
+import { PageHeader } from "@/components/page-header/PageHeader"
+import { Button } from "@/components/button/Button"
+import { FaArrowLeft } from "react-icons/fa6"
 
 const CartPage: FC = () => {
   const dispatch = useAppDispatch()
@@ -54,12 +56,19 @@ const CartPage: FC = () => {
 
   return (
     <PageContainer>
-      <CartHeader
-        title="Shopping Cart"
-        info={`${cartItems.length > 1 ? `${cartItems.length} items` : `${cartItems.length} item`}`}
-        link={{ href: "/products", label: "Continue shopping" }}
-      />
-
+      <div className="flex items-center justify-between mb-[4.2rem]">
+        <PageHeader
+          title="Shopping Cart"
+          description={`${cartItems.length > 1 ? `${cartItems.length} items` : `${cartItems.length} item`}`}
+        />
+        <Button
+          to="/products"
+          size="sm"
+          preFix={<FaArrowLeft />}
+        >
+          Continue shopping
+        </Button>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[3.2rem]">
         <div className="lg:col-span-2">
           <div className="flex flex-col gap-[1.6rem] rounded-lg">

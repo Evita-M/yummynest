@@ -26,14 +26,14 @@ const navLinks = [
 function App() {
   return (
     <>
-	<Navbar links={navLinks} />
-		<Routes>
-			<Route path='/' element={<HomePage />} />
-			<Route path='/recipes' element={<RecipesPage />} />
-			<Route path='/products' element={<ProductsPage />} />
-			<Route path='/products/:id' element={<ProductPage />} />
-			<Route path='/:category' element={<CategoryPage />} />
-			<Route path='/cart' element={<CartPage />} />
+      <Navbar links={navLinks} />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/recipes' element={<RecipesPage />} />
+        <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products/:id' element={<ProductPage />} />
+        <Route path='/:category' element={<CategoryPage />} />
+        <Route path='/cart' element={<CartPage />} />
       </Routes>
     </>
   )

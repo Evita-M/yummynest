@@ -14,7 +14,7 @@ const ProductsPage: FC = () => {
 
   return (
     <PageContainer>
-      <Products title="All Products" items={allProducts}/>
+      <Products title="All Products" count={allProducts.length} items={allProducts}/>
     </PageContainer>
   )
 }
