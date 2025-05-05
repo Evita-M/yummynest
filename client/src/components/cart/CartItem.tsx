@@ -26,7 +26,7 @@ export const CartItem: FC<CartItemProps> = ({
 }) => {
   return (
     <div
-      className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem] bg-white"
+      className="flex items-center justify-between p-[1.6rem] rounded-[1.2rem] bg-white cursor-pointer hover:shadow-hover transition-all duration-300"
       onClick={onClick}
     >
       <div className="flex items-center gap-[2.0rem]">

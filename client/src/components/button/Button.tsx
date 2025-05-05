@@ -24,7 +24,8 @@ type LinkButtonProps = BaseButtonProps & Omit<LinkProps, 'className'> & {
 type Props = ButtonProps | LinkButtonProps;
 
 const Button = ({ className = '', variant = 'primary', size = 'default', to, preFix, postFix, children, ...props }: Props) => {
-  const baseStyles = 'border-[2px] cursor-pointer inline-flex tracking-wide items-center justify-center rounded-[0.8rem] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+  const baseStyles = 'border-[2px] cursor-pointer inline-flex tracking-wide items-center justify-center rounded-[0.8rem] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:shadow-hover transition-all duration-300'
+;
 
   const variantStyles = {
     primary: 'bg-[var(--color-brown)] border-[var(--color-brown)] text-[var(--color-white)] hover:bg-brown-dark',

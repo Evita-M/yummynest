@@ -20,7 +20,7 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ name, price, offerPrice ,onClick, onIncrement, onDecrement,inCartQuantity, href, inStock}) => {
   return (
-    <div className="flex flex-col w-full relative group bg-white rounded-[1.2rem]">
+    <div className="flex flex-col w-full relative group bg-white rounded-[1.2rem] hover:shadow-hover transition-all duration-300">
       {!inStock && <Badge text="Sold out" bgColor='bg-blue-light' color='text-blue' className="absolute top-[1.2rem] right-[1.2rem]"/>}
       <Link to={href} className="flex flex-col">
         <span className="p-[2.6rem] flex flex-col items-center justify-center rounded-[1.2rem] w-full h-[240px] overflow-hidden" >

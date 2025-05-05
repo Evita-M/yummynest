@@ -23,7 +23,7 @@ export const Summary: FC<SummaryProps> = ({
       <h2>Order Summary</h2>
       <div className="flex flex-col gap-[1.8rem]">
         <div>
-          <h3 className="uppercase">Delivery Address</h3>
+          <h3>Delivery Address</h3>
           <div className="flex justify-between items-center">
             <p className="text-gray-500">No address found</p>
             <Button onClick={()=>openModal(<div>Hello</div>)} variant="secondary" size="sm" preFix={<LuPlus />}>
@@ -32,7 +32,7 @@ export const Summary: FC<SummaryProps> = ({
           </div>
         </div>
         <div>
-          <h3 className="uppercase">Payment Method</h3>
+          <h3>Payment Method</h3>
           <select className="w-full p-2 border border-gray-200 rounded bg-white">
           <option>Online Payment</option>
           <option>Cash on Delivery</option>
@@ -53,7 +53,7 @@ export const Summary: FC<SummaryProps> = ({
         </div>
       </div>
       </div>
-      <div className="flex justify-between font-semibold text-lg pt-4">
+      <div className="flex justify-between font-semibold text-lg py-[1.2rem]">
         <span>Total Amount:</span>
         <span>€ {total.toFixed(2)}</span>
       </div>
