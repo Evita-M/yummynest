@@ -1,5 +1,9 @@
-import {  createEntityAdapter, createSlice, EntityState } from "@reduxjs/toolkit"
-import { RootState } from "@/app/store"
+import {
+  createEntityAdapter,
+  createSlice,
+  EntityState,
+} from '@reduxjs/toolkit';
+import { RootState } from '@/app/store';
 interface CartItem {
   id: string;
   name: string;
@@ -9,22 +13,22 @@ interface CartItem {
 }
 
 // Create the adapter
-const cartAdapter = createEntityAdapter<CartItem>()
+const cartAdapter = createEntityAdapter<CartItem>();
 
 type CartState = EntityState<CartItem, string> & {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   errors: string[];
   items: CartItem[];
-}
+};
 
 const initialState: CartState = cartAdapter.getInitialState({
   status: 'idle',
   errors: [],
   items: [],
-})
+});
 
 export const cartSlice = createSlice({
-  name:'cart',
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -32,24 +36,24 @@ export const cartSlice = createSlice({
       if (existingItem) {
         cartAdapter.updateOne(state, {
           id: action.payload.id,
-          changes: { quantity: existingItem.quantity + 1 }
+          changes: { quantity: existingItem.quantity + 1 },
         });
       } else {
         cartAdapter.addOne(state, { ...action.payload, quantity: 1 });
       }
     },
     removeFromCart: (state, action) => {
-      cartAdapter.removeOne(state, action.payload)
+      cartAdapter.removeOne(state, action.payload);
     },
     updateQuantity: (state, action) => {
-      cartAdapter.updateOne(state, action.payload)
+      cartAdapter.updateOne(state, action.payload);
     },
     incrementQuantity: (state, action) => {
       const existingItem = state.entities[action.payload];
       if (existingItem) {
         cartAdapter.updateOne(state, {
           id: action.payload,
-          changes: { quantity: existingItem.quantity + 1 }
+          changes: { quantity: existingItem.quantity + 1 },
         });
       }
     },
@@ -61,13 +65,13 @@ export const cartSlice = createSlice({
         } else {
           cartAdapter.updateOne(state, {
             id: action.payload,
-            changes: { quantity: existingItem.quantity - 1 }
+            changes: { quantity: existingItem.quantity - 1 },
           });
         }
       }
-    }
+    },
   },
-})
+});
 
 // Selectors
 export const {
@@ -80,10 +84,17 @@ export const selectCartItems = (state: RootState) => selectAllCartItems(state);
 export const selectCartTotalPrice = (state: RootState) => {
   const items = selectAllCartItems(state);
   return items.reduce((total, item) => {
-    const itemPrice = item.offerPrice !== undefined ? item.offerPrice : item.price;
+    const itemPrice =
+      item.offerPrice !== undefined ? item.offerPrice : item.price;
     return total + itemPrice * item.quantity;
   }, 0);
 };
 
-export const { addToCart, removeFromCart, updateQuantity, incrementQuantity, decrementQuantity } = cartSlice.actions
-export default cartSlice.reducer
+export const {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
+export default cartSlice.reducer;

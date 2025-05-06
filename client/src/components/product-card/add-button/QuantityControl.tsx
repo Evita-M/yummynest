@@ -1,21 +1,27 @@
-import { FC, ReactNode, MouseEvent } from 'react'
-import clsx from 'clsx'
-import { LuPlus, LuMinus } from "react-icons/lu";
+import { FC, ReactNode, MouseEvent } from 'react';
+import clsx from 'clsx';
+import { LuPlus, LuMinus } from 'react-icons/lu';
 
 interface QuantityButtonProps {
-  onClick: (e: MouseEvent) => void
-  icon: ReactNode
-  label: string
-  disabled?: boolean
-  size?: 'sm' | 'default'
+  onClick: (e: MouseEvent) => void;
+  icon: ReactNode;
+  label: string;
+  disabled?: boolean;
+  size?: 'sm' | 'default';
 }
 
-const QuantityButton: FC<QuantityButtonProps> = ({ onClick, icon, label, disabled = false, size = 'default' }) => (
+const QuantityButton: FC<QuantityButtonProps> = ({
+  onClick,
+  icon,
+  label,
+  disabled = false,
+  size = 'default',
+}) => (
   <button
     className={clsx(
-      'flex items-center justify-center bg-orange',
-      size === 'sm' ? 'w-[3.2rem] h-[3.2rem]' : 'w-[4.0rem] h-[4.0rem]',
-      disabled ? 'opacity-50 cursor-default' : 'hover:bg-orange-dark'
+      'bg-orange flex items-center justify-center',
+      size === 'sm' ? 'h-[3.2rem] w-[3.2rem]' : 'h-[4.0rem] w-[4.0rem]',
+      disabled ? 'cursor-default opacity-50' : 'hover:bg-orange-dark'
     )}
     onClick={onClick}
     disabled={disabled}
@@ -23,15 +29,15 @@ const QuantityButton: FC<QuantityButtonProps> = ({ onClick, icon, label, disable
   >
     {icon}
   </button>
-)
+);
 
 interface QuantityControlProps {
-  quantity: number
-  onIncrement: VoidFunction
-  onDecrement: VoidFunction
-  className?: string
-  maxQuantity?: number
-  size?: 'sm' | 'default'
+  quantity: number;
+  onIncrement: VoidFunction;
+  onDecrement: VoidFunction;
+  className?: string;
+  maxQuantity?: number;
+  size?: 'sm' | 'default';
 }
 
 export const QuantityControl: FC<QuantityControlProps> = ({
@@ -40,47 +46,47 @@ export const QuantityControl: FC<QuantityControlProps> = ({
   onDecrement,
   className,
   maxQuantity = 10,
-  size = 'default'
+  size = 'default',
 }) => {
-  const isIncrementDisabled = quantity >= maxQuantity
+  const isIncrementDisabled = quantity >= maxQuantity;
 
   return (
-      <div
+    <div
+      className={clsx(
+        'bg-orange-light overflow-hidden rounded-[0.8rem]',
+        'flex w-full items-center',
+        size === 'sm' ? 'h-[3.2rem]' : 'h-[4.0rem]',
+        className
+      )}
+      aria-label='Quantity control'
+    >
+      <QuantityButton
+        onClick={(e) => {
+          e.stopPropagation();
+          onDecrement();
+        }}
+        icon={<LuMinus size={20} className='text-white' />}
+        label='Decrease quantity'
+        size={size}
+      />
+      <span
         className={clsx(
-          'overflow-hidden rounded-[0.8rem] bg-orange-light',
-          'w-full flex items-center',
-          size === 'sm' ? 'h-[3.2rem]' : 'h-[4.0rem]',
-          className
+          'text-orange-dark flex flex-1 items-center justify-center font-bold',
+          size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
         )}
-        aria-label="Quantity control"
       >
-        <QuantityButton
-          onClick={(e) => {
-            e.stopPropagation()
-            onDecrement()
-          }}
-          icon={<LuMinus size={20} className="text-white" />}
-          label="Decrease quantity"
-          size={size}
-        />
-        <span
-          className={clsx(
-            'flex items-center justify-center font-bold flex-1 text-orange-dark',
-            size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
-          )}
-        >
-          {quantity}
-        </span>
-        <QuantityButton
-          onClick={(e) => {
-            e.stopPropagation()
-            onIncrement()
-          }}
-          icon={<LuPlus size={20} className="text-white" />}
-          label="Increase quantity"
-          disabled={isIncrementDisabled}
-          size={size}
-        />
-      </div>
-  )
-}
+        {quantity}
+      </span>
+      <QuantityButton
+        onClick={(e) => {
+          e.stopPropagation();
+          onIncrement();
+        }}
+        icon={<LuPlus size={20} className='text-white' />}
+        label='Increase quantity'
+        disabled={isIncrementDisabled}
+        size={size}
+      />
+    </div>
+  );
+};

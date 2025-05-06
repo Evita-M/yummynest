@@ -1,12 +1,12 @@
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import HomePage from './pages/Home'
-import { Navbar } from './layout/Navbar'
-import RecipesPage from './pages/Recipes'
-import CartPage from './pages/Cart'
-import ProductPage from './pages/Product'
-import ProductsPage from './pages/Products'
-import CategoryPage from './pages/Category'
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import HomePage from './pages/Home';
+import { Navbar } from './layout/Navbar';
+import RecipesPage from './pages/Recipes';
+import CartPage from './pages/Cart';
+import ProductPage from './pages/Product';
+import ProductsPage from './pages/Products';
+import CategoryPage from './pages/Category';
 
 const navLinks = [
   {
@@ -21,7 +21,7 @@ const navLinks = [
     label: 'Products',
     href: '/products',
   },
-]
+];
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
         <Route path='/cart' element={<CartPage />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

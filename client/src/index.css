@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html {
   font-size: 62.5%; /* Makes 1rem = 10px */
@@ -11,17 +11,17 @@ html {
 
 @theme {
   --font-*: initial;
-  --font-sans: "Roboto", sans-serif;
-  --font-primary: "Roboto", sans-serif;
-  --font-secondary:  "Lora", serif;
+  --font-sans: 'Roboto', sans-serif;
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Lora', serif;
   --color-orange: #f29449;
-  --color-orange-light: #FAF6F1;
+  --color-orange-light: #faf6f1;
   --color-orange-dark: #f18631;
   --color-blue: #5bacd1;
-  --color-blue-light: #E8F3F7;
+  --color-blue-light: #e8f3f7;
   --color-black: #212427;
-  --color-offwhite: #FFFBF4;
-  --color-yellow: #FFD14F;
+  --color-offwhite: #fffbf4;
+  --color-yellow: #ffd14f;
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
   /* Custom Shadows */
@@ -37,7 +37,7 @@ html {
 html,
 body {
   height: 100%;
-  background-color: #FAF6F1;
+  background-color: #faf6f1;
 }
 
 #root {
@@ -46,7 +46,12 @@ body {
   flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-secondary);
   margin-bottom: 2rem;
   font-weight: 500;
@@ -77,13 +82,15 @@ h4 {
   line-height: 1.4;
 }
 
-h5, h6 {
+h5,
+h6 {
   font-size: 1.6rem;
   margin-bottom: 0.2em;
   line-height: 1.5;
 }
 
-button, a {
+button,
+a {
   cursor: pointer;
   line-height: 1.5;
 }

@@ -1,17 +1,17 @@
-import { FC } from 'react'
-import { AddToCartButton } from './AddToCartButton'
-import { QuantityControl } from './QuantityControl'
-import clsx from 'clsx'
+import { FC } from 'react';
+import { AddToCartButton } from './AddToCartButton';
+import { QuantityControl } from './QuantityControl';
+import clsx from 'clsx';
 
 interface AddButtonProps {
-  onClick: VoidFunction
-  onIncrement: VoidFunction
-  onDecrement: VoidFunction
-  className?: string
-  inCartQuantity: number
-  isDisabled: boolean
-  label?: string
-  size?: 'sm' | 'default'
+  onClick: VoidFunction;
+  onIncrement: VoidFunction;
+  onDecrement: VoidFunction;
+  className?: string;
+  inCartQuantity: number;
+  isDisabled: boolean;
+  label?: string;
+  size?: 'sm' | 'default';
 }
 
 export const AddButton: FC<AddButtonProps> = ({
@@ -22,11 +22,15 @@ export const AddButton: FC<AddButtonProps> = ({
   className,
   label,
   isDisabled,
-  size = 'default'
+  size = 'default',
 }) => {
-
   return (
-    <div className={clsx("flex justify-end w-full items-center gap-[0.8rem]", className)}>
+    <div
+      className={clsx(
+        'flex w-full items-center justify-end gap-[0.8rem]',
+        className
+      )}
+    >
       {inCartQuantity > 0 ? (
         <QuantityControl
           quantity={inCartQuantity}
@@ -36,8 +40,13 @@ export const AddButton: FC<AddButtonProps> = ({
           size={size}
         />
       ) : (
-        <AddToCartButton onClick={onClick} label={label} isDisabled={isDisabled} size={size} />
+        <AddToCartButton
+          onClick={onClick}
+          label={label}
+          isDisabled={isDisabled}
+          size={size}
+        />
       )}
     </div>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
-import { FC } from "react"
-import { BreadCrumbLink } from "./BreadCrumbLink";
-import { clsx } from "clsx";
+import { FC } from 'react';
+import { BreadCrumbLink } from './BreadCrumbLink';
+import { clsx } from 'clsx';
 
 interface BreadCrumbItem {
   label: string;
@@ -14,19 +14,21 @@ interface BreadCrumbsProps {
 
 export const BreadCrumbs: FC<BreadCrumbsProps> = ({ items, className }) => {
   return (
-    <nav className={clsx("flex items-center text-sm", className)}>
+    <nav className={clsx('flex items-center text-sm', className)}>
       {items.map((item, index) => (
-        <div key={index} className="flex items-center">
+        <div key={index} className='flex items-center'>
           {item.href ? (
             <>
               <BreadCrumbLink label={item.label} href={item.href} />
-              {index < items.length - 1 && <span className="mx-2 text-gray-400">/</span>}
+              {index < items.length - 1 && (
+                <span className='mx-2 text-gray-400'>/</span>
+              )}
             </>
           ) : (
-            <span className="text-gray-700 capitalize">{item.label}</span>
+            <span className='text-gray-700 capitalize'>{item.label}</span>
           )}
         </div>
       ))}
     </nav>
-  )
-}
+  );
+};

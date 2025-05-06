@@ -1,18 +1,25 @@
-import { FC } from "react"
-import { PageContainer } from "@/layout/PageContainer"
-import { Categories } from "@/features/categories/Categories"
-import { RecipeHero } from "@/modules/recipe-hero/RecipeHero"
-import { useGetRandomRecipeQuery } from "@/features/recipes/recipesApi"
+import { FC } from 'react';
+import { PageContainer } from '@/layout/PageContainer';
+import { Categories } from '@/features/categories/Categories';
+import { RecipeHero } from '@/modules/recipe-hero/RecipeHero';
+import { useGetRandomRecipeQuery } from '@/features/recipes/recipesApi';
 
 const RecipesPage: FC = () => {
-const {data} = useGetRandomRecipeQuery({})
-const recipe = data?.meals[0]
+  const { data } = useGetRandomRecipeQuery({});
+  const recipe = data?.meals[0];
   return (
     <PageContainer>
-      <RecipeHero name={recipe?.strMeal} category={recipe?.strCategory} area={recipe?.strArea} instructions={recipe?.strInstructions} imgUrl={recipe?.strMealThumb} className="mb-16" />
-      <Categories title="Categories" />
+      <RecipeHero
+        name={recipe?.strMeal}
+        category={recipe?.strCategory}
+        area={recipe?.strArea}
+        instructions={recipe?.strInstructions}
+        imgUrl={recipe?.strMealThumb}
+        className='mb-16'
+      />
+      <Categories title='Categories' />
     </PageContainer>
-  )
-}
+  );
+};
 
-export default RecipesPage
+export default RecipesPage;
