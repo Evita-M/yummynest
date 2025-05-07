@@ -29,7 +29,6 @@ export const Categories: FC<CategoriesProps> = ({ title }) => {
         {categories.map(({ idCategory, strCategory, strCategoryThumb }) => (
           <CategoryCard
             key={idCategory}
-            id={idCategory}
             name={strCategory}
             imgUrl={strCategoryThumb}
             onClick={() => navigate(`/categories/${idCategory}`)}

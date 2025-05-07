@@ -3,7 +3,6 @@ import { FC } from 'react';
 const IMAGE_SIZE = 120;
 
 interface CategoryCardProps {
-  id: string;
   imgUrl: string;
   name: string;
   onClick?: VoidFunction;
@@ -11,7 +10,6 @@ interface CategoryCardProps {
 
 export const CategoryCard: FC<CategoryCardProps> = ({
   name,
-  id,
   imgUrl,
   onClick,
 }) => {
