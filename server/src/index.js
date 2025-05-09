@@ -4,66 +4,90 @@ import dotenv from 'dotenv';
 import {
   createProduct,
   readProducts,
+  readProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 } from './crud.js';
+import sleep from './middleware/sleep.js';
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// Optional sleep middleware
-const sleepMiddleware = (delay = 2000) => (req, res, next) => {
-  setTimeout(next, delay);
-};
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // Routes
-app.get('/products', async (_req, res) => {
+app.get('/api/products', async (_req, res) => {
   try {
     const rows = await readProducts();
+
     res.status(200).json(rows);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err.message);
   }
 });
 
-app.post('/products', async (req, res) => {
+app.post('/api/products', sleep(), async (req, res) => {
   const { name, description, price, offerPrice, inStock } = req.body;
 
   if (!name || !price || inStock === undefined) {
-    return res.status(400).json({ error: 'Missing required fields: name, price, and inStock are required' });
+    return res.status(400).json({
+      error: 'Missing required fields: name, price, and inStock are required',
+    });
   }
 
   try {
-    const result = await createProduct(name, description, price, offerPrice, inStock);
+    const result = await createProduct(
+      name,
+      description,
+      price,
+      offerPrice,
+      inStock
+    );
     res.status(201).json(`Product ${name} with id ${result.id} was added`);
   } catch (err) {
     res.status(500).send(err.message);
   }
 });
 
-app.put('/products/:id', async (req, res) => {
+app.get('/api/products/:id', sleep(), async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, offerPrice, inStock } = req.body;
+  try {
+    const product = await readProduct(id);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.put('/api/products/:id', sleep(), async (req, res) => {
+  const { id } = req.params;
+  const { name, category, description, price, offerPrice, inStock } = req.body;
 
   if (!name || !price || inStock === undefined) {
-    return res.status(400).json({ error: 'Missing required fields: name, price, and inStock are required' });
+    return res.status(400).json({
+      error: 'Missing required fields: name, price, and inStock are required',
+    });
   }
 
   try {
-    await updateProduct(id, name, description, price, offerPrice, inStock);
+    await updateProduct(
+      id,
+      name,
+      category,
+      description,
+      price,
+      offerPrice,
+      inStock
+    );
     res.status(200).json(`Product ${name} with id ${id} was updated`);
   } catch (err) {
     res.status(500).send(err.message);
   }
 });
 
-app.delete('/products/:id', async (req, res) => {
+app.delete('/api/products/:id', sleep(), async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -81,8 +105,8 @@ app.get('/api/test', (_req, res) => {
     timestamp: new Date().toISOString(),
     data: {
       serverStatus: 'active',
-      environment: process.env.NODE_ENV || 'development'
-    }
+      environment: process.env.NODE_ENV || 'development',
+    },
   });
 });
 

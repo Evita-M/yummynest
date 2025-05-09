@@ -1,0 +1,7 @@
+packages:
+  - client
+  - server
+ignoredBuiltDependencies:
+  - esbuild
+onlyBuiltDependencies:
+  - sqlite3

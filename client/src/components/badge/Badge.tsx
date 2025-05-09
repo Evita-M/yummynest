@@ -20,7 +20,7 @@ export const Badge: FC<BadgeProps> = ({
   return (
     <div
       className={clsx(
-        'inline-flex items-center gap-[0.8rem] rounded-[0.6rem] px-[1.2rem] pt-[0.4rem] pb-[0.3rem]',
+        'inline-flex items-center gap-[0.8rem] rounded-[0.6rem] px-[1.2rem] pb-[0.3rem] pt-[0.4rem]',
         bgColor,
         className
       )}

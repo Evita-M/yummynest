@@ -18,13 +18,21 @@ import { Badge } from '@/components/badge/Badge';
 import { PageContainer } from '@/layout/PageContainer';
 
 const ProductPage: FC = () => {
+  console.log('ProductPage component function invoked');
   const { id } = useParams();
+  console.log('Value of id after useParams:', id);
   const dispatch = useAppDispatch();
   const { product, productStatus } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector(selectAllCartItems);
 
   useEffect(() => {
-    dispatch(fetchProductById(id!));
+    console.log('useEffect in ProductPage is running');
+    if (id) {
+      console.log('Product ID from useParams:', id);
+      dispatch(fetchProductById(id));
+    } else {
+      console.error('Product ID is missing from URL params.');
+    }
   }, [dispatch, id]);
 
   if (productStatus === 'loading') {
@@ -91,19 +99,20 @@ const ProductPage: FC = () => {
     );
   };
 
+  const breadcrumbItems: Array<{ label: string; href: string }> = [
+    { label: 'Products', href: '/products' },
+  ];
+  if (product.category) {
+    breadcrumbItems.push({
+      label: product.category,
+      href: `/${product.category.toLowerCase()}`,
+    });
+  }
+  breadcrumbItems.push({ label: product.name, href: '#' });
+
   return (
     <PageContainer>
-      <BreadCrumbs
-        items={[
-          { label: 'Products', href: '/products' },
-          {
-            label: product.category,
-            href: `/${product.category.toLowerCase()}`,
-          },
-          { label: product.name },
-        ]}
-        className='mb-[3.2rem]'
-      />
+      <BreadCrumbs items={breadcrumbItems} className='mb-[3.2rem]' />
       <div className='mx-auto grid max-w-[1000px] grid-cols-1 gap-[4rem] md:grid-cols-2'>
         <div className='flex gap-[2rem]'>
           <div className='relative flex aspect-square flex-1 items-center justify-center overflow-hidden rounded-[2rem] bg-white'>
@@ -112,7 +121,7 @@ const ProductPage: FC = () => {
                 text='Sold out'
                 bgColor='bg-blue-light'
                 color='text-blue'
-                className='absolute top-[1.2rem] right-[1.2rem]'
+                className='absolute right-[1.2rem] top-[1.2rem]'
               />
             )}
             <img
@@ -130,7 +139,7 @@ const ProductPage: FC = () => {
               <span className='text-gray-500'>37 reviews</span>
             </div>
           </div>
-          <List items={product.description} />
+          {/* <List items={product.description} /> */}
           <ProductPricing
             price={product.price.toFixed(2)}
             offerPrice={product.offerPrice.toFixed(2)}
