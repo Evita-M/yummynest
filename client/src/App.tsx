@@ -1,25 +1,25 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/Home';
-import { Navbar } from './layout/Navbar';
-import RecipesPage from './pages/Recipes';
-import CartPage from './pages/Cart';
-import ProductPage from './pages/Product';
-import ProductsPage from './pages/Products';
-import CategoryPage from './pages/Category';
+import HomePage from '@/pages/Home';
+import { Navbar } from '@/layout/Navbar';
+import RecipesPage from '@/pages/Recipes';
+import CartPage from '@/pages/Cart';
+import ProductPage from '@/pages/Product';
+import ProductsPage from '@/pages/Products';
+import routes from './routes';
 
 const navLinks = [
   {
     label: 'Home',
-    href: '/',
+    href: routes.home,
   },
   {
     label: 'Recipes',
-    href: '/recipes',
+    href: routes.recipes,
   },
   {
     label: 'Products',
-    href: '/products',
+    href: routes.products,
   },
 ];
 
@@ -28,12 +28,13 @@ function App() {
     <>
       <Navbar links={navLinks} />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/recipes' element={<RecipesPage />} />
-        <Route path='/products' element={<ProductsPage />} />
-        <Route path='/products/:id' element={<ProductPage />} />
-        <Route path='/:category' element={<CategoryPage />} />
-        <Route path='/cart' element={<CartPage />} />
+        <Route path={routes.home} element={<HomePage />} />
+        <Route path={routes.recipes} element={<RecipesPage />} />
+        <Route path={routes.products}>
+          <Route index element={<ProductsPage />} />
+          <Route path={`${routes.products}/:id`} element={<ProductPage />} />
+        </Route>
+        <Route path={routes.cart} element={<CartPage />} />
       </Routes>
     </>
   );
