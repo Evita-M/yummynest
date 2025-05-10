@@ -16,6 +16,7 @@ export const BreadCrumbLink: FC<BreadCrumbLinkProps> = ({
   <Link
     to={href}
     className={clsx(
+      'capitalize',
       'text-gray-500 hover:text-gray-700',
       disabled && 'cursor-default'
     )}
