@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "pnpm seed && nodemon src/index.js",
+    "seed": "node src/seed.js",
     "build": "tsc",
     "lint": "eslint .",
     "format": "prettier --write .",
