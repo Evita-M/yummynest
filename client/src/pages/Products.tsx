@@ -47,17 +47,13 @@ const ProductsPage: FC = () => {
 
   return (
     <PageContainer>
-      <BreadCrumbs items={breadcrumbItems} className='mb-[3.2rem]' />
+      <BreadCrumbs className='mb-[3.2rem]' />
       <PageHeader
-        title={category || 'All Products'}
+        title={pageTitle}
         description={`${displayedProducts.length} products found`}
         className='mb-[4.2rem]'
       />
-      <Products
-        title={pageTitle}
-        count={displayedProducts.length}
-        items={displayedProducts}
-      />
+      <Products items={displayedProducts} />
     </PageContainer>
   );
 };
