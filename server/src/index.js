@@ -7,6 +7,8 @@ import {
   readProduct,
   updateProduct,
   deleteProduct,
+  readCategories,
+  readProductsByCategory,
 } from './crud.js';
 import sleep from './middleware/sleep.js';
 
@@ -17,9 +19,17 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.get('/api/products', async (_req, res) => {
+app.get('/api/products', async (req, res) => {
   try {
-    const rows = await readProducts();
+    const { category } = req.query;
+    let rows;
+
+    if (category) {
+      console.log(`Fetching products for category: ${category}`);
+      rows = await readProductsByCategory(category);
+    } else {
+      rows = await readProducts();
+    }
 
     res.status(200).json(rows);
   } catch (err) {
@@ -29,17 +39,20 @@ app.get('/api/products', async (_req, res) => {
 });
 
 app.post('/api/products', sleep(), async (req, res) => {
-  const { name, description, price, offerPrice, inStock } = req.body;
-
-  if (!name || !price || inStock === undefined) {
+  const { name, categoryId, description, price, offerPrice, inStock } =
+    req.body;
+  console.log(req.body);
+  if (!name || !categoryId || !price || inStock === undefined) {
     return res.status(400).json({
-      error: 'Missing required fields: name, price, and inStock are required',
+      error:
+        'Missing required fields: name, categoryId, price, and inStock are required',
     });
   }
 
   try {
     const result = await createProduct(
       name,
+      categoryId,
       description,
       price,
       offerPrice,
@@ -63,11 +76,13 @@ app.get('/api/products/:id', sleep(), async (req, res) => {
 
 app.put('/api/products/:id', sleep(), async (req, res) => {
   const { id } = req.params;
-  const { name, category, description, price, offerPrice, inStock } = req.body;
+  const { name, categoryId, description, price, offerPrice, inStock } =
+    req.body;
 
-  if (!name || !price || inStock === undefined) {
+  if (!name || !categoryId || !price || inStock === undefined) {
     return res.status(400).json({
-      error: 'Missing required fields: name, price, and inStock are required',
+      error:
+        'Missing required fields: name, categoryId, price, and inStock are required',
     });
   }
 
@@ -75,7 +90,7 @@ app.put('/api/products/:id', sleep(), async (req, res) => {
     await updateProduct(
       id,
       name,
-      category,
+      categoryId,
       description,
       price,
       offerPrice,
@@ -108,6 +123,27 @@ app.get('/api/test', (_req, res) => {
       environment: process.env.NODE_ENV || 'development',
     },
   });
+});
+
+// Route to get all categories
+app.get('/api/categories', async (_req, res) => {
+  try {
+    const categories = await readCategories();
+    res.status(200).json(categories);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err.message);
+  }
+});
+
+app.get('/api/categories/:categoryName', async (req, res) => {
+  const { categoryName } = req.params;
+  try {
+    const category = await readCategoryByName(categoryName);
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
 
 // Start server
