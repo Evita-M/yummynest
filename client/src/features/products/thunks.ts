@@ -28,17 +28,3 @@ export const fetchProductById = createAsyncThunk<
     return thunkAPI.rejectWithValue('Failed to fetch product');
   }
 });
-
-export const fetchProductsByCategory = createAsyncThunk<
-  Product[],
-  string,
-  { rejectValue: string }
->('products/fetchProductsByCategory', async (category, thunkAPI) => {
-  try {
-    const response = await fetch(`http://localhost:5555/api/${category}`);
-    const data = await response.json();
-    return data;
-  } catch {
-    return thunkAPI.rejectWithValue('Failed to fetch products');
-  }
-});
