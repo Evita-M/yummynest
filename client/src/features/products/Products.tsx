@@ -42,12 +42,11 @@ export const Products: FC<ProductsProps> = ({ title, count, items }) => {
   };
 
   return (
-    <section className='flex h-full flex-col gap-[4.2rem]'>
+    <section className='flex h-full flex-col'>
       {status === 'loading' ? (
         <Loader />
       ) : (
         <>
-          <PageHeader title={title} description={`${count} products found`} />
           <div className='grid grid-cols-2 gap-[3.2rem] md:grid-cols-3 lg:grid-cols-4'>
             {items.map(({ id, name, price, offerPrice, inStock }: Product) => {
               const quantity = getCartItemInfo(id);
