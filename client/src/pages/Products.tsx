@@ -4,7 +4,7 @@ import { PageContainer } from '@/layout/PageContainer';
 import { fetchProducts } from '@/features/products/thunks';
 import { Products } from '@/features/products/Products';
 import { useSearchParams } from 'react-router-dom';
-import { selectProductsByCategory } from '@/features/products/productsSlice';
+import { selectProductsByCategory } from '@/features/products/selectors';
 import {
   BreadCrumbItem,
   BreadCrumbs,

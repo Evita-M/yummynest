@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { fetchProductById } from '@/features/products/thunks';
 import vegetableImg from '@/assets/images/vegetable.png';
-import { BreadCrumbs } from '@/components/breadcrumbs/BreadCrumbs';
+import {
+  BreadCrumbItem,
+  BreadCrumbs,
+} from '@/components/breadcrumbs/BreadCrumbs';
 import { Loader } from '@/components/loader/Lodaer';
 import { ProductPricing } from '@/modules/product-pricing/ProductPricing';
 import { List } from '@/components/list/List';
@@ -16,22 +19,18 @@ import {
 } from '@/features/cart/cartSlice';
 import { Badge } from '@/components/badge/Badge';
 import { PageContainer } from '@/layout/PageContainer';
+import routes from '@/routes';
 
 const ProductPage: FC = () => {
-  console.log('ProductPage component function invoked');
   const { id } = useParams();
-  console.log('Value of id after useParams:', id);
   const dispatch = useAppDispatch();
   const { product, productStatus } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector(selectAllCartItems);
 
   useEffect(() => {
-    console.log('useEffect in ProductPage is running');
     if (id) {
-      console.log('Product ID from useParams:', id);
       dispatch(fetchProductById(id));
     } else {
-      console.error('Product ID is missing from URL params.');
     }
   }, [dispatch, id]);
 
@@ -99,16 +98,15 @@ const ProductPage: FC = () => {
     );
   };
 
-  const breadcrumbItems: Array<{ label: string; href: string }> = [
-    { label: 'Products', href: '/products' },
+  const breadcrumbItems: BreadCrumbItem[] = [
+    { label: 'Home', href: routes.home },
+    { label: 'Products', href: routes.products },
+    {
+      label: product.categoryName,
+      href: `${routes.products}?category=${product.categoryName}`,
+    },
+    { label: product.name },
   ];
-  if (product.category) {
-    breadcrumbItems.push({
-      label: product.category,
-      href: `/${product.category.toLowerCase()}`,
-    });
-  }
-  breadcrumbItems.push({ label: product.name, href: '#' });
 
   return (
     <PageContainer>
@@ -139,7 +137,7 @@ const ProductPage: FC = () => {
               <span className='text-gray-500'>37 reviews</span>
             </div>
           </div>
-          {/* <List items={product.description} /> */}
+          <List items={product.description} />
           <ProductPricing
             price={product.price.toFixed(2)}
             offerPrice={product.offerPrice.toFixed(2)}
