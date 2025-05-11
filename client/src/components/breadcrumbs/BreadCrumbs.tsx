@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BreadCrumbLink } from './BreadCrumbLink';
-import { clsx } from 'clsx';
 import { generateBreadcrumbs } from '@/utils/generate-breadcrumbs';
 
 export interface BreadCrumbItem {

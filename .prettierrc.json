@@ -7,9 +7,7 @@
   "plugins": ["prettier-plugin-tailwindcss"],
   "overrides": [
     {
-      "files": [
-        "client/**/*.*"
-      ],
+      "files": ["client/**/*.*"],
       "options": {
         "jsxSingleQuote": true
       }

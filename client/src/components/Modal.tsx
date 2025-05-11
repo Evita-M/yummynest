@@ -13,7 +13,7 @@ export const Modal: React.FC = () => {
       <div className='relative mx-4 w-full max-w-md rounded-lg bg-white p-[1.8rem] shadow-xl'>
         <button
           onClick={closeModal}
-          className='absolute top-[1.2rem] right-[1.2rem] text-gray-600 hover:text-gray-800'
+          className='absolute right-[1.2rem] top-[1.2rem] text-gray-600 hover:text-gray-800'
         >
           <IoCloseOutline />
         </button>

@@ -1,8 +1,7 @@
-import { DB } from './db.js';
+import db from '../database/db.js';
 import { v4 as uuidv4 } from 'uuid';
 
-// Create
-export const createProduct = async (
+const createProduct = async (
   name,
   categoryId,
   description,
@@ -10,6 +9,7 @@ export const createProduct = async (
   offerPrice,
   inStock
 ) => {
+  const database = db.get();
   const now = new Date().toISOString();
   const id = uuidv4();
   const sql = `
@@ -33,7 +33,7 @@ export const createProduct = async (
   ];
 
   return new Promise((resolve, reject) => {
-    DB.run(sql, params, function (err) {
+    database.run(sql, params, function (err) {
       if (err) return reject(err);
       resolve({ id });
     });
@@ -41,7 +41,8 @@ export const createProduct = async (
 };
 
 // Read
-export const readProducts = async () => {
+const readProducts = async () => {
+  const database = db.get();
   const sql = `
     SELECT p.*, c.name as categoryName
     FROM products p
@@ -49,7 +50,7 @@ export const readProducts = async () => {
   `;
 
   return new Promise((resolve, reject) => {
-    DB.all(sql, [], (err, rows) => {
+    database.all(sql, [], (err, rows) => {
       if (err) return reject(err);
       // Parse the description string for each product
       const products = rows.map((row) => ({
@@ -61,7 +62,8 @@ export const readProducts = async () => {
   });
 };
 
-export const readProduct = async (id) => {
+const readProduct = async (id) => {
+  const database = db.get();
   const sql = `
     SELECT p.*, c.name as categoryName
     FROM products p
@@ -70,7 +72,7 @@ export const readProduct = async (id) => {
   `;
 
   return new Promise((resolve, reject) => {
-    DB.get(sql, [id], (err, row) => {
+    database.get(sql, [id], (err, row) => {
       if (err) return reject(err);
       // Parse the description string if product is found
       if (row) {
@@ -85,19 +87,31 @@ export const readProduct = async (id) => {
   });
 };
 
-// New function to get category ID by name
-export const getCategoryByName = async (name) => {
-  const sql = 'SELECT id FROM categories WHERE name = ?';
+// Read by category
+const readProductsByCategory = async (categoryName) => {
+  const database = db.get();
+  const sql = `
+    SELECT p.*, c.name as categoryName
+    FROM products p
+    JOIN categories c ON p.categoryId = c.id
+    WHERE LOWER(c.name) = LOWER(?)
+  `;
+
   return new Promise((resolve, reject) => {
-    DB.get(sql, [name], (err, row) => {
+    database.all(sql, [categoryName], (err, rows) => {
       if (err) return reject(err);
-      resolve(row); // Returns the row (which includes id) or undefined if not found
+      // Parse the description string for each product
+      const products = rows.map((row) => ({
+        ...row,
+        description: row.description ? JSON.parse(row.description) : [],
+      }));
+      resolve(products);
     });
   });
 };
 
 // Update
-export const updateProduct = async (
+const updateProduct = async (
   id,
   name,
   categoryId,
@@ -106,6 +120,7 @@ export const updateProduct = async (
   offerPrice,
   inStock
 ) => {
+  const database = db.get();
   const now = new Date().toISOString();
   const sql = `
         UPDATE products
@@ -130,7 +145,7 @@ export const updateProduct = async (
   ];
 
   return new Promise((resolve, reject) => {
-    DB.run(sql, params, function (err) {
+    database.run(sql, params, function (err) {
       if (err) return reject(err);
       resolve({ id: this.lastID });
     });
@@ -138,16 +153,17 @@ export const updateProduct = async (
 };
 
 // Delete
-export const deleteProduct = async (id) => {
+const deleteProduct = async (id) => {
+  const database = db.get();
   // First check if product exists
   const checkSql = 'SELECT id FROM products WHERE id = ?';
   const deleteSql = 'DELETE FROM products WHERE id = ?';
 
   return new Promise((resolve, reject) => {
-    DB.get(checkSql, [id], (err, row) => {
+    database.get(checkSql, [id], (err, row) => {
       if (err) return reject(err);
       // If product exists, proceed with deletion
-      DB.run(deleteSql, [id], function (err) {
+      database.run(deleteSql, [id], function (err) {
         if (err) return reject(err);
         resolve({ id: this.lastID });
       });
@@ -155,53 +171,11 @@ export const deleteProduct = async (id) => {
   });
 };
 
-export const getCategories = async () => {
-  const sql = 'SELECT * FROM categories';
-  return new Promise((resolve, reject) => {
-    DB.all(sql, [], (err, rows) => {
-      if (err) return reject(err);
-      resolve(rows);
-    });
-  });
-};
-
-// New function to get all categories
-export const readCategories = async () => {
-  const sql = 'SELECT id, name, createdAt, updatedAt FROM categories';
-  return new Promise((resolve, reject) => {
-    DB.all(sql, [], (err, rows) => {
-      if (err) return reject(err);
-      resolve(rows);
-    });
-  });
-};
-
-export const readProductsByCategory = async (categoryName) => {
-  const sql = `
-    SELECT p.*, c.name as categoryName
-    FROM products p
-    JOIN categories c ON p.categoryId = c.id
-    WHERE LOWER(c.name) = LOWER(?)
-  `;
-
-  return new Promise((resolve, reject) => {
-    DB.all(sql, [categoryName], (err, rows) => {
-      if (err) return reject(err);
-      // Parse the description string for each product
-      const products = rows.map((row) => ({
-        ...row,
-        description: row.description ? JSON.parse(row.description) : [],
-      }));
-      resolve(products);
-    });
-  });
-};
-
-export default {
+export {
   createProduct,
   readProducts,
+  readProduct,
+  readProductsByCategory,
   updateProduct,
   deleteProduct,
-  readCategories,
-  readProductsByCategory,
 };

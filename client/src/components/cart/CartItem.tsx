@@ -30,7 +30,7 @@ export const CartItem: FC<CartItemProps> = ({
       onClick={onClick}
     >
       <div className='flex items-center gap-[2.0rem]'>
-        <div className='border-orange-light flex h-[100px] w-[100px] items-center justify-center rounded-[1.2rem] border-3'>
+        <div className='border-orange-light border-3 flex h-[100px] w-[100px] items-center justify-center rounded-[1.2rem]'>
           <img src={vegetableImg} alt={name} width={80} height='auto' />
         </div>
         <div>
@@ -42,7 +42,7 @@ export const CartItem: FC<CartItemProps> = ({
           quantity={quantity}
           onIncrement={() => onIncrement(id)}
           onDecrement={() => onDecrement(id)}
-          className='!relative !right-0 !bottom-0 !w-[120px]'
+          className='!relative !bottom-0 !right-0 !w-[120px]'
           size='sm'
         />
         <p className='font-secondary w-[80px] text-right !text-[1.8rem] font-medium'>

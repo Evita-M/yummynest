@@ -59,6 +59,7 @@ pnpm build
 ## Tech Stack
 
 ### Frontend
+
 - React 19
 - Vite
 - Redux Toolkit
@@ -67,6 +68,7 @@ pnpm build
 - TypeScript
 
 ### Backend
+
 - Express
 - SQLite
 - Node.js

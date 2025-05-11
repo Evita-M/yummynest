@@ -26,7 +26,7 @@ export const ProductPricing: FC<ProductPricingProps> = ({
         Orginal Price: <span className='line-through'>€ {price}</span>
       </p>
       <div className='flex w-full items-center justify-between'>
-        <p className='font-secondary flex-1/2 !text-5xl font-medium whitespace-nowrap'>
+        <p className='font-secondary flex-1/2 whitespace-nowrap !text-5xl font-medium'>
           € {offerPrice}
         </p>
         <AddButton

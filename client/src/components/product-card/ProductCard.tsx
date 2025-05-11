@@ -30,13 +30,13 @@ export const ProductCard: FC<ProductCardProps> = ({
   inStock,
 }) => {
   return (
-    <div className='group hover:shadow-hover relative flex w-full flex-col rounded-[1.2rem] bg-white transition-all duration-300'>
+    <div className='hover:shadow-hover group relative flex w-full flex-col rounded-[1.2rem] bg-white transition-all duration-300'>
       {!inStock && (
         <Badge
           text='Sold out'
           bgColor='bg-blue-light'
           color='text-blue'
-          className='absolute top-[1.2rem] right-[1.2rem]'
+          className='absolute right-[1.2rem] top-[1.2rem]'
         />
       )}
       <Link to={href} className='flex flex-col'>
@@ -64,7 +64,7 @@ export const ProductCard: FC<ProductCardProps> = ({
           </div>
         </div>
       </Link>
-      <div className='absolute right-[0.8rem] bottom-[8.9rem] left-[0.8rem]'>
+      <div className='absolute bottom-[8.9rem] left-[0.8rem] right-[0.8rem]'>
         <AddButton
           onClick={onClick}
           onIncrement={onIncrement}
