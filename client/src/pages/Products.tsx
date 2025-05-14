@@ -10,6 +10,7 @@ import {
   BreadCrumbs,
 } from '@/components/breadcrumbs/BreadCrumbs';
 import { PageHeader } from '@/components/page-header/PageHeader';
+import routes from '@/shared/variables/routes';
 
 const ProductsPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -36,8 +37,8 @@ const ProductsPage: FC = () => {
   }, [category]);
 
   const breadcrumbItems: BreadCrumbItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'Products', href: '/products' },
+    { label: 'Home', href: routes.home },
+    { label: 'Products', href: routes.products },
   ];
   if (category) {
     breadcrumbItems.push({

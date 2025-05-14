@@ -19,7 +19,7 @@ import {
 } from '@/features/cart/cartSlice';
 import { Badge } from '@/components/badge/Badge';
 import { PageContainer } from '@/layout/PageContainer';
-import routes from '@/routes';
+import routes from '@/shared/variables/routes';
 
 const ProductPage: FC = () => {
   const { id } = useParams();

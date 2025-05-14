@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
-import { recipesApi } from '@/features/recipes/recipesApi';
 import { productsSlice } from '@/features/products/productsSlice';
 import { cartSlice } from '@/features/cart/cartSlice';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -14,7 +13,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   products: productsSlice.reducer,
-  [recipesApi.reducerPath]: recipesApi.reducer,
   cart: cartSlice.reducer,
 });
 
@@ -22,8 +20,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(recipesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
