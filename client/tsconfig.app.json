@@ -36,7 +36,8 @@
       "@/assets/*": ["src/assets/*"],
       "@/lib/*": ["src/lib/*"],
       "@/modules/*": ["src/modules/*"],
-      "@/layout/*": ["src/layout/*"]
+      "@/layout/*": ["src/layout/*"],
+      "@/shared/*": ["src/shared/*"]
     }
   },
   "include": ["src"]

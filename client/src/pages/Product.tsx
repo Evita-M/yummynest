@@ -137,10 +137,10 @@ const ProductPage: FC = () => {
               <span className='text-gray-500'>37 reviews</span>
             </div>
           </div>
-          <List items={product.description} />
+          <List items={product.description ?? []} />
           <ProductPricing
-            price={product.price.toFixed(2)}
-            offerPrice={product.offerPrice.toFixed(2)}
+            price={(product.price ?? 0).toFixed(2)}
+            offerPrice={(product.offerPrice ?? 0).toFixed(2)}
             inStock={product.inStock}
             onIncrement={handleIncrement}
             onDecrement={handleDecrement}

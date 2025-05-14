@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Product } from './model/product';
+import axiosInstance from '@/shared/api/axios-instance';
 
 export const fetchProducts = createAsyncThunk<
   Product[],
@@ -7,11 +8,10 @@ export const fetchProducts = createAsyncThunk<
   { rejectValue: string }
 >('products/fetchProducts', async (_, thunkAPI) => {
   try {
-    const response = await fetch('http://localhost:5555/api/products');
-    const data = await response.json();
+    const { data } = await axiosInstance.get('/products');
     return data;
-  } catch {
-    return thunkAPI.rejectWithValue('Failed to fetch products');
+  } catch (err: unknown) {
+    return thunkAPI.rejectWithValue(err as string);
   }
 });
 
@@ -21,10 +21,9 @@ export const fetchProductById = createAsyncThunk<
   { rejectValue: string }
 >('products/fetchProductById', async (id, thunkAPI) => {
   try {
-    const response = await fetch(`http://localhost:5555/api/products/${id}`);
-    const data = await response.json();
+    const { data } = await axiosInstance.get(`/products/${id}`);
     return data;
-  } catch {
-    return thunkAPI.rejectWithValue('Failed to fetch product');
+  } catch (err: unknown) {
+    return thunkAPI.rejectWithValue(err as string);
   }
 });
