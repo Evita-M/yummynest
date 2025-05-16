@@ -102,7 +102,6 @@ class Database {
   }
 }
 
-// Create and initialize database instance
 const db = Database.getInstance();
 
 export default db;

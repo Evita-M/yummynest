@@ -3,13 +3,10 @@ import db from './db.js';
 import { getCurrentDateTime, createInsertStatement } from '../utils/index.js';
 import { categories, productsByCategory } from './data.js';
 
-// Function to seed categories
 const seedCategories = () => {
   return new Promise((resolve, reject) => {
-    // Access the SQLite database object
     const database = db.get();
 
-    // Clear existing categories
     database.run('DELETE FROM categories', [], (err) => {
       if (err) {
         console.error('Error clearing categories:', err);
@@ -42,13 +39,10 @@ const seedCategories = () => {
   });
 };
 
-// Function to seed products
 const seedProducts = () => {
   return new Promise((resolve, reject) => {
-    // Access the SQLite database object
     const database = db.get();
 
-    // Clear existing products
     database.run('DELETE FROM products', [], (err) => {
       if (err) {
         console.error('Error clearing products:', err);
@@ -106,10 +100,8 @@ const seedProducts = () => {
   });
 };
 
-// Main seeding function
 const seedDatabase = async () => {
   try {
-    // Seed data
     await seedCategories();
     await seedProducts();
 
@@ -119,5 +111,4 @@ const seedDatabase = async () => {
   }
 };
 
-// Run the seeder
 export default seedDatabase;

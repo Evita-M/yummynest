@@ -1,4 +1,3 @@
-// Data modules
 const categories = [
   { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'Vegetables' },
   { id: '986a9a7a-5159-44c8-b1e7-6228f5b2b34a', name: 'Fruits' },
@@ -9,7 +8,6 @@ const categories = [
   { id: '123e4567-e89b-12d3-a456-426614174002', name: 'Bakery' },
 ];
 
-// Products data organized by category
 const productsByCategory = {
   vegetables: [
     {

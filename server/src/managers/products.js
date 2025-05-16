@@ -17,14 +17,11 @@ const createProduct = async (
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-  // Stringify the description array
-  const descriptionString = JSON.stringify(description);
-
   const params = [
     id,
     name,
     categoryId,
-    descriptionString,
+    JSON.stringify(description),
     price,
     offerPrice,
     now,
@@ -52,7 +49,6 @@ const readProducts = async () => {
   return new Promise((resolve, reject) => {
     database.all(sql, [], (err, rows) => {
       if (err) return reject(err);
-      // Parse the description string for each product
       const products = rows.map((row) => ({
         ...row,
         description: row.description ? JSON.parse(row.description) : [],
@@ -74,14 +70,13 @@ const readProduct = async (id) => {
   return new Promise((resolve, reject) => {
     database.get(sql, [id], (err, row) => {
       if (err) return reject(err);
-      // Parse the description string if product is found
       if (row) {
         resolve({
           ...row,
           description: row.description ? JSON.parse(row.description) : [],
         });
       } else {
-        resolve(null); // Or handle as 'not found' appropriately
+        resolve(null);
       }
     });
   });
@@ -100,7 +95,6 @@ const readProductsByCategory = async (categoryName) => {
   return new Promise((resolve, reject) => {
     database.all(sql, [categoryName], (err, rows) => {
       if (err) return reject(err);
-      // Parse the description string for each product
       const products = rows.map((row) => ({
         ...row,
         description: row.description ? JSON.parse(row.description) : [],
@@ -128,15 +122,10 @@ const updateProduct = async (
         WHERE id = ?
     `;
 
-  // Stringify the description array if it's being updated and is an array
-  // Assuming description might also be a string directly from request, or needs stringifying
-  const descriptionString =
-    typeof description === 'string' ? description : JSON.stringify(description);
-
   const params = [
     name,
     categoryId,
-    descriptionString,
+    JSON.stringify(description),
     price,
     offerPrice,
     now,
@@ -155,14 +144,13 @@ const updateProduct = async (
 // Delete
 const deleteProduct = async (id) => {
   const database = db.get();
-  // First check if product exists
   const checkSql = 'SELECT id FROM products WHERE id = ?';
   const deleteSql = 'DELETE FROM products WHERE id = ?';
 
   return new Promise((resolve, reject) => {
     database.get(checkSql, [id], (err, row) => {
       if (err) return reject(err);
-      // If product exists, proceed with deletion
+
       database.run(deleteSql, [id], function (err) {
         if (err) return reject(err);
         resolve({ id: this.lastID });
