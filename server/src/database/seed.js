@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { faker } from '@faker-js/faker';
 import db from './db.js';
 import { getCurrentDateTime, createInsertStatement } from '../utils/index.js';
 import { categories, productsByCategory } from './data.js';
@@ -59,6 +60,7 @@ const seedProducts = () => {
         'createdAt',
         'updatedAt',
         'inStock',
+        'reviews',
       ];
       const stmt = database.prepare(createInsertStatement('products', columns));
 
@@ -68,6 +70,11 @@ const seedProducts = () => {
       allProducts.forEach((product) => {
         const id = uuidv4();
         const now = getCurrentDateTime();
+        const inStock = faker.datatype.boolean();
+        const reviews = {
+          rating: Math.round(faker.number.int({ min: 3, max: 5 }) / 0.5) * 0.5,
+          count: faker.number.int({ min: 10, max: 60 }),
+        };
 
         stmt.run(
           [
@@ -79,7 +86,8 @@ const seedProducts = () => {
             product.offerPrice,
             now,
             now,
-            product.inStock,
+            inStock,
+            JSON.stringify(reviews),
           ],
           function (err) {
             if (err) {

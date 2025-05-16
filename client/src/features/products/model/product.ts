@@ -9,4 +9,8 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
   inStock: boolean;
+  reviews: {
+    rating: number;
+    count: number;
+  };
 }

@@ -7,14 +7,15 @@ const createProduct = async (
   description,
   price,
   offerPrice,
-  inStock
+  inStock,
+  reviews
 ) => {
   const database = db.get();
   const now = new Date().toISOString();
   const id = uuidv4();
   const sql = `
-        INSERT INTO products (id, name, categoryId, description, price, offerPrice, createdAt, updatedAt, inStock)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO products (id, name, categoryId, description, price, offerPrice, createdAt, updatedAt, inStock, reviews)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
   const params = [
@@ -27,6 +28,7 @@ const createProduct = async (
     now,
     now,
     inStock,
+    JSON.stringify(reviews),
   ];
 
   return new Promise((resolve, reject) => {
@@ -52,6 +54,7 @@ const readProducts = async () => {
       const products = rows.map((row) => ({
         ...row,
         description: row.description ? JSON.parse(row.description) : [],
+        reviews: row.reviews ? JSON.parse(row.reviews) : null,
       }));
       resolve(products);
     });
@@ -74,6 +77,7 @@ const readProduct = async (id) => {
         resolve({
           ...row,
           description: row.description ? JSON.parse(row.description) : [],
+          reviews: row.reviews ? JSON.parse(row.reviews) : null,
         });
       } else {
         resolve(null);
@@ -112,13 +116,14 @@ const updateProduct = async (
   description,
   price,
   offerPrice,
-  inStock
+  inStock,
+  reviews
 ) => {
   const database = db.get();
   const now = new Date().toISOString();
   const sql = `
         UPDATE products
-        SET name = ?, categoryId = ?, description = ?, price = ?, offerPrice = ?, updatedAt = ?, inStock = ?
+        SET name = ?, categoryId = ?, description = ?, price = ?, offerPrice = ?, updatedAt = ?, inStock = ?, reviews = ?
         WHERE id = ?
     `;
 

@@ -133,8 +133,10 @@ const ProductPage: FC = () => {
           <div>
             <h1 className='!mb-[1.2rem]'>{product.name}</h1>
             <div className='flex items-center gap-2'>
-              <Rating rating={4} />
-              <span className='text-gray-500'>37 reviews</span>
+              <Rating rating={product.reviews.rating} />
+              <span className='text-gray-500'>
+                {product.reviews.count} reviews
+              </span>
             </div>
           </div>
           <List items={product.description ?? []} />

@@ -83,6 +83,7 @@ class Database {
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL,
       inStock BOOLEAN NOT NULL,
+      reviews TEXT,
       FOREIGN KEY (categoryId) REFERENCES categories(id)
     )`;
 

@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 const categories = [
   { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'Vegetables' },
   { id: '986a9a7a-5159-44c8-b1e7-6228f5b2b34a', name: 'Fruits' },
@@ -20,7 +22,6 @@ const productsByCategory = {
       ]),
       price: 0.93,
       offerPrice: 0.82,
-      inStock: 1,
     },
     {
       name: 'Garlic 200g',
@@ -32,7 +33,6 @@ const productsByCategory = {
       ]),
       price: 0.81,
       offerPrice: 0.71,
-      inStock: 0,
     },
     {
       name: 'Carrots 500g',
@@ -44,7 +44,6 @@ const productsByCategory = {
       ]),
       price: 0.95,
       offerPrice: 0.85,
-      inStock: 1,
     },
     {
       name: 'Broccoli 300g',
@@ -56,7 +55,6 @@ const productsByCategory = {
       ]),
       price: 1.25,
       offerPrice: 1.15,
-      inStock: 1,
     },
     {
       name: 'Bell Peppers 3 pack',
@@ -68,7 +66,6 @@ const productsByCategory = {
       ]),
       price: 1.75,
       offerPrice: 1.55,
-      inStock: 1,
     },
   ],
   fruits: [
@@ -82,7 +79,6 @@ const productsByCategory = {
       ]),
       price: 3.16,
       offerPrice: 2.73,
-      inStock: 1,
     },
     {
       name: 'Pineapple 1 pc',
@@ -94,7 +90,6 @@ const productsByCategory = {
       ]),
       price: 2.05,
       offerPrice: 1.82,
-      inStock: 1,
     },
     {
       name: 'Watermelon 1 pc',
@@ -106,7 +101,6 @@ const productsByCategory = {
       ]),
       price: 3.32,
       offerPrice: 2.88,
-      inStock: 0,
     },
     {
       name: 'Apples 1 kg',
@@ -118,7 +112,6 @@ const productsByCategory = {
       ]),
       price: 2.45,
       offerPrice: 2.15,
-      inStock: 1,
     },
     {
       name: 'Bananas 1 kg',
@@ -130,7 +123,6 @@ const productsByCategory = {
       ]),
       price: 1.85,
       offerPrice: 1.65,
-      inStock: 1,
     },
     {
       name: 'Grapes 500g',
@@ -142,7 +134,6 @@ const productsByCategory = {
       ]),
       price: 2.95,
       offerPrice: 2.75,
-      inStock: 1,
     },
   ],
   dairy: [
@@ -156,7 +147,6 @@ const productsByCategory = {
       ]),
       price: 2.28,
       offerPrice: 2.02,
-      inStock: 1,
     },
     {
       name: 'Paneer 200g',
@@ -168,7 +158,6 @@ const productsByCategory = {
       ]),
       price: 2.99,
       offerPrice: 2.75,
-      inStock: 1,
     },
     {
       name: 'Cream Cheese 200g',
@@ -180,7 +169,6 @@ const productsByCategory = {
       ]),
       price: 2.81,
       offerPrice: 2.6,
-      inStock: 1,
     },
     {
       name: 'Greek Yogurt 500g',
@@ -192,7 +180,6 @@ const productsByCategory = {
       ]),
       price: 3.25,
       offerPrice: 2.95,
-      inStock: 1,
     },
     {
       name: 'Mozzarella 200g',
@@ -204,7 +191,6 @@ const productsByCategory = {
       ]),
       price: 2.75,
       offerPrice: 2.45,
-      inStock: 1,
     },
     {
       name: 'Sour Cream 200g',
@@ -216,7 +202,6 @@ const productsByCategory = {
       ]),
       price: 1.95,
       offerPrice: 1.75,
-      inStock: 1,
     },
   ],
   bakery: [
@@ -230,7 +215,6 @@ const productsByCategory = {
       ]),
       price: 1.67,
       offerPrice: 1.57,
-      inStock: 1,
     },
     {
       name: 'Muffins 4 pack',
@@ -242,7 +226,6 @@ const productsByCategory = {
       ]),
       price: 3.21,
       offerPrice: 3.04,
-      inStock: 0,
     },
     {
       name: 'Brown Bread',
@@ -254,7 +237,6 @@ const productsByCategory = {
       ]),
       price: 2.75,
       offerPrice: 2.53,
-      inStock: 0,
     },
     {
       name: 'Croissant 4 pack',
@@ -266,7 +248,6 @@ const productsByCategory = {
       ]),
       price: 3.45,
       offerPrice: 3.15,
-      inStock: 1,
     },
     {
       name: 'Cinnamon Roll',
@@ -278,7 +259,6 @@ const productsByCategory = {
       ]),
       price: 2.25,
       offerPrice: 1.95,
-      inStock: 1,
     },
     {
       name: 'Sourdough Bread',
@@ -290,7 +270,6 @@ const productsByCategory = {
       ]),
       price: 3.95,
       offerPrice: 3.65,
-      inStock: 1,
     },
   ],
   beverages: [
@@ -304,7 +283,6 @@ const productsByCategory = {
       ]),
       price: 2.61,
       offerPrice: 2.26,
-      inStock: 1,
     },
     {
       name: 'Green Tea 20 bags',
@@ -316,7 +294,6 @@ const productsByCategory = {
       ]),
       price: 1.8,
       offerPrice: 1.68,
-      inStock: 1,
     },
     {
       name: 'Coffee 200g',
@@ -328,7 +305,6 @@ const productsByCategory = {
       ]),
       price: 4.11,
       offerPrice: 3.52,
-      inStock: 0,
     },
     {
       name: 'Apple Juice 1L',
@@ -340,7 +316,6 @@ const productsByCategory = {
       ]),
       price: 2.35,
       offerPrice: 2.15,
-      inStock: 1,
     },
     {
       name: 'Sparkling Water 1L',
@@ -352,7 +327,6 @@ const productsByCategory = {
       ]),
       price: 1.25,
       offerPrice: 1.15,
-      inStock: 1,
     },
     {
       name: 'Hot Chocolate Mix 300g',
@@ -364,7 +338,6 @@ const productsByCategory = {
       ]),
       price: 3.45,
       offerPrice: 3.15,
-      inStock: 1,
     },
   ],
   snacks: [
@@ -378,7 +351,6 @@ const productsByCategory = {
       ]),
       price: 1.12,
       offerPrice: 0.96,
-      inStock: 0,
     },
     {
       name: 'Trail Mix 200g',
@@ -390,7 +362,6 @@ const productsByCategory = {
       ]),
       price: 2.85,
       offerPrice: 2.54,
-      inStock: 1,
     },
     {
       name: 'Chocolate Bar 100g',
@@ -402,7 +373,6 @@ const productsByCategory = {
       ]),
       price: 1.67,
       offerPrice: 1.49,
-      inStock: 1,
     },
     {
       name: 'Popcorn 200g',
@@ -414,7 +384,6 @@ const productsByCategory = {
       ]),
       price: 1.45,
       offerPrice: 1.25,
-      inStock: 1,
     },
     {
       name: 'Pretzels 200g',
@@ -426,7 +395,6 @@ const productsByCategory = {
       ]),
       price: 1.85,
       offerPrice: 1.65,
-      inStock: 1,
     },
     {
       name: 'Granola Bars 6 pack',
@@ -438,7 +406,6 @@ const productsByCategory = {
       ]),
       price: 2.95,
       offerPrice: 2.75,
-      inStock: 1,
     },
   ],
 };
