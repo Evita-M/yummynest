@@ -2,12 +2,11 @@
   "name": "food-shop-server",
   "version": "1.0.0",
   "description": "Backend server for food shop application",
-  "main": "index.js",
-  "type": "module",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsup src/server.ts --watch --onSuccess \"node dist/server.js\"",
+    "build": "tsup",
     "lint": "eslint .",
     "format": "prettier --write .",
     "fix-sql3": "pnpm rebuild sqlite3"
@@ -24,7 +23,8 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.25",
-    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.3.3"
   }
