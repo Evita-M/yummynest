@@ -1,3 +1,4 @@
+import { Product } from '../types/index';
 import {
   createProduct,
   readProducts,
@@ -5,11 +6,11 @@ import {
   updateProduct,
   deleteProduct,
   readProductsByCategory,
-} from '../managers/products.js';
+} from '../managers/products';
 
-import express from 'express';
+import express, { Router } from 'express';
 
-const routeInit = () => {
+const routeInit = (): Router => {
   const router = express.Router();
 
   // GET /api/products - Retrieve all products or filter by category
@@ -18,7 +19,7 @@ const routeInit = () => {
       const { category } = req.query;
       let rows;
 
-      if (category) {
+      if (typeof category === 'string') {
         console.log(`Fetching products for category: ${category}`);
         rows = await readProductsByCategory(category);
       } else {
@@ -26,16 +27,25 @@ const routeInit = () => {
       }
 
       res.status(200).json(rows);
-    } catch (err) {
-      console.log(err);
-      res.status(500).send(err.message);
+    } catch (error: unknown) {
+      console.log(error);
+      res
+        .status(500)
+        .send(error instanceof Error ? error.message : 'Unknown error');
     }
   });
 
   // POST /api/products - Create a new product
   router.post('/', async (req, res) => {
-    const { name, categoryId, description, price, offerPrice, inStock } =
-      req.body;
+    const {
+      name,
+      categoryId,
+      description,
+      price,
+      offerPrice,
+      inStock,
+      reviews,
+    } = req.body;
 
     if (!name || !categoryId || !price || inStock === undefined) {
       return res.status(400).json({
@@ -45,17 +55,21 @@ const routeInit = () => {
     }
 
     try {
-      const result = await createProduct(
+      const result: Product = await createProduct({
         name,
         categoryId,
         description,
         price,
         offerPrice,
-        inStock
-      );
+        inStock,
+        reviews,
+      });
       res.status(201).json(`Product ${name} with id ${result.id} was added`);
-    } catch (err) {
-      res.status(500).send(err.message);
+    } catch (error: unknown) {
+      console.log(error);
+      res
+        .status(500)
+        .send(error instanceof Error ? error.message : 'Unknown error');
     }
   });
 
@@ -65,16 +79,26 @@ const routeInit = () => {
     try {
       const product = await readProduct(id);
       res.status(200).json(product);
-    } catch (err) {
-      res.status(500).send(err.message);
+    } catch (error: unknown) {
+      console.log(error);
+      res
+        .status(500)
+        .send(error instanceof Error ? error.message : 'Unknown error');
     }
   });
 
   // PUT /api/products/:id - Update a product
   router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, categoryId, description, price, offerPrice, inStock } =
-      req.body;
+    const {
+      name,
+      categoryId,
+      description,
+      price,
+      offerPrice,
+      inStock,
+      reviews,
+    } = req.body;
 
     if (!name || !categoryId || !price || inStock === undefined) {
       return res.status(400).json({
@@ -91,11 +115,15 @@ const routeInit = () => {
         description,
         price,
         offerPrice,
-        inStock
+        inStock,
+        reviews
       );
       res.status(200).json(`Product ${name} with id ${id} was updated`);
-    } catch (err) {
-      res.status(500).send(err.message);
+    } catch (error: unknown) {
+      console.log(error);
+      res
+        .status(500)
+        .send(error instanceof Error ? error.message : 'Unknown error');
     }
   });
 
@@ -106,8 +134,11 @@ const routeInit = () => {
     try {
       await deleteProduct(id);
       res.status(200).json(`Product with id ${id} was deleted`);
-    } catch (err) {
-      res.status(500).send(err.message);
+    } catch (error: unknown) {
+      console.log(error);
+      res
+        .status(500)
+        .send(error instanceof Error ? error.message : 'Unknown error');
     }
   });
 

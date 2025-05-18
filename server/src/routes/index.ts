@@ -1,8 +1,8 @@
-import express from 'express';
-import productsRouter from './products.js';
-import categoriesRouter from './categories.js';
+import express, { Router } from 'express';
+import productsRouter from './products';
+import categoriesRouter from './categories';
 
-const routeInit = () => {
+const routeInit = (): Router => {
   const router = express.Router();
 
   router.use('/products', productsRouter());
