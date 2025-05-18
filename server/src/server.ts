@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import sleep from './middlewares/sleep.js';
-import routeInit from './routes/index.js';
-import db from './database/db.js';
-import seedDatabase from './database/seed.js';
+import sleep from './middlewares/sleep';
+import routeInit from './routes/index';
+import db from './database/db';
+import seedDatabase from './database/seed';
 
 dotenv.config();
 
