@@ -1,14 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 import { faker } from '@faker-js/faker';
-import db from './db.js';
-import { getCurrentDateTime, createInsertStatement } from '../utils/index.js';
-import { categories, productsByCategory } from './data.js';
+import db from './db';
+import { categories, productsByCategory } from './data';
+import { createInsertStatement, getCurrentDateTime } from '../utils/index';
 
 const seedCategories = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const database = db.get();
+    if (!database) {
+      return reject(new Error('Database not found'));
+    }
 
-    database.run('DELETE FROM categories', [], (err) => {
+    database.run('DELETE FROM categories', [], (err: Error | null) => {
       if (err) {
         console.error('Error clearing categories:', err);
         return reject(err);
@@ -40,9 +43,12 @@ const seedCategories = () => {
   });
 };
 
-const seedProducts = () => {
-  return new Promise((resolve, reject) => {
+const seedProducts = (): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
     const database = db.get();
+    if (!database) {
+      return reject(new Error('Database not found'));
+    }
 
     database.run('DELETE FROM products', [], (err) => {
       if (err) {
@@ -89,7 +95,7 @@ const seedProducts = () => {
             inStock,
             JSON.stringify(reviews),
           ],
-          function (err) {
+          function (err: Error) {
             if (err) {
               console.error(`Error inserting product ${product.name}:`, err);
             } else {
@@ -114,7 +120,7 @@ const seedDatabase = async () => {
     await seedProducts();
 
     console.log('Database seeded successfully!');
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error seeding database:', error);
   }
 };

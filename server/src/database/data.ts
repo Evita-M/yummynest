@@ -1,6 +1,21 @@
-import { faker } from '@faker-js/faker';
+interface Category {
+  id: string;
+  name: string;
+}
 
-const categories = [
+interface Product {
+  name: string;
+  categoryId: string;
+  description: string;
+  price: number;
+  offerPrice: number;
+}
+
+interface ProductsByCategory {
+  [key: string]: Product[];
+}
+
+const categories: Category[] = [
   { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'Vegetables' },
   { id: '986a9a7a-5159-44c8-b1e7-6228f5b2b34a', name: 'Fruits' },
   { id: '23d5b6de-72c7-4b66-8a0a-1b7a3e9e4f8b', name: 'Beverages' },
@@ -10,7 +25,7 @@ const categories = [
   { id: '123e4567-e89b-12d3-a456-426614174002', name: 'Bakery' },
 ];
 
-const productsByCategory = {
+const productsByCategory: ProductsByCategory = {
   vegetables: [
     {
       name: 'Onion 1 kg',
