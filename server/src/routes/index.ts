@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
-import productsRouter from './products';
-import categoriesRouter from './categories';
+import productsRouter from './products/products.router';
+import categoriesRouter from './categories/categories.router';
 
 const routeInit = (): Router => {
   const router = express.Router();
