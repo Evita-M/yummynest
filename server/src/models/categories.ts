@@ -42,7 +42,7 @@ const getCategoryByName = async (
   });
 };
 
-const readCategories = async (): Promise<CategoryDatabaseRow[]> => {
+const getAllCategories = async (): Promise<CategoryDatabaseRow[]> => {
   const database = getDatabase(db);
   return new Promise((resolve, reject) => {
     database.all(
@@ -60,4 +60,4 @@ const readCategories = async (): Promise<CategoryDatabaseRow[]> => {
   });
 };
 
-export { getCategoryByName, readCategories };
+export { getCategoryByName, getAllCategories };

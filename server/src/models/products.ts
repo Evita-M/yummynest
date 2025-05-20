@@ -1,5 +1,4 @@
 import {
-  Review,
   ProductDatabaseRow,
   transformDbRowToProduct,
   Product,
@@ -53,7 +52,7 @@ const createProduct = async (product: ProductInput): Promise<Product> => {
 };
 
 // Read
-const readProducts = async (): Promise<Product[]> => {
+const getAllProducts = async (): Promise<Product[]> => {
   const database = getDatabase(db);
   const sql = `
     SELECT p.*, c.name as categoryName
@@ -69,7 +68,7 @@ const readProducts = async (): Promise<Product[]> => {
   });
 };
 
-const readProduct = async (id: string): Promise<Product | null> => {
+const getProduct = async (id: string): Promise<Product | null> => {
   const database = getDatabase(db);
   const sql = `
     SELECT p.*, c.name as categoryName
@@ -120,13 +119,7 @@ const readProductsByCategory = async (
 // Update
 const updateProduct = async (
   id: string,
-  name: string,
-  categoryId: string,
-  description: string,
-  price: number,
-  offerPrice: number,
-  inStock: boolean,
-  reviews: Review
+  productUpdateData: ProductInput
 ): Promise<Product> => {
   const database = db.get();
   if (!database) {
@@ -140,14 +133,14 @@ const updateProduct = async (
     `;
 
   const params = [
-    name,
-    categoryId,
-    JSON.stringify(description),
-    price,
-    offerPrice,
+    productUpdateData.name,
+    productUpdateData.categoryId,
+    JSON.stringify(productUpdateData.description),
+    productUpdateData.price,
+    productUpdateData.offerPrice,
     now,
-    inStock,
-    JSON.stringify(reviews),
+    productUpdateData.inStock,
+    JSON.stringify(productUpdateData.reviews),
     id,
   ];
 
@@ -192,8 +185,8 @@ const deleteProduct = async (id: string): Promise<void> => {
 
 export {
   createProduct,
-  readProducts,
-  readProduct,
+  getAllProducts,
+  getProduct,
   readProductsByCategory,
   updateProduct,
   deleteProduct,
