@@ -17,14 +17,11 @@ app.use(sleep()); // Delay the response
 
 app.use('/api', routeInit());
 
-// Start server
 const startServer = async (port: number) => {
   try {
-    // Initialize database before starting the server
     await db.initialize();
     console.log('Database initialized');
 
-    // Seed the database with initial data
     await seedDatabase();
 
     const server = app.listen(port, () => {
