@@ -1,4 +1,4 @@
-# Food Shop
+# Food Shop ![In Progress](https://img.shields.io/badge/IN%20PROGRESS-C23F84)
 
 A full-stack food shop application built with React, Vite, Express, and SQLite.
 
