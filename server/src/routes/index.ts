@@ -1,12 +1,12 @@
 import express, { Router } from 'express';
-import productsRouter from './products/products.router';
-import categoriesRouter from './categories/categories.router';
+import productRouter from './product.router';
+import categoryRouter from './category.router';
 
 const routeInit = (): Router => {
   const router = express.Router();
 
-  router.use('/products', productsRouter());
-  router.use('/categories', categoriesRouter());
+  router.use('/products', productRouter());
+  router.use('/categories', categoryRouter());
 
   return router;
 };
