@@ -9,20 +9,31 @@
     "build": "tsup",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "fix-sql3": "pnpm rebuild sqlite3"
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "postinstall": "pnpm db:generate",
+    "test": "vitest"
   },
   "dependencies": {
+    "@prisma/client": "^6.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "sqlite3": "^5.1.7",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vitest": "^3.2.4",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.17.44",
+    "@vitest/ui": "^3.2.4",
+    "prisma": "^6.10.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",

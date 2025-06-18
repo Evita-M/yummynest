@@ -10,6 +10,7 @@
     "build:client": "pnpm --filter client build",
     "build:server": "pnpm --filter food-shop-server build",
     "build": "pnpm build:server && pnpm build:client",
+    "start": "pnpm --filter food-shop-server start",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky"

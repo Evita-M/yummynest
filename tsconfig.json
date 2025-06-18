@@ -6,6 +6,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "."
   },
-  "include": ["client/src", "server/src"],
+  "include": ["client/src"],
   "exclude": ["node_modules"]
 }

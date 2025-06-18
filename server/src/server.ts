@@ -1,10 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import sleep from './middlewares/sleep';
 import routeInit from './routes/index';
-import db from './database/db';
-import seedDatabase from './database/seed';
 
 dotenv.config();
 
@@ -15,14 +14,22 @@ app.use(cors());
 app.use(express.json());
 app.use(sleep()); // Delay the response
 
+// Serve static files from the client build directory
+const clientDistPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientDistPath));
+
 app.use('/api', routeInit());
+
+// Handle client-side routing - serve index.html for any non-API routes
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  }
+});
 
 const startServer = async (port: number) => {
   try {
-    await db.initialize();
-    console.log('Database initialized');
-
-    await seedDatabase();
+    // await seedDatabase();
 
     const server = app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);

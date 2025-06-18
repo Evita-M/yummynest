@@ -3,5 +3,3 @@ packages:
   - server
 ignoredBuiltDependencies:
   - esbuild
-onlyBuiltDependencies:
-  - sqlite3
