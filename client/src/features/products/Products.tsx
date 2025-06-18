@@ -8,14 +8,7 @@ import {
   selectAllCartItems,
 } from '@/features/cart/cartSlice';
 import { Loader } from '@/components/loader/Lodaer';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  offerPrice: number;
-  inStock: boolean;
-}
+import { Product } from './model/product';
 
 interface ProductsProps {
   items: Product[];
@@ -44,16 +37,24 @@ export const Products: FC<ProductsProps> = ({ items }) => {
         <Loader />
       ) : (
         <div className='grid grid-cols-2 gap-[3.2rem] md:grid-cols-3 lg:grid-cols-4'>
-          {items.map(({ id, name, price, offerPrice, inStock }: Product) => {
+          {items.map((product: Product) => {
+            const { id, name, price, offerPrice, inStock } = product;
             const quantity = getCartItemInfo(id);
             return (
               <ProductCard
                 key={id}
                 name={name}
                 price={price.toFixed(2)}
-                offerPrice={offerPrice.toFixed(2)}
+                offerPrice={(offerPrice || price).toFixed(2)}
                 onClick={() =>
-                  dispatch(addToCart({ id, name, price, offerPrice }))
+                  dispatch(
+                    addToCart({
+                      id,
+                      name,
+                      price,
+                      offerPrice: offerPrice || price,
+                    })
+                  )
                 }
                 onIncrement={() => handleIncrement(id)}
                 onDecrement={() => handleDecrement(id)}

@@ -3,6 +3,7 @@ import { fetchProductById, fetchProducts } from './thunks';
 import { Product } from './model/product';
 
 export interface ProductsState {
+  count: number;
   allProducts: Product[];
   filteredProducts: Product[];
   product: Product | null;
@@ -12,6 +13,7 @@ export interface ProductsState {
 }
 
 const initialState: ProductsState = {
+  count: 0,
   allProducts: [],
   filteredProducts: [],
   product: null,
@@ -33,7 +35,8 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.errors = [];
-        state.allProducts = action.payload;
+        state.allProducts = action.payload.data;
+        state.count = action.payload.count;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
@@ -47,7 +50,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.productStatus = 'succeeded';
-        state.product = action.payload;
+        state.product = action.payload.data;
         state.errors = [];
       })
       .addCase(fetchProductById.rejected, (state, action) => {

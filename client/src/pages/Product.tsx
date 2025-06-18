@@ -9,7 +9,6 @@ import {
 } from '@/components/breadcrumbs/BreadCrumbs';
 import { Loader } from '@/components/loader/Lodaer';
 import { ProductPricing } from '@/modules/product-pricing/ProductPricing';
-import { List } from '@/components/list/List';
 import { Rating } from '@/components/rating/Rating';
 import {
   addToCart,
@@ -102,8 +101,8 @@ const ProductPage: FC = () => {
     { label: 'Home', href: routes.home },
     { label: 'Products', href: routes.products },
     {
-      label: product.categoryName,
-      href: `${routes.products}?category=${product.categoryName}`,
+      label: product.category?.name ?? '',
+      href: `${routes.products}?category=${product.category?.name}`,
     },
     { label: product.name },
   ];
@@ -133,13 +132,13 @@ const ProductPage: FC = () => {
           <div>
             <h1 className='!mb-[1.2rem]'>{product.name}</h1>
             <div className='flex items-center gap-2'>
-              <Rating rating={product.reviews.rating} />
+              <Rating rating={product.reviewRating} />
               <span className='text-gray-500'>
-                {product.reviews.count} reviews
+                {product.reviewTotalCount} reviews
               </span>
             </div>
           </div>
-          <List items={product.description ?? []} />
+          <p>{product.description}</p>
           <ProductPricing
             price={(product.price ?? 0).toFixed(2)}
             offerPrice={(product.offerPrice ?? 0).toFixed(2)}

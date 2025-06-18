@@ -2,15 +2,17 @@ export interface Product {
   id: string;
   name: string;
   categoryId: string;
-  categoryName: string;
   price: number;
-  offerPrice: number;
-  description: string[];
-  createdAt: string;
-  updatedAt: string;
+  offerPrice?: number;
+  description?: string;
+  imageSrc?: string;
+  createdAt?: string;
+  updatedAt?: string;
   inStock: boolean;
-  reviews: {
-    rating: number;
-    count: number;
+  category?: {
+    id: string;
+    name: string;
   };
+  reviewTotalCount: number;
+  reviewRating: number;
 }
