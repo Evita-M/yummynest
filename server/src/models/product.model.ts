@@ -1,5 +1,7 @@
 import { Product, Category } from '../../prisma/generated/client';
 import prisma from '../database/prisma';
+import { CustomError } from '../middlewares/error-handler';
+import { ERROR_CODES, ERROR_MESSAGES } from '../utils/error-constants';
 
 export interface CreateProductInput {
   name: string;
@@ -38,7 +40,11 @@ export class ProductModel {
       });
 
       if (!categoryExists) {
-        throw new Error('Category not found');
+        throw new CustomError(
+          ERROR_MESSAGES.RECORD_NOT_FOUND('Category'),
+          404,
+          ERROR_CODES.NOT_FOUND
+        );
       }
 
       const product = await prisma.product.create({
@@ -60,10 +66,25 @@ export class ProductModel {
 
       return product;
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to create product: ${error.message}`);
+      // Re-throw CustomErrors as-is
+      if (error instanceof CustomError) {
+        throw error;
       }
-      throw new Error('Failed to create product: Unknown error');
+
+      if (error instanceof Error) {
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_CREATE('Product'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
+      }
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_CREATE('Product'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -79,9 +100,19 @@ export class ProductModel {
       return products;
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to fetch products: ${error.message}`);
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_FETCH('Products'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to fetch products: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_FETCH('Products'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -102,9 +133,19 @@ export class ProductModel {
       return product;
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to fetch product: ${error.message}`);
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_FETCH('Product'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to fetch product: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_FETCH('Product'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -124,11 +165,19 @@ export class ProductModel {
       return products;
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(
-          `Failed to fetch products by category: ${error.message}`
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_FETCH('Products by category'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
         );
       }
-      throw new Error('Failed to fetch products by category: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_FETCH('Products by category'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -144,7 +193,11 @@ export class ProductModel {
         });
 
         if (!categoryExists) {
-          throw new Error('Category not found');
+          throw new CustomError(
+            ERROR_MESSAGES.RECORD_NOT_FOUND('Category'),
+            404,
+            ERROR_CODES.NOT_FOUND
+          );
         }
       }
 
@@ -176,10 +229,25 @@ export class ProductModel {
 
       return product;
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to update product: ${error.message}`);
+      // Re-throw CustomErrors as-is
+      if (error instanceof CustomError) {
+        throw error;
       }
-      throw new Error('Failed to update product: Unknown error');
+
+      if (error instanceof Error) {
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_UPDATE('Product'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
+      }
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_UPDATE('Product'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -193,7 +261,11 @@ export class ProductModel {
       });
 
       if (!existingProduct) {
-        throw new Error('Product not found');
+        throw new CustomError(
+          ERROR_MESSAGES.RECORD_NOT_FOUND('Product'),
+          404,
+          ERROR_CODES.NOT_FOUND
+        );
       }
 
       await prisma.product.delete({
@@ -202,10 +274,25 @@ export class ProductModel {
 
       return existingProduct;
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to delete product: ${error.message}`);
+      // Re-throw CustomErrors as-is
+      if (error instanceof CustomError) {
+        throw error;
       }
-      throw new Error('Failed to delete product: Unknown error');
+
+      if (error instanceof Error) {
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_DELETE('Product'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
+      }
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_DELETE('Product'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 }

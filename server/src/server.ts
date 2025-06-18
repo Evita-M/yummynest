@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import sleep from './middlewares/sleep';
 import routeInit from './routes/index';
+import { globalErrorHandler } from './middlewares/error-handler';
 
 dotenv.config();
 
@@ -20,17 +21,17 @@ app.use(express.static(clientDistPath));
 
 app.use('/api', routeInit());
 
-// Handle client-side routing - serve index.html for any non-API routes
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
     res.sendFile(path.join(clientDistPath, 'index.html'));
   }
 });
 
+// Global error handler
+app.use(globalErrorHandler);
+
 const startServer = async (port: number) => {
   try {
-    // await seedDatabase();
-
     const server = app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });

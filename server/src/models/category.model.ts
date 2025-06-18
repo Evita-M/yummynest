@@ -1,5 +1,7 @@
 import { Category } from '../../prisma/generated/client';
 import prisma from '../database/prisma';
+import { CustomError } from '../middlewares/error-handler';
+import { ERROR_CODES, ERROR_MESSAGES } from '../utils/error-constants';
 
 export interface CreateCategoryInput {
   name: string;
@@ -24,9 +26,19 @@ export class CategoryModel {
       });
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to create category: ${error.message}`);
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_CREATE('Category'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to create category: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_CREATE('Category'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -49,9 +61,19 @@ export class CategoryModel {
       });
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to fetch categories: ${error.message}`);
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_FETCH('Categories'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to fetch categories: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_FETCH('Categories'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -68,9 +90,19 @@ export class CategoryModel {
       });
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to update category: ${error.message}`);
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_UPDATE('Category'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to update category: Unknown error');
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_UPDATE('Category'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -82,21 +114,44 @@ export class CategoryModel {
       });
 
       if (!categoryWithProducts) {
-        throw new Error('Category not found');
+        throw new CustomError(
+          ERROR_MESSAGES.RECORD_NOT_FOUND('Category'),
+          404,
+          ERROR_CODES.NOT_FOUND
+        );
       }
 
       if (categoryWithProducts._count.products > 0) {
-        throw new Error('Cannot delete category with existing products');
+        throw new CustomError(
+          ERROR_MESSAGES.CANNOT_DELETE_WITH_RELATIONS('Category', 'products'),
+          409,
+          ERROR_CODES.CONFLICT
+        );
       }
 
       return await prisma.category.delete({
         where: { id },
       });
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to delete category: ${error.message}`);
+      // Re-throw CustomErrors as-is
+      if (error instanceof CustomError) {
+        throw error;
       }
-      throw new Error('Failed to delete category: Unknown error');
+
+      if (error instanceof Error) {
+        throw new CustomError(
+          ERROR_MESSAGES.FAILED_TO_DELETE('Category'),
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
+      }
+      throw new CustomError(
+        ERROR_MESSAGES.FAILED_TO_DELETE('Category'),
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 
@@ -109,9 +164,19 @@ export class CategoryModel {
       return !!category;
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(`Failed to check category existence: ${error.message}`);
+        throw new CustomError(
+          'Failed to check category existence',
+          500,
+          ERROR_CODES.INTERNAL_ERROR,
+          true,
+          { originalError: error.message }
+        );
       }
-      throw new Error('Failed to check category existence: Unknown error');
+      throw new CustomError(
+        'Failed to check category existence',
+        500,
+        ERROR_CODES.UNKNOWN_ERROR
+      );
     }
   }
 }

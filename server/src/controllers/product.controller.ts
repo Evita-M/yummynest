@@ -1,87 +1,13 @@
 import { Request, Response } from 'express';
-import { Prisma } from '../../prisma/generated/client';
 import ProductModel, {
   CreateProductInput,
   UpdateProductInput,
 } from '../models/product.model';
-import { validateString } from '../utils/validate-string/indes';
-import { validateNumber } from '../utils/validate-number';
-import { validateUUID } from '../utils/validate-uuid';
+import { asyncHandler, CustomError } from '../middlewares/error-handler';
+import { ERROR_MESSAGES, ERROR_CODES } from '../utils/error-constants';
 
-// Error response helper
-const handleError = (res: Response, error: unknown, operation: string) => {
-  console.error(`${operation} error:`, error);
-
-  if (error instanceof Error) {
-    // Handle Prisma-specific errors
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      switch (error.code) {
-        case 'P2002':
-          return res.status(409).json({
-            error: 'Product with this name already exists',
-            code: 'DUPLICATE_NAME',
-          });
-        case 'P2025':
-          return res.status(404).json({
-            error: 'Product not found',
-            code: 'NOT_FOUND',
-          });
-        case 'P2003':
-          return res.status(400).json({
-            error: 'Invalid category reference',
-            code: 'INVALID_REFERENCE',
-          });
-        default:
-          return res.status(400).json({
-            error: 'Database operation failed',
-            code: 'DB_ERROR',
-          });
-      }
-    }
-
-    // Handle validation errors
-    if (
-      error.message.includes('required') ||
-      error.message.includes('invalid') ||
-      error.message.includes('exceed') ||
-      error.message.includes('positive') ||
-      error.message.includes('less than')
-    ) {
-      return res.status(400).json({
-        error: error.message,
-        code: 'VALIDATION_ERROR',
-      });
-    }
-
-    // Handle business logic errors
-    if (error.message.includes('Category not found')) {
-      return res.status(400).json({
-        error: error.message,
-        code: 'CATEGORY_NOT_FOUND',
-      });
-    }
-
-    return res.status(500).json({
-      error: error.message,
-      code: 'INTERNAL_ERROR',
-    });
-  }
-
-  return res.status(500).json({
-    error: 'An unexpected error occurred',
-    code: 'UNKNOWN_ERROR',
-  });
-};
-
-/**
- * Create a new product
- * POST /api/products
- */
-export async function httpCreateProduct(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
+export const httpCreateProduct = asyncHandler(
+  async (req: Request, res: Response): Promise<Response> => {
     const {
       name,
       description,
@@ -94,37 +20,51 @@ export async function httpCreateProduct(
       reviewRating,
     } = req.body;
 
-    // Validate required fields
-    const validatedName = validateString('Name', name, 1, 120);
-    const validatedPrice = validateNumber('Price', price, 1, 200);
-
+    // Use custom error for validation
     if (!categoryId) {
-      return res.status(400).json({
-        error: 'Category ID is required',
-        code: 'VALIDATION_ERROR',
-      });
+      throw new CustomError(
+        ERROR_MESSAGES.CATEGORY_ID_REQUIRED,
+        400,
+        ERROR_CODES.VALIDATION_ERROR
+      );
+    }
+
+    // Additional validation
+    if (!name || name.trim().length === 0) {
+      throw new CustomError(
+        ERROR_MESSAGES.PRODUCT_NAME_REQUIRED,
+        400,
+        ERROR_CODES.VALIDATION_ERROR
+      );
+    }
+
+    if (price <= 0) {
+      throw new CustomError(
+        ERROR_MESSAGES.INVALID_PRICE,
+        400,
+        ERROR_CODES.VALIDATION_ERROR
+      );
+    }
+
+    if (offerPrice && offerPrice >= price) {
+      throw new CustomError(
+        ERROR_MESSAGES.INVALID_OFFER_PRICE,
+        400,
+        ERROR_CODES.VALIDATION_ERROR
+      );
     }
 
     const productData: CreateProductInput = {
-      name: validatedName,
+      name: name.trim(),
       description: description?.trim(),
-      price: validatedPrice,
+      price: price,
       categoryId: categoryId.trim(),
       inStock: inStock ?? true,
+      offerPrice: offerPrice,
       reviewTotalCount: reviewTotalCount ?? 0,
       reviewRating: reviewRating ?? 0,
       imageSrc: imageSrc?.trim(),
     };
-
-    // Validate offer price if provided
-    if (offerPrice !== undefined) {
-      productData.offerPrice = validateNumber(
-        'Offer price',
-        offerPrice,
-        0,
-        validatedPrice
-      );
-    }
 
     const newProduct = await ProductModel.create(productData);
 
@@ -132,32 +72,11 @@ export async function httpCreateProduct(
       data: newProduct,
       message: 'Product created successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Create product');
   }
-}
+);
 
-/**
- * Get all products with optional filtering
- * GET /api/products?categoryId=uuid&categoryName=name&search=query&inStock=true&priceMin=10&priceMax=100&includeCategory=true&includeReviews=false
- */
-export async function httpGetAllProducts(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
-    const {
-      categoryId,
-      categoryName,
-      search,
-      inStock,
-      priceMin,
-      priceMax,
-      includeCategory,
-      includeReviews,
-    } = req.query;
-
-    // Since filtering was removed, just get all products
+export const httpGetAllProducts = asyncHandler(
+  async (_req: Request, res: Response): Promise<Response> => {
     const products = await ProductModel.findMany();
 
     return res.status(200).json({
@@ -165,29 +84,27 @@ export async function httpGetAllProducts(
       count: products.length,
       message: 'Products retrieved successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Get products');
   }
-}
+);
 
-/**
- * Get product by ID
- * GET /api/products/:id?includeCategory=true&includeReviews=true
- */
-export async function httpGetProduct(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
-    const productId = validateUUID(req.params.id);
+export const httpGetProduct = asyncHandler(
+  async (req: Request, res: Response): Promise<Response> => {
+    const productId = req.params.id;
     const includeCategory = req.query.includeCategory !== 'false';
+
+    if (!productId) {
+      return res.status(400).json({
+        error: ERROR_MESSAGES.REQUIRED_FIELD('Product ID'),
+        code: ERROR_CODES.VALIDATION_ERROR,
+      });
+    }
 
     const product = await ProductModel.findById(productId, includeCategory);
 
     if (!product) {
       return res.status(404).json({
-        error: 'Product not found',
-        code: 'NOT_FOUND',
+        error: ERROR_MESSAGES.RECORD_NOT_FOUND('Product'),
+        code: ERROR_CODES.NOT_FOUND,
       });
     }
 
@@ -195,22 +112,20 @@ export async function httpGetProduct(
       data: product,
       message: 'Product retrieved successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Get product by ID');
   }
-}
+);
 
-/**
- * Get products by category ID
- * GET /api/products/category/:categoryId?includeReviews=false
- */
-export async function httpGetProductsByCategory(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
-    const categoryId = validateUUID(req.params.categoryId);
+export const httpGetProductsByCategory = asyncHandler(
+  async (req: Request, res: Response): Promise<Response> => {
+    const categoryId = req.params.categoryId;
     const includeReviews = req.query.includeReviews === 'true';
+
+    if (!categoryId) {
+      return res.status(400).json({
+        error: ERROR_MESSAGES.CATEGORY_ID_REQUIRED,
+        code: ERROR_CODES.VALIDATION_ERROR,
+      });
+    }
 
     const products = await ProductModel.findByCategory(
       categoryId,
@@ -222,26 +137,23 @@ export async function httpGetProductsByCategory(
       count: products.length,
       message: 'Products retrieved successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Get products by category');
   }
-}
+);
 
-/**
- * Update product by ID
- * PUT /api/products/:id
- */
-export async function httpUpdateProduct(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
-    const productId = validateUUID(req.params.id);
+export const httpUpdateProduct = asyncHandler(
+  async (req: Request, res: Response): Promise<Response> => {
+    const productId = req.params.id;
     const updateData: UpdateProductInput = {};
 
-    // Validate and set fields if provided
+    if (!productId) {
+      return res.status(400).json({
+        error: ERROR_MESSAGES.REQUIRED_FIELD('Product ID'),
+        code: ERROR_CODES.VALIDATION_ERROR,
+      });
+    }
+
     if (req.body.name !== undefined) {
-      updateData.name = validateString('Name', req.body.name, 1, 120);
+      updateData.name = req.body.name;
     }
 
     if (req.body.description !== undefined) {
@@ -249,7 +161,7 @@ export async function httpUpdateProduct(
     }
 
     if (req.body.price !== undefined) {
-      updateData.price = validateNumber('Price', req.body.price, 1, 200);
+      updateData.price = req.body.price;
     }
 
     if (req.body.reviewTotalCount !== undefined) {
@@ -263,16 +175,11 @@ export async function httpUpdateProduct(
       const originalPrice = updateData.price || req.body.price;
       if (!originalPrice) {
         return res.status(400).json({
-          error: 'Cannot set offer price without knowing the original price',
-          code: 'VALIDATION_ERROR',
+          error: ERROR_MESSAGES.INVALID_OFFER_PRICE,
+          code: ERROR_CODES.VALIDATION_ERROR,
         });
       }
-      updateData.offerPrice = validateNumber(
-        'Offer price',
-        req.body.offerPrice,
-        0,
-        originalPrice
-      );
+      updateData.offerPrice = req.body.offerPrice;
     }
 
     if (req.body.imageSrc !== undefined) {
@@ -293,21 +200,19 @@ export async function httpUpdateProduct(
       data: updatedProduct,
       message: 'Product updated successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Update product');
   }
-}
+);
 
-/**
- * Delete product by ID
- * DELETE /api/products/:id
- */
-export async function httpDeleteProduct(
-  req: Request,
-  res: Response
-): Promise<Response> {
-  try {
-    const productId = validateUUID(req.params.id);
+export const httpDeleteProduct = asyncHandler(
+  async (req: Request, res: Response): Promise<Response> => {
+    const productId = req.params.id;
+
+    if (!productId) {
+      return res.status(400).json({
+        error: ERROR_MESSAGES.REQUIRED_FIELD('Product ID'),
+        code: ERROR_CODES.VALIDATION_ERROR,
+      });
+    }
 
     const deletedProduct = await ProductModel.deleteById(productId);
 
@@ -315,7 +220,5 @@ export async function httpDeleteProduct(
       data: deletedProduct,
       message: 'Product deleted successfully',
     });
-  } catch (error) {
-    return handleError(res, error, 'Delete product');
   }
-}
+);
