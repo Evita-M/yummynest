@@ -1,4 +1,4 @@
-# Yummynest Food Shop ![In Progress](https://img.shields.io/badge/IN%20PROGRESS-C23F84)
+# Yummynest Food Shop
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -9,12 +9,11 @@
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Cypress](https://img.shields.io/badge/Cypress-007780?style=for-the-badge&logo=cypress&logoColor=white)
+![REST API](https://img.shields.io/badge/REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 ![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)
-![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
-![REST API](https://img.shields.io/badge/REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 A full-stack food shop application built with React, Vite, Express, and Prisma ORM with PostgreSQL.
 
@@ -26,6 +25,7 @@ A full-stack food shop application built with React, Vite, Express, and Prisma O
 - **Database ORM** - Prisma ORM with PostgreSQL for robust data management
 - **RESTful API** - Complete CRUD operations for products and categories
 - **Data Validation** - Comprehensive input validation with custom validators using Zod
+- **E2E Testing** - Comprehensive Cypress test suite covering complete shopping flow
 
 ## 🛠️ Getting Started
 

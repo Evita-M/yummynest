@@ -1,0 +1,21 @@
+{
+  "data": {
+    "id": "1",
+    "name": "Fresh Organic Apples",
+    "categoryId": "fruits",
+    "price": 4.99,
+    "offerPrice": 3.99,
+    "description": "Crisp and sweet organic apples, perfect for snacking or baking. These premium quality apples are grown without pesticides and harvested at peak ripeness for maximum flavor and nutrition.",
+    "imageSrc": "apple",
+    "inStock": true,
+    "category": {
+      "id": "fruits",
+      "name": "Fruits"
+    },
+    "reviewTotalCount": 24,
+    "reviewRating": 4.5,
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  "message": "Product retrieved successfully"
+}

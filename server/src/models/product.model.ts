@@ -218,6 +218,7 @@ export class ProductModel {
         updateData.reviewTotalCount = data.reviewTotalCount;
       if (data.reviewRating !== undefined)
         updateData.reviewRating = data.reviewRating;
+      if (data.imageSrc === undefined) updateData.imageSrc = null;
 
       const product = await prisma.product.update({
         where: { id },

@@ -1,0 +1,83 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "Fresh Organic Apples",
+      "categoryId": "fruits",
+      "price": 4.99,
+      "offerPrice": 3.99,
+      "description": "Crisp and sweet organic apples, perfect for snacking or baking.",
+      "imageSrc": "apple",
+      "inStock": true,
+      "category": {
+        "id": "fruits",
+        "name": "Fruits"
+      },
+      "reviewTotalCount": 24,
+      "reviewRating": 4.5
+    },
+    {
+      "id": "2",
+      "name": "Organic Carrots",
+      "categoryId": "vegetables",
+      "price": 2.49,
+      "description": "Fresh organic carrots, great for cooking and snacking.",
+      "imageSrc": "carrot",
+      "inStock": true,
+      "category": {
+        "id": "vegetables",
+        "name": "Vegetables"
+      },
+      "reviewTotalCount": 18,
+      "reviewRating": 4.2
+    },
+    {
+      "id": "3",
+      "name": "Fresh Broccoli",
+      "categoryId": "vegetables",
+      "price": 3.29,
+      "description": "Nutritious fresh broccoli, perfect for healthy meals.",
+      "imageSrc": "broccolli",
+      "inStock": false,
+      "category": {
+        "id": "vegetables",
+        "name": "Vegetables"
+      },
+      "reviewTotalCount": 12,
+      "reviewRating": 4.0
+    },
+    {
+      "id": "4",
+      "name": "Premium Coffee",
+      "categoryId": "beverages",
+      "price": 12.99,
+      "offerPrice": 9.99,
+      "description": "Rich and aromatic premium coffee beans.",
+      "imageSrc": "coffee",
+      "inStock": true,
+      "category": {
+        "id": "beverages",
+        "name": "Beverages"
+      },
+      "reviewTotalCount": 156,
+      "reviewRating": 4.8
+    },
+    {
+      "id": "5",
+      "name": "Fresh Strawberries",
+      "categoryId": "fruits",
+      "price": 5.99,
+      "description": "Sweet and juicy fresh strawberries.",
+      "imageSrc": "strawberry",
+      "inStock": true,
+      "category": {
+        "id": "fruits",
+        "name": "Fruits"
+      },
+      "reviewTotalCount": 67,
+      "reviewRating": 4.6
+    }
+  ],
+  "count": 5,
+  "message": "Products retrieved successfully"
+}
