@@ -10,12 +10,13 @@ interface QuantityButtonProps {
   size?: 'sm' | 'default';
 }
 
-const QuantityButton: FC<QuantityButtonProps> = ({
+const QuantityButton: FC<QuantityButtonProps & { testId?: string }> = ({
   onClick,
   icon,
   label,
   disabled = false,
   size = 'default',
+  testId,
 }) => (
   <button
     className={clsx(
@@ -26,6 +27,7 @@ const QuantityButton: FC<QuantityButtonProps> = ({
     onClick={onClick}
     disabled={disabled}
     aria-label={label}
+    data-testid={testId}
   >
     {icon}
   </button>
@@ -68,12 +70,14 @@ export const QuantityControl: FC<QuantityControlProps> = ({
         icon={<LuMinus size={20} className='text-white' />}
         label='Decrease quantity'
         size={size}
+        testId='decrement-quantity'
       />
       <span
         className={clsx(
           'text-orange-dark flex flex-1 items-center justify-center font-bold',
           size === 'sm' ? 'text-[1.4rem]' : 'text-[1.6rem]'
         )}
+        data-testid='quantity-display'
       >
         {quantity}
       </span>
@@ -86,6 +90,7 @@ export const QuantityControl: FC<QuantityControlProps> = ({
         label='Increase quantity'
         disabled={isIncrementDisabled}
         size={size}
+        testId='increment-quantity'
       />
     </div>
   );

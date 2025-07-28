@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { PageContainer } from '@/layout/PageContainer';
-import { CartItem } from '@/components/cart/CartItem';
-import { EmptyCart } from '@/components/cart/EmptyCart';
+import { PageContainer } from '@/layout';
+import { CartItem, EmptyCart, Button } from '@/components';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import {
   selectAllCartItems,
@@ -9,11 +8,10 @@ import {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-} from '@/features/cart/cartSlice';
-import { Summary } from '@/modules/summary/Summary';
+} from '@/features/cart/slice';
+import { Summary } from '@/modules/summary';
 import { useNavigate } from 'react-router-dom';
-import { PageHeader } from '@/components/page-header/PageHeader';
-import { Button } from '@/components/button/Button';
+import { PageHeader } from '@/components';
 import { FaArrowLeft } from 'react-icons/fa6';
 
 const CartPage: FC = () => {
@@ -61,7 +59,12 @@ const CartPage: FC = () => {
           title='Shopping Cart'
           description={`${cartItems.length > 1 ? `${cartItems.length} items` : `${cartItems.length} item`}`}
         />
-        <Button to='/products' size='sm' preFix={<FaArrowLeft />}>
+        <Button
+          to='/products'
+          size='sm'
+          preFix={<FaArrowLeft />}
+          data-testid='continue-shopping'
+        >
           Continue shopping
         </Button>
       </div>
@@ -72,6 +75,7 @@ const CartPage: FC = () => {
               <CartItem
                 key={item.id}
                 id={item.id}
+                imageSrc={item.imageSrc}
                 name={item.name}
                 price={item.offerPrice || item.price}
                 quantity={item.quantity}

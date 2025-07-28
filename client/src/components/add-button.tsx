@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 import { LuPlus } from 'react-icons/lu';
-import { Button } from '../../button/Button';
+import { Button } from './ui';
 
 interface AddToCartButtonProps {
   onClick: (e: React.MouseEvent) => void;
@@ -17,7 +17,12 @@ export const AddToCartButton: FC<AddToCartButtonProps> = ({
   size = 'default',
 }) => {
   return label ? (
-    <Button onClick={onClick} className='w-full' disabled={isDisabled}>
+    <Button
+      onClick={onClick}
+      className='w-full'
+      disabled={isDisabled}
+      data-testid='add-to-cart-button'
+    >
       {label}
     </Button>
   ) : (
@@ -33,6 +38,7 @@ export const AddToCartButton: FC<AddToCartButtonProps> = ({
       onClick={onClick}
       aria-label='Add to cart'
       disabled={isDisabled}
+      data-testid='quick-add-button'
     >
       <LuPlus size={size === 'sm' ? 20 : 24} />
     </button>

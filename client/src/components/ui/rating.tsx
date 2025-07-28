@@ -24,5 +24,7 @@ const renderStars = (rating: number) => {
 };
 
 export const Rating: FC<RatingProps> = ({ rating }) => (
-  <div className='flex items-center gap-[0.4rem]'>{renderStars(rating)}</div>
+  <div className='flex items-center gap-[0.4rem]' data-testid='product-rating'>
+    {renderStars(rating)}
+  </div>
 );

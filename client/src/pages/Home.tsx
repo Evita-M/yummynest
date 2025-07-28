@@ -1,5 +1,3 @@
-import hero from '@/assets/images/hero.jpg';
-
 const HomePage = () => {
   return (
     <section className='relative h-[540px] w-full'>
@@ -7,7 +5,11 @@ const HomePage = () => {
         <h1 className='!mb-[1.6rem]'>Welcome to YummyNest</h1>
         <p>Your favorite grocery e-shop is here. Discover, taste, and enjoy.</p>
       </div>
-      <img src={hero} alt='hero' className='h-full w-full object-cover' />
+      <img
+        src='/images/hero.jpg'
+        alt='hero'
+        className='h-full w-full object-cover'
+      />
     </section>
   );
 };

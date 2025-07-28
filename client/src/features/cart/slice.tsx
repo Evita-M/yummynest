@@ -4,12 +4,14 @@ import {
   EntityState,
 } from '@reduxjs/toolkit';
 import { RootState } from '@/app/store';
+
 interface CartItem {
   id: string;
   name: string;
   price: number;
   offerPrice: number;
   quantity: number;
+  imageSrc?: string;
 }
 
 // Create the adapter

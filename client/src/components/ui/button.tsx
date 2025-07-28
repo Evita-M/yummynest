@@ -11,6 +11,7 @@ interface BaseButtonProps {
   preFix?: ButtonIcon;
   postFix?: ButtonIcon;
   className?: string;
+  'data-testid'?: string;
 }
 
 type ButtonProps = BaseButtonProps &
@@ -33,6 +34,7 @@ const Button = ({
   preFix,
   postFix,
   children,
+  'data-testid': testId,
   ...props
 }: Props) => {
   const baseStyles =
@@ -57,7 +59,12 @@ const Button = ({
   if (to) {
     const { to: _, ...linkProps } = props as LinkProps;
     return (
-      <Link to={to} className={buttonClassName} {...linkProps}>
+      <Link
+        to={to}
+        className={buttonClassName}
+        data-testid={testId}
+        {...linkProps}
+      >
         {preFix && <span>{preFix}</span>}
         {children}
         {postFix && <span>{postFix}</span>}
@@ -68,6 +75,7 @@ const Button = ({
   return (
     <button
       className={buttonClassName}
+      data-testid={testId}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {preFix && <span>{preFix}</span>}

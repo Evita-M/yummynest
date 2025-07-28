@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import HomePage from '@/pages/Home';
-import { Navbar } from '@/layout/Navbar';
-import CartPage from '@/pages/Cart';
-import ProductPage from '@/pages/Product';
-import ProductsPage from '@/pages/Products';
+import HomePage from '@/pages/home';
+import { Navbar } from '@/layout';
+import CartPage from '@/pages/cart';
+import ProductPage from '@/pages/product';
+import ProductsPage from '@/pages/products';
 import routes from '@/shared/variables/routes';
 
 const navLinks = [

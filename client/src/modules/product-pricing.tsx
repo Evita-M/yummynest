@@ -21,7 +21,10 @@ export const ProductPricing: FC<ProductPricingProps> = ({
   onClick,
 }) => {
   return (
-    <div className='rounded-[1.2rem] bg-white p-[2.4rem]'>
+    <div
+      className='rounded-[1.2rem] bg-white p-[2.4rem]'
+      data-testid='product-price'
+    >
       <p className='text-blue mb-[2rem] font-medium'>
         Orginal Price: <span className='line-through'>€ {price}</span>
       </p>

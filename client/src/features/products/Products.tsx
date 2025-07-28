@@ -6,8 +6,8 @@ import {
   incrementQuantity,
   decrementQuantity,
   selectAllCartItems,
-} from '@/features/cart/cartSlice';
-import { Loader } from '@/components/loader/Lodaer';
+} from '@/features/cart/slice';
+import { Loader } from '@/components';
 import { Product } from './model/product';
 
 interface ProductsProps {
@@ -38,12 +38,13 @@ export const Products: FC<ProductsProps> = ({ items }) => {
       ) : (
         <div className='grid grid-cols-2 gap-[3.2rem] md:grid-cols-3 lg:grid-cols-4'>
           {items.map((product: Product) => {
-            const { id, name, price, offerPrice, inStock } = product;
+            const { id, name, price, offerPrice, inStock, imageSrc } = product;
             const quantity = getCartItemInfo(id);
             return (
               <ProductCard
                 key={id}
                 name={name}
+                imageSrc={imageSrc}
                 price={price.toFixed(2)}
                 offerPrice={(offerPrice || price).toFixed(2)}
                 onClick={() =>

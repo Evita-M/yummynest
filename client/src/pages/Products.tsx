@@ -1,15 +1,11 @@
 import { FC, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import { PageContainer } from '@/layout/PageContainer';
+import { PageContainer } from '@/layout';
 import { fetchProducts } from '@/features/products/thunks';
-import { Products } from '@/features/products/Products';
+import { Products } from '@/features/products/products';
 import { useSearchParams } from 'react-router-dom';
 import { selectProductsByCategory } from '@/features/products/selectors';
-import {
-  BreadCrumbItem,
-  BreadCrumbs,
-} from '@/components/breadcrumbs/BreadCrumbs';
-import { PageHeader } from '@/components/page-header/PageHeader';
+import { BreadCrumbItem, BreadCrumbs, PageHeader } from '@/components';
 import routes from '@/shared/variables/routes';
 
 const ProductsPage: FC = () => {
@@ -36,6 +32,9 @@ const ProductsPage: FC = () => {
     return category ? category : 'All Products';
   }, [category]);
 
+  // Safe count calculation
+  const productsCount = displayedProducts?.length || 0;
+
   const breadcrumbItems: BreadCrumbItem[] = [
     { label: 'Home', href: routes.home },
     { label: 'Products', href: routes.products },
@@ -51,10 +50,10 @@ const ProductsPage: FC = () => {
       <BreadCrumbs className='mb-[3.2rem]' />
       <PageHeader
         title={pageTitle}
-        description={`${displayedProducts.length} products found`}
+        description={`${productsCount} products found`}
         className='mb-[4.2rem]'
       />
-      <Products items={displayedProducts} />
+      <Products items={displayedProducts || []} />
     </PageContainer>
   );
 };

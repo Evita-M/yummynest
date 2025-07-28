@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Button } from '@/components/button/Button';
+import { Button } from '@/components';
 import { LuPlus } from 'react-icons/lu';
-import { useModal } from '@/hooks/useModal';
+import { useModal } from '@/hooks';
 
 interface SummaryProps {
   subtotal: number;
@@ -46,7 +46,7 @@ export const Summary: FC<SummaryProps> = ({
         <div className='mb-4 space-y-2'>
           <div className='flex justify-between'>
             <span>Price</span>
-            <span>€ {subtotal.toFixed(2)}</span>
+            <span data-testid='subtotal'>€ {subtotal.toFixed(2)}</span>
           </div>
           <div className='flex justify-between'>
             <span>Shipping Fee</span>
@@ -54,15 +54,22 @@ export const Summary: FC<SummaryProps> = ({
           </div>
           <div className='flex justify-between'>
             <span>Tax (2%)</span>
-            <span>€ {tax.toFixed(2)}</span>
+            <span data-testid='tax'>€ {tax.toFixed(2)}</span>
           </div>
         </div>
       </div>
       <div className='font-secondary flex justify-between py-[1.2rem] font-semibold'>
         <p className='!text-[1.8rem]'>Total Amount</p>
-        <p className='!text-[1.8rem]'>€ {total.toFixed(2)}</p>
+        <p className='!text-[1.8rem]' data-testid='total'>
+          € {total.toFixed(2)}
+        </p>
       </div>
-      <Button onClick={onCheckout} className='w-full' variant='secondary'>
+      <Button
+        onClick={onCheckout}
+        className='w-full'
+        variant='secondary'
+        data-testid='checkout-button'
+      >
         Proceed to Checkout
       </Button>
     </div>

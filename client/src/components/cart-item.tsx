@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { LuTrash } from 'react-icons/lu';
-import { QuantityControl } from '../product-card/add-button/QuantityControl';
-import vegetableImg from '@/assets/images/vegetable.png';
+import { QuantityControl } from './quantity-control';
 
 interface CartItemProps {
   id: string;
   name: string;
   price: number;
   quantity: number;
+  imageSrc?: string;
   onRemove: (id: string) => void;
   onIncrement: (id: string) => void;
   onDecrement: (id: string) => void;
@@ -17,6 +17,7 @@ interface CartItemProps {
 export const CartItem: FC<CartItemProps> = ({
   id,
   name,
+  imageSrc,
   price,
   quantity,
   onRemove,
@@ -28,10 +29,18 @@ export const CartItem: FC<CartItemProps> = ({
     <div
       className='hover:shadow-hover flex cursor-pointer items-center justify-between rounded-[1.2rem] bg-white p-[1.6rem] transition-all duration-300'
       onClick={onClick}
+      data-testid='cart-item'
     >
       <div className='flex items-center gap-[2.0rem]'>
         <div className='border-orange-light border-3 flex h-[100px] w-[100px] items-center justify-center rounded-[1.2rem]'>
-          <img src={vegetableImg} alt={name} width={80} height='auto' />
+          <img
+            src={
+              imageSrc ? `/images/${imageSrc}.webp` : '/images/vegetable.png'
+            }
+            alt={name}
+            width={80}
+            height='auto'
+          />
         </div>
         <div>
           <h3 className='!mb-0 !text-[2rem]'>{name}</h3>
@@ -55,6 +64,7 @@ export const CartItem: FC<CartItemProps> = ({
           }}
           className='text-gray-600 hover:text-gray-800'
           aria-label='Remove item'
+          data-testid='remove-item'
         >
           <LuTrash size={20} />
         </button>

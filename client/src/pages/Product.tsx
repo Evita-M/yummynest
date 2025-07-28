@@ -2,22 +2,16 @@ import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { fetchProductById } from '@/features/products/thunks';
-import vegetableImg from '@/assets/images/vegetable.png';
-import {
-  BreadCrumbItem,
-  BreadCrumbs,
-} from '@/components/breadcrumbs/BreadCrumbs';
-import { Loader } from '@/components/loader/Lodaer';
-import { ProductPricing } from '@/modules/product-pricing/ProductPricing';
-import { Rating } from '@/components/rating/Rating';
+import { BreadCrumbItem, BreadCrumbs, Loader, Badge } from '@/components';
+import { ProductPricing } from '@/modules/product-pricing';
+import { Rating } from '@/components';
 import {
   addToCart,
   incrementQuantity,
   decrementQuantity,
   selectAllCartItems,
-} from '@/features/cart/cartSlice';
-import { Badge } from '@/components/badge/Badge';
-import { PageContainer } from '@/layout/PageContainer';
+} from '@/features/cart/slice';
+import { PageContainer } from '@/layout';
 import routes from '@/shared/variables/routes';
 
 const ProductPage: FC = () => {
@@ -122,9 +116,13 @@ const ProductPage: FC = () => {
               />
             )}
             <img
-              src={vegetableImg}
+              src={
+                product.imageSrc
+                  ? `/images/${product.imageSrc}.webp`
+                  : '/images/vegetable.png'
+              }
               alt={product.name}
-              className='h-auto w-[320px] object-cover'
+              className='h-auto w-[768px] object-cover'
             />
           </div>
         </div>

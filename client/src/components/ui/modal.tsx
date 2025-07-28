@@ -1,5 +1,5 @@
 import React from 'react';
-import { useModal } from '@/hooks/useModal';
+import { useModal } from '@/hooks';
 import { IoCloseOutline } from 'react-icons/io5';
 
 export const Modal: React.FC = () => {

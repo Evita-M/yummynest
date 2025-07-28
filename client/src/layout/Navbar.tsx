@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { NavLinkItem } from '@/components/nav-link/NavLink';
+import { NavLinkItem } from '@/components';
 import { Link } from 'react-router-dom';
-import { CartCounter } from '@/components/cart-counter/CartCounter';
+import { CartCounter } from '@/components';
 import { useAppSelector } from '@/app/store';
-import { selectCartTotalItems } from '@/features/cart/cartSlice';
+import { selectCartTotalItems } from '@/features/cart/slice';
 
 interface NavLink {
   label: string;
@@ -18,7 +18,7 @@ export const Navbar: FC<NavbarProps> = ({ links }) => {
   const totalItems = useAppSelector(selectCartTotalItems);
 
   return (
-    <div className='mx-auto flex w-full max-w-[1220px] items-center justify-between gap-[1.2rem] px-[1.2rem] py-[2.4rem]'>
+    <nav className='mx-auto flex w-full max-w-[1220px] items-center justify-between gap-[1.2rem] px-[1.2rem] py-[2.4rem]'>
       <Link to='/' className='font-secondary text-[18px] font-bold'>
         Yummy<span className='text-blue'>Nest</span>
       </Link>
@@ -32,6 +32,6 @@ export const Navbar: FC<NavbarProps> = ({ links }) => {
         </ul>
         <CartCounter totalItems={totalItems} href='/cart' />
       </div>
-    </div>
+    </nav>
   );
 };
